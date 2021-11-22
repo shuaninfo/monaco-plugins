@@ -1,7 +1,6 @@
 /* eslint-disable no-use-before-define */
 import { defaults, uniq, uniqBy } from 'lodash';
-import { Lexer } from '../lexer';
-import { IToken } from '../lexer/token';
+import { Lexer, IToken } from '@shuaninfo/lexer';
 import {
   Chain,
   ChainFunction,

@@ -1,39 +1,21 @@
 {
   "compilerOptions": {
     "module": "esnext",
-    "moduleResolution": "node",
+    "target": "esnext",
+    "lib": ["ESNext", "DOM"],
+    "esModuleInterop": true,
     "strict": true,
     "strictNullChecks": false,
-    "jsx": "react",
-    "target": "esnext",
     "experimentalDecorators": true,
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
     "skipLibCheck": true,
-    "outDir": "dist",
-    "baseUrl": ".",
-    "lib": [
-      "dom",
-      "es5",
-      "es6",
-      "es7",
-      "scripthost",
-      "es2018.promise"
-    ],
-    "emitDecoratorMetadata": true,
-    "preserveConstEnums": true,
-    "paths": {
-      "pri/*": [
-        "pri",
-        ".temp/types/*"
-      ]
-    }
+    "noUnusedParameters": true,
+    "types": ["node"]
   },
-  "include": [
-    ".temp/**/*",
-    "typings/**/*",
-    "src/**/*"
-  ],
   "exclude": [
-    "node_modules",
-    "dist"
+    "**/dist",
+    "**/node_modules",
+    "**/test"
   ]
 }

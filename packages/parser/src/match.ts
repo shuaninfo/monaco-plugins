@@ -1,4 +1,4 @@
-import { IToken } from '../lexer/token';
+import { IToken } from '@shuaninfo/lexer';
 import { chain } from './chain';
 import { IElements } from './define';
 import { Scanner } from './scanner';

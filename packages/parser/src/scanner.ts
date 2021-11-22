@@ -1,4 +1,4 @@
-import { IToken } from '../lexer/token';
+import { IToken } from '@shuaninfo/lexer';
 
 export class Scanner {
   private tokens: IToken[] = [];

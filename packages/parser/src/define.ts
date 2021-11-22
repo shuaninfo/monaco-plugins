@@ -1,4 +1,4 @@
-import { IToken } from '../lexer/token';
+import { IToken } from '@shuaninfo/lexer';
 import { IMatch } from './match';
 import { Scanner } from './scanner';
 
