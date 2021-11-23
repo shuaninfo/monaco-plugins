@@ -1,7 +1,7 @@
 import { IToken } from '@shuaninfo/lexer';
 import { IMatch } from './match';
 import { Scanner } from './scanner';
-
+ 
 // tslint:disable:max-classes-per-file
 
 export interface IParseResult {
@@ -73,102 +73,103 @@ export const parserMap = new Map<ChainFunction, Parser>();
 export const MAX_VISITER_CALL = 1000000;
 
 export class Parser {
-  public rootChainNode: ChainNode = null;
+    rootChainNode: ChainNode = null
+ 
+    firstSet = new Map<ChainFunction, MatchNode[]>();
 
-  public firstSet = new Map<ChainFunction, MatchNode[]>();
-
-  public firstOrFunctionSet = new Map<ChainFunction, FirstOrFunctionSet[]>();
-
-  public relatedSet = new Map<ChainFunction, Set<ChainFunction>>();
+      firstOrFunctionSet = new Map<ChainFunction, FirstOrFunctionSet[]>();
+  
+    relatedSet = new Map<ChainFunction, Set<ChainFunction>>();
 }
 
 export class VisiterStore {
-  public restChances: IChance[] = [];
+    restChances: IChance[] = [];
 
-  public stop = false;
+    stop = false;
 
   // eslint-disable-next-line no-useless-constructor, @typescript-eslint/no-parameter-properties
-  constructor(public scanner: Scanner, public parser: Parser) {
+  constructor(  _scanner: Scanner,   _parser: Parser) {
     //
   }
 }
 
 export class VisiterOption {
-  public onCallVisiter?: (node?: Node, store?: VisiterStore) => void;
+    onCallVisiter?: (node?: Node, store?: VisiterStore) => void;
 
-  public onVisiterNextNode?: (node?: Node, store?: VisiterStore) => void;
+    onVisiterNextNode?: (node?: Node, store?: VisiterStore) => void;
 
-  public onSuccess?: () => void;
+    onSuccess?: () => void;
 
-  public onFail?: (lastNode?: Node) => void;
+    onFail?: (lastNode?: Node) => void;
 
-  public onMatchNode: (matchNode: MatchNode, store: VisiterStore, visiterOption: VisiterOption) => void;
+    onMatchNode: (matchNode: MatchNode, store: VisiterStore, visiterOption: VisiterOption) => void;
 
-  public generateAst?: boolean = true;
+    generateAst?: boolean = true;
 
-  public enableFirstSet?: boolean = true;
+       enableFirstSet?: boolean = true;
 }
 
 export class ChainNode {
-  public parentNode: ParentNode;
+  parentNode: ParentNode;
 
-  public childs: Node[] = [];
+  childs: Node[] = [];
 
-  public astResults?: IAst[] = [];
+  astResults?: IAst[] = [];
 
   // Eg: const foo = chain => chain()(), so the chain creatorFunction is 'foo'.
-  public creatorFunction: ChainFunction = null;
+  creatorFunction: ChainFunction = null;
 
   // Only user function can have functionName.
-  public functionName: string;
+  functionName: string;
 
-  public solveAst: ISolveAst = null;
+  solveAst: ISolveAst = null;
 
   // eslint-disable-next-line no-useless-constructor, @typescript-eslint/no-parameter-properties
-  constructor(public parentIndex: number) {
+  constructor(_parentIndex: number) {
     //
   }
 }
 
 export class TreeNode {
-  public parentNode: ParentNode;
+  parentNode: ParentNode;
 
-  public childs: Node[] = [];
+  childs: Node[] = [];
 
   // eslint-disable-next-line no-useless-constructor, @typescript-eslint/no-parameter-properties
-  constructor(public parentIndex: number) {
+  constructor(_parentIndex: number) {
     //
   }
 }
 
 export class FunctionNode {
-  public parentNode: ParentNode;
+  parentNode: ParentNode;
 
   // eslint-disable-next-line no-useless-constructor, @typescript-eslint/no-parameter-properties
-  constructor(public chainFunction: ChainFunction, public parentIndex: number, public parser: Parser) {
+  constructor(_chainFunction: ChainFunction, _parentIndex: number, _parser: Parser) {
     //
   }
 
-  public run = () => {
+  run = () => {
+    // @ts-ignore
     return this.chainFunction()(this.parentNode, this.chainFunction, this.parentIndex, this.parser);
   };
 }
 
 export class MatchNode {
-  public parentNode: ParentNode;
+  parentNode: ParentNode;
 
   // eslint-disable-next-line no-useless-constructor, @typescript-eslint/no-parameter-properties
-  constructor(private matchFunction: IMatchFn, public matching: IMatching, public parentIndex: number) {
+  constructor(private matchFunction: IMatchFn, _matching: IMatching, _parentIndex: number) {
     //
   }
 
-  public run = (scanner: Scanner, isCostToken = true) => {
+  run = (scanner: Scanner, isCostToken = true) => {
     return this.matchFunction(scanner, isCostToken);
   };
 }
 
 export class CreateParserOptions {
-  public cursorTokenExcludes?: (token?: IToken) => boolean = () => {
+  cursorTokenExcludes?: (token?: IToken) => boolean = () => {
     return false;
   };
 }

@@ -1,77 +1,77 @@
-import { IToken } from '@shuaninfo/lexer';
-import { chain } from './chain';
-import { IElements } from './define';
-import { Scanner } from './scanner';
+import { IToken } from '@shuaninfo/lexer'
+import { chain } from './chain'
+import { IElements } from './define'
+import { Scanner } from './scanner'
 
 export interface IMatch {
   token?: IToken;
   match: boolean;
 }
 
-function equalWordOrIncludeWords(str: string, word: string | string[] | null) {
+function equalWordOrIncludeWords (str: string, word: string | string[] | null) {
   if (typeof word === 'string') {
-    return judgeMatch(str, word);
+    return judgeMatch(str, word)
   }
   return word.some(eachWord => {
-    return judgeMatch(str, eachWord);
-  });
+    return judgeMatch(str, eachWord)
+  })
 }
 
-function judgeMatch(source: string, target: string) {
+function judgeMatch (source: string, target: string) {
   if (source === null) {
-    return false;
+    return false
   }
-  return (source && source.toLowerCase()) === (target && target.toLowerCase());
+  return (source && source.toLowerCase()) === (target && target.toLowerCase())
 }
 
-function matchToken(scanner: Scanner, compare: (token: IToken) => boolean, isCostToken?: boolean): IMatch {
-  const token = scanner.read();
+function matchToken (scanner: Scanner, compare: (token: IToken) => boolean, isCostToken?: boolean): IMatch {
+  const token = scanner.read()
   if (!token) {
     return {
       token: null,
-      match: false,
-    };
+      match: false
+    }
   }
   if (compare(token)) {
     if (isCostToken) {
-      scanner.next();
+      scanner.next()
     }
 
     return {
       token,
-      match: true,
-    };
+      match: true
+    }
   }
   return {
     token,
-    match: false,
-  };
+    match: false
+  }
 }
 
-function createMatch<T>(fn: (scanner: Scanner, arg?: T, isCostToken?: boolean) => IMatch, specialName?: string) {
+function createMatch<T> (fn: (scanner: Scanner, arg?: T, isCostToken?: boolean) => IMatch, specialName?: string) {
   return (arg?: T) => {
-    function foo() {
+    function foo () {
       return (scanner: Scanner, isCostToken?: boolean) => {
-        return fn(scanner, arg, isCostToken);
-      };
+        return fn(scanner, arg, isCostToken)
+      }
     }
 
-    foo.parserName = 'match';
+    foo.parserName = 'match'
 
-    foo.displayName = specialName;
-    return foo;
-  };
+    foo.displayName = specialName
+    return foo
+  }
 }
 
 export const match = createMatch((scanner, word: string | string[], isCostToken) => {
   return matchToken(
     scanner,
     token => {
-      return equalWordOrIncludeWords(token.value, word);
+      return equalWordOrIncludeWords(token.value, word)
     },
-    isCostToken,
-  );
-});
+    isCostToken
+  )
+})
 
 interface IMatchTokenTypeOption {
   includes?: string[];
@@ -79,92 +79,93 @@ interface IMatchTokenTypeOption {
 }
 
 export const matchTokenType = (tokenType: string, opts: IMatchTokenTypeOption = {}) => {
-  const options: IMatchTokenTypeOption = { includes: [], excludes: [], ...opts };
+  const options: IMatchTokenTypeOption = { includes: [], excludes: [], ...opts }
 
+  // @ts-ignore
   return createMatch((scanner, word, isCostToken) => {
     return matchToken(
       scanner,
       token => {
         if (
           options.includes.some(includeValue => {
-            return judgeMatch(includeValue, token.value);
+            return judgeMatch(includeValue, token.value)
           })
         ) {
-          return true;
+          return true
         }
 
         if (
           options.excludes.some(includeValue => {
-            return judgeMatch(includeValue, token.value);
+            return judgeMatch(includeValue, token.value)
           })
         ) {
-          return false;
+          return false
         }
 
         if (token.type !== tokenType) {
-          return false;
+          return false
         }
 
-        return true;
+        return true
       },
-      isCostToken,
-    );
-  }, tokenType)();
-};
+      isCostToken
+    )
+  }, tokenType)()
+}
 
 export const matchTrue = (): IMatch => {
   return {
     token: null,
-    match: true,
-  };
-};
+    match: true
+  }
+}
 
 export const matchFalse = (): IMatch => {
   return {
     token: null,
-    match: true,
-  };
-};
+    match: true
+  }
+}
 
 export const optional = (...elements: IElements) => {
   if (elements.length === 0) {
-    throw Error('Must have arguments!');
+    throw Error('Must have arguments!')
   }
 
   return chain([
     chain(...elements)(ast => {
-      return elements.length === 1 ? ast[0] : ast;
+      return elements.length === 1 ? ast[0] : ast
     }),
-    true,
+    true
   ])(ast => {
-    return ast[0];
-  });
-};
+    return ast[0]
+  })
+}
 
 export const plus = (...elements: IElements) => {
   if (elements.length === 0) {
-    throw Error('Must have arguments!');
+    throw Error('Must have arguments!')
   }
 
   const plusFunction = () => {
     return chain(
       chain(...elements)(ast => {
-        return elements.length === 1 ? ast[0] : ast;
+        return elements.length === 1 ? ast[0] : ast
       }),
-      optional(plusFunction),
+      optional(plusFunction)
     )(ast => {
       if (ast[1]) {
-        return [ast[0]].concat(ast[1]);
+        return [ast[0]].concat(ast[1])
       }
-      return [ast[0]];
-    });
-  };
-  return plusFunction;
-};
+      return [ast[0]]
+    })
+  }
+  return plusFunction
+}
 
 export const many = (...elements: IElements) => {
   if (elements.length === 0) {
-    throw Error('Must have arguments!');
+    throw Error('Must have arguments!')
   }
-  return optional(plus(...elements));
-};
+  return optional(plus(...elements))
+}

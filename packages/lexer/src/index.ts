@@ -1,7 +1,6 @@
 import { IToken } from './token';
 
-export { IToken };
-
+export { IToken }
 interface ILexerConfig {
   type: string;
   regexes: RegExp[];

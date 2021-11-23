@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
+    "sourceMap": true,
     "module": "esnext",
     "target": "esnext",
-    "lib": ["ESNext", "DOM"],
+    "lib": ["esnext","es6", "dom"],
     "esModuleInterop": true,
     "strict": true,
     "strictNullChecks": false,
@@ -11,6 +12,8 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "noUnusedParameters": true,
+    "emitDecoratorMetadata": true,
+    "preserveConstEnums": true,
     "types": ["node","@types/jest"]
   },
   "exclude": [

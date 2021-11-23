@@ -64,68 +64,72 @@ var import_lodash = __toModule(require("lodash"));
 var parserMap = new Map();
 var MAX_VISITER_CALL = 1e6;
 var Parser = class {
-  constructor() {
-    this.rootChainNode = null;
-    this.firstSet = new Map();
-    this.firstOrFunctionSet = new Map();
-    this.relatedSet = new Map();
-  }
+  rootChainNode = null;
+  firstSet = new Map();
+  firstOrFunctionSet = new Map();
+  relatedSet = new Map();
 };
 var VisiterStore = class {
   constructor(scanner, parser) {
     this.scanner = scanner;
     this.parser = parser;
-    this.restChances = [];
-    this.stop = false;
   }
+  restChances = [];
+  stop = false;
 };
 var VisiterOption = class {
-  constructor() {
-    this.generateAst = true;
-    this.enableFirstSet = true;
-  }
+  onCallVisiter;
+  onVisiterNextNode;
+  onSuccess;
+  onFail;
+  onMatchNode;
+  generateAst = true;
+  enableFirstSet = true;
 };
 var ChainNode = class {
   constructor(parentIndex) {
     this.parentIndex = parentIndex;
-    this.childs = [];
-    this.astResults = [];
-    this.creatorFunction = null;
-    this.solveAst = null;
   }
+  parentNode;
+  childs = [];
+  astResults = [];
+  creatorFunction = null;
+  functionName;
+  solveAst = null;
 };
 var TreeNode = class {
   constructor(parentIndex) {
     this.parentIndex = parentIndex;
-    this.childs = [];
   }
+  parentNode;
+  childs = [];
 };
 var FunctionNode = class {
   constructor(chainFunction, parentIndex, parser) {
     this.chainFunction = chainFunction;
     this.parentIndex = parentIndex;
     this.parser = parser;
-    this.run = () => {
-      return this.chainFunction()(this.parentNode, this.chainFunction, this.parentIndex, this.parser);
-    };
   }
+  parentNode;
+  run = () => {
+    return this.chainFunction()(this.parentNode, this.chainFunction, this.parentIndex, this.parser);
+  };
 };
 var MatchNode = class {
   constructor(matchFunction, matching, parentIndex) {
     this.matchFunction = matchFunction;
     this.matching = matching;
     this.parentIndex = parentIndex;
-    this.run = (scanner, isCostToken = true) => {
-      return this.matchFunction(scanner, isCostToken);
-    };
   }
+  parentNode;
+  run = (scanner, isCostToken = true) => {
+    return this.matchFunction(scanner, isCostToken);
+  };
 };
 var CreateParserOptions = class {
-  constructor() {
-    this.cursorTokenExcludes = () => {
-      return false;
-    };
-  }
+  cursorTokenExcludes = () => {
+    return false;
+  };
 };
 
 // src/match.ts
@@ -253,85 +257,85 @@ var many = (...elements) => {
 
 // src/scanner.ts
 var Scanner = class {
+  tokens = [];
+  index = 0;
   constructor(tokens, index = 0) {
-    this.tokens = [];
-    this.index = 0;
-    this.read = () => {
-      const token = this.tokens[this.index];
-      if (token) {
-        return token;
-      }
-      return false;
-    };
-    this.next = () => {
-      this.index += 1;
-    };
-    this.isEnd = () => {
-      return this.index >= this.tokens.length;
-    };
-    this.getIndex = () => {
-      return this.index;
-    };
-    this.setIndex = (index) => {
-      this.index = index;
-      return index;
-    };
-    this.getRestTokenCount = () => {
-      return this.tokens.length - this.index - 1;
-    };
-    this.getNextByToken = (token) => {
-      const currentTokenIndex = this.tokens.findIndex((eachToken) => {
-        return eachToken === token;
-      });
-      if (currentTokenIndex > -1) {
-        if (currentTokenIndex + 1 < this.tokens.length) {
-          return this.tokens[currentTokenIndex + 1];
-        }
-        return null;
-      }
-      throw Error(`token ${token.value.toString()} not exist in scanner.`);
-    };
-    this.getTokenByCharacterIndex = (characterIndex) => {
-      if (characterIndex === null) {
-        return null;
-      }
-      for (const token of this.tokens) {
-        if (characterIndex >= token.position[0] && characterIndex - 1 <= token.position[1]) {
-          return token;
-        }
-      }
-      return null;
-    };
-    this.getPrevTokenByCharacterIndex = (characterIndex) => {
-      let prevToken = null;
-      let prevTokenIndex = null;
-      this.tokens.forEach((token, index) => {
-        if (token.position[1] < characterIndex - 1) {
-          prevToken = token;
-          prevTokenIndex = index;
-        }
-      });
-      return { prevToken, prevTokenIndex };
-    };
-    this.getNextTokenFromCharacterIndex = (characterIndex) => {
-      for (const token of this.tokens) {
-        if (token.position[0] > characterIndex) {
-          return token;
-        }
-      }
-      return null;
-    };
-    this.addToken = (token) => {
-      const { prevToken, prevTokenIndex } = this.getPrevTokenByCharacterIndex(token.position[0]);
-      if (prevToken) {
-        this.tokens.splice(prevTokenIndex + 1, 0, token);
-      } else {
-        this.tokens.unshift(token);
-      }
-    };
     this.tokens = tokens.slice();
     this.index = index;
   }
+  read = () => {
+    const token = this.tokens[this.index];
+    if (token) {
+      return token;
+    }
+    return false;
+  };
+  next = () => {
+    this.index += 1;
+  };
+  isEnd = () => {
+    return this.index >= this.tokens.length;
+  };
+  getIndex = () => {
+    return this.index;
+  };
+  setIndex = (index) => {
+    this.index = index;
+    return index;
+  };
+  getRestTokenCount = () => {
+    return this.tokens.length - this.index - 1;
+  };
+  getNextByToken = (token) => {
+    const currentTokenIndex = this.tokens.findIndex((eachToken) => {
+      return eachToken === token;
+    });
+    if (currentTokenIndex > -1) {
+      if (currentTokenIndex + 1 < this.tokens.length) {
+        return this.tokens[currentTokenIndex + 1];
+      }
+      return null;
+    }
+    throw Error(`token ${token.value.toString()} not exist in scanner.`);
+  };
+  getTokenByCharacterIndex = (characterIndex) => {
+    if (characterIndex === null) {
+      return null;
+    }
+    for (const token of this.tokens) {
+      if (characterIndex >= token.position[0] && characterIndex - 1 <= token.position[1]) {
+        return token;
+      }
+    }
+    return null;
+  };
+  getPrevTokenByCharacterIndex = (characterIndex) => {
+    let prevToken = null;
+    let prevTokenIndex = null;
+    this.tokens.forEach((token, index) => {
+      if (token.position[1] < characterIndex - 1) {
+        prevToken = token;
+        prevTokenIndex = index;
+      }
+    });
+    return { prevToken, prevTokenIndex };
+  };
+  getNextTokenFromCharacterIndex = (characterIndex) => {
+    for (const token of this.tokens) {
+      if (token.position[0] > characterIndex) {
+        return token;
+      }
+    }
+    return null;
+  };
+  addToken = (token) => {
+    const { prevToken, prevTokenIndex } = this.getPrevTokenByCharacterIndex(token.position[0]);
+    if (prevToken) {
+      this.tokens.splice(prevTokenIndex + 1, 0, token);
+    } else {
+      this.tokens.unshift(token);
+    }
+  };
 };
 
 // src/utils.ts
@@ -500,13 +504,13 @@ var createParser = (root, lexer, options) => {
       node: parser.rootChainNode,
       scanner: originScanner,
       visiterOption: {
-        onCallVisiter: (node, store) => {
+        onCallVisiter: (_node, store) => {
           callVisiterCount += 1;
           if (callVisiterCount > MAX_VISITER_CALL) {
             store.stop = true;
           }
         },
-        onVisiterNextNode: (node, store) => {
+        onVisiterNextNode: (_node, store) => {
           callParentCount += 1;
           if (callParentCount > MAX_VISITER_CALL) {
             store.stop = true;
@@ -533,7 +537,7 @@ var createParser = (root, lexer, options) => {
         onSuccess: () => {
           success = true;
         },
-        onFail: (node) => {
+        onFail: (_node) => {
           success = false;
         }
       },
@@ -543,13 +547,13 @@ var createParser = (root, lexer, options) => {
       node: parser.rootChainNode,
       scanner,
       visiterOption: {
-        onCallVisiter: (node, store) => {
+        onCallVisiter: (_node, store) => {
           callVisiterCount += 1;
           if (callVisiterCount > MAX_VISITER_CALL) {
             store.stop = true;
           }
         },
-        onVisiterNextNode: (node, store) => {
+        onVisiterNextNode: (_node, store) => {
           callParentCount += 1;
           if (callParentCount > MAX_VISITER_CALL) {
             store.stop = true;
@@ -752,10 +756,8 @@ function noNextNode(node, store, visiterOption) {
 function addChances({
   node,
   store,
-  visiterOption,
   tokenIndex,
-  childIndex,
-  addToNextMatchNodeFinders
+  childIndex
 }) {
   const chance = {
     node,
@@ -773,7 +775,7 @@ function tryChances(node, store, visiterOption) {
   store.scanner.setIndex(nextChance.tokenIndex);
   visit({ node: nextChance.node, store, visiterOption, childIndex: nextChance.childIndex });
 }
-function fail(node, store, visiterOption) {
+function fail(node, _store = null, visiterOption) {
   if (visiterOption.onFail) {
     visiterOption.onFail(node);
   }
@@ -863,7 +865,7 @@ function solveFirstSet(creatorFunction, parser) {
     parser.firstSet.set(creatorFunction, newFirstMatchNodes);
     if (parser.relatedSet.has(creatorFunction)) {
       const relatedFunctionNames = parser.relatedSet.get(creatorFunction);
-      relatedFunctionNames.forEach((relatedFunctionName) => {
+      relatedFunctionNames.forEach(() => {
         return solveFirstSet;
       });
     }
