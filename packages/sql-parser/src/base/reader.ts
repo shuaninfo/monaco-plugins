@@ -1,6 +1,6 @@
 /* eslint-disable no-case-declarations */
 import * as _ from 'lodash';
-import { IToken } from '../../..';
+import { IToken } from '@shuaninfo/lexer';
 import {
   ICompletionItem,
   ICursorInfo,

@@ -1,10 +1,10 @@
 /* eslint-disable no-use-before-define */
-import { chain, ChainFunction, optional } from '../../..';
+import { chain, ChainFunction, optional } from '@shuaninfo/parser';
 
 // Four operations ---------------------------------
 export function createFourOperations(field: ChainFunction) {
   const addExpr = () => {
-    return chain(term, exprTail)(ast => {
+    return chain(term, exprTail)((ast: any[]) => {
       return ast[0];
     });
   };
@@ -14,7 +14,7 @@ export function createFourOperations(field: ChainFunction) {
   };
 
   const term = () => {
-    return chain(factor, termTail)(ast => {
+    return chain(factor, termTail)((ast: any[]) => {
       return ast[0];
     });
   };
@@ -24,24 +24,24 @@ export function createFourOperations(field: ChainFunction) {
   };
 
   const mulOp = () => {
-    return chain(['*', '/', '%'])(ast => {
+    return chain(['*', '/', '%'])((ast: any[]) => {
       return ast[0];
     });
   };
 
   const addOp = () => {
-    return chain(['+', '-'])(ast => {
+    return chain(['+', '-'])((ast: any[]) => {
       return ast[0];
     });
   };
 
   const factor = () => {
     return chain([
-      chain('(', addExpr, ')')(ast => {
+      chain('(', addExpr, ')')((ast: any[]) => {
         return ast[1];
       }),
       field,
-    ])(ast => {
+    ])((ast: any[]) => {
       return ast[0];
     });
   };

@@ -1,4 +1,4 @@
-import { IToken } from '../../..';
+import { IToken } from '@shuaninfo/lexer';
 
 export type IStatements = IStatement[];
 
