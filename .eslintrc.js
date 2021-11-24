@@ -4,14 +4,7 @@
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
-  extends: [
-    // 'prettier/@typescript-eslint',
-    // 'plugin:prettier/recommended'
-    // 'prettier'
-    'plugin:prettier/recommended'
-  ],
-  // 定义了该eslint文件所依赖的插件
-  // plugins: ['@typescript-eslint'],
+  extends: ['plugin:prettier/recommended'],
   parserOptions: {
     ecmaVersion: 2019,
     sourceType: 'module',
@@ -25,14 +18,16 @@ module.exports = {
     node: true
   },
   rules: {
-    'ts-ignore': 0,
     // "cypress/no-assigning-return-values": "error",
     // "cypress/no-unnecessary-waiting": "error",
     // "cypress/assertion-before-screenshot": "warn",
     // "cypress/no-force": "warn",
     // "cypress/no-async-tests": "error",
     // "cypress/no-pause": "error",
-
+    'ts-ignore': 0,
+    // insert ·· eslint prettier/prettier: https://stackoverflow.com/questions/58424718/how-can-i-disable-the-error-prettier-prettier-on-eslint
+    'prettier/prettier': 0,
+    // indent: 'off', // ['error', 2],
     // 三个等号
     eqeqeq: 'off',
     // 关闭驼峰
@@ -46,7 +41,10 @@ module.exports = {
   // },
   overrides: [
     {
-      files: ['**/__tests__/*.{j,t}s?(x)', '**/tests/unit/**/*.spec.{j,t}s?(x)'],
+      files: [
+        '**/__tests__/*.{j,t}s?(x)',
+        '**/tests/unit/**/*.spec.{j,t}s?(x)'
+      ],
       env: {
         jest: true
       }

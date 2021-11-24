@@ -1,7 +1,7 @@
 // https://www.cnblogs.com/oneweek/p/11236515.html
 // https://blog.csdn.net/u014627807/article/details/109809378
 module.exports = {
-  // printWidth: 500,
+  printWidth: 100,
   "semi": false, // 末尾添加分号
   "singleQuote": true,
   // 大括号内的首尾需要空格
@@ -9,10 +9,11 @@ module.exports = {
   "arrowParens": "avoid",
   "insertPragma": false,
   // 使用默认的折行标准
-  proseWrap: 'always',
+  // proseWrap: 'always',
   // 结尾处不加逗号
   "trailingComma": "none",
-  "tabWidth": 2,
+  "tabWidth": 2, // 缩进字节数
+  "useTabs": false, // 缩进不使用tab，使用空格
   // 每个文件格式化的范围是文件的全部内容
   rangeStart: 0,
   rangeEnd: Infinity,
