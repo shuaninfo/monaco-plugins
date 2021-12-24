@@ -2,18 +2,24 @@
   "name": "@shuaninfo/monaco-plugins",
   "version": "2.0.0",
   "private": true,
+  "license": "MIT",
   "workspaces": [
     "packages/*",
+    "plugins/*",
     "examples/*"
   ],
   "scripts": {
-    "dev":"npm -C examples/vue2 run dev",
-    "build":"",
+    "stub": "lerna run prepack -- --stub",
+    "build": "lerna run build",
+    "dev": "concurrently -t \"yyyy-MM-dd HH:mm:ss.SSS\" --names libs,example -c bgGreen,#8EF9D9 \"npm run dev:libs\" \"npm run dev:example\"",
+    "dev:example": "npm -C examples/vue2 run dev",
+    "dev:libs": "concurrently \"yarn dev:sql-parser\"  \"yarn dev:parser\" \"yarn dev:auto\"",
+    "dev:parser": "yarn workspace  @shuaninfo/parser  run dev",
+    "dev:sql-parser": "yarn workspace @shuaninfo/sql-parser run dev",
+    "dev:auto": "yarn workspace @shuaninfo/auto-complete  run dev",
     "test": "jest",
-    "release": "npm publish",
-    "lint":""
+    "release": "npm publish"
   },
-  
   "lint-staged": {
     "packages/**/{src,__tests__,config}/**/**.{js,vue,ts,tsx}": [
       "eslint --ext .js,.ts --fix"
@@ -23,24 +29,31 @@
     ]
   },
   "devDependencies": {
-    "@types/jest":"^27.0.3",
+    "concurrently": "^6.2.1",
+    "@swc/core": "^1.2.122",
+    "@swc/helpers": "^0.3.2",
+    "@swc/jest": "^0.2.15",
+    "@types/jest": "^27.0.3",
     "@types/lodash": "^4.14.172",
     "@types/node": "^15.14.9",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "lerna": "^4.0.0",
-    "typescript": "^4.5.2",
-    "tsup":"^5.8.0",
-    "jest":"^27.3.1",
-    "ts-jest":"^27.0.7 ",
-    "ts-node": "^10.4.0",
-    "eslint": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
-    "prettier":"^2.4.1",
-    "eslint-config-prettier":"8.3.0",
-    "eslint-plugin-prettier":"4.0.0"
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "eslint": "^8.3.0",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-prettier": "4.0.0",
+    "jest": "^27.3.1",
+    "lerna": "^4.0.0",
+    "prettier": "^2.4.1",
+    "ts-jest": "^27.0.7 ",
+    "ts-node": "^10.4.0",
+    "tsconfig-paths": "^3.12.0",
+    "tsup": "^5.8.0",
+    "typescript": "^4.5.2",
+    "unbuild": "^0.6.7"
   },
+  "packageManager": "yarn@3.1.1",
   "engines": {
-    "node": "^14.16.0 || ^16.11.0 || ^17.0.0"
+    "node": "^14.16.0 || ^16.13.0 || ^17.0.0"
   }
 }

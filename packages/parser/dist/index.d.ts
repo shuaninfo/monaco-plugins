@@ -1,4 +1,18 @@
-import { IToken, Lexer } from '@shuaninfo/lexer';
+interface IToken {
+    type: string;
+    value: string;
+    position?: [number, number];
+}
+interface ILexerConfig {
+    type: string;
+    regexes: RegExp[];
+    /**
+     * Will match, by not add to token list.
+     */
+    ignore?: boolean;
+}
+declare type Lexer = (text: string) => IToken[];
+declare const createLexer: (lexerConfig: ILexerConfig[]) => Lexer;
 
 declare class Scanner {
     private tokens;
@@ -140,4 +154,4 @@ declare class CreateParserOptions {
 declare const chain: Chain;
 declare const createParser: <AST = {}>(root: ChainFunction, lexer: Lexer, options?: CreateParserOptions) => (text: string, cursorIndex?: number) => IParseResult;
 
-export { Chain, ChainFunction, ChainNode, ChainNodeFactory, CreateParserOptions, FirstOrFunctionSet, FunctionNode, IAst, IChance, IElement, IElements, IMatchFn, IMatching, IParseResult, ISolveAst, MAX_VISITER_CALL, MatchNode, Node, ParentNode, Parser, Scanner, SingleElement, TreeNode, VisiterOption, VisiterStore, chain, createParser, many, matchTokenType, optional, parserMap, plus };
+export { Chain, ChainFunction, ChainNode, ChainNodeFactory, CreateParserOptions, FirstOrFunctionSet, FunctionNode, IAst, IChance, IElement, IElements, IMatchFn, IMatching, IParseResult, ISolveAst, IToken, Lexer, MAX_VISITER_CALL, MatchNode, Node, ParentNode, Parser, Scanner, SingleElement, TreeNode, VisiterOption, VisiterStore, chain, createLexer, createParser, many, matchTokenType, optional, parserMap, plus };

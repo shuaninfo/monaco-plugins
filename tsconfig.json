@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "sourceMap": true,
+    "allowJs": true,
     "module": "esnext",
     "target": "esnext",
     "lib": ["esnext","es6", "dom"],
@@ -14,11 +15,16 @@
     "noUnusedParameters": true,
     "emitDecoratorMetadata": true,
     "preserveConstEnums": true,
-    "types": ["node","@types/jest"]
+    "types": ["node", "@types/jest"]
   },
   "exclude": [
     "**/dist",
     "**/node_modules",
     "**/test"
-  ]
+  ],
+  "ts-node": {
+    "transpileOnly": true,
+    "transpiler": "ts-node/transpilers/swc-experimental",
+    "require": ["tsconfig-paths/register"]
+  }
 }

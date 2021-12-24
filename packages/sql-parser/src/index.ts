@@ -1,6 +1,6 @@
-import * as reader from './base/reader'
+import * as reader from './base/reader';
 
-export { reader }
-export * from './base/define'
+export { reader };
+export * from './base/define';
 
-export { mysqlParser } from './mysql'
+export { mysqlParser } from './mysql';

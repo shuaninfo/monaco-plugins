@@ -3,7 +3,7 @@ import App from './App.vue'
 
 Vue.config.productionTip = false
 
-import { mysqlParser } from '@shuaninfo/parser';
+import { mysqlParser } from '@shuaninfo/sql-parser';
 const result = mysqlParser(`SELECT *
 FROM bananas
 WHERE color = 'red'`);

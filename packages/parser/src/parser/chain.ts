@@ -1,5 +1,6 @@
-import { defaults, uniq, uniqBy } from 'lodash'
-import { Lexer, IToken } from '@shuaninfo/lexer'
+/* eslint-disable no-use-before-define */
+import { defaults, uniq, uniqBy } from 'lodash';
+import { Lexer, IToken } from '../lexer';
 import {
   Chain,
   ChainFunction,
@@ -18,32 +19,32 @@ import {
   parserMap,
   TreeNode,
   VisiterOption,
-  VisiterStore
-} from './define'
-import { match, matchFalse, matchTrue } from './match'
-import { Scanner } from './scanner'
-import { compareIgnoreLowerCaseWhenString, getPathByCursorIndexFromAst, tailCallOptimize } from './utils'
+  VisiterStore,
+} from './define';
+import { match, matchFalse, matchTrue } from './match';
+import { Scanner } from './scanner';
+import { compareIgnoreLowerCaseWhenString, getPathByCursorIndexFromAst, tailCallOptimize } from './utils';
 
 const createNodeByElement = (element: IElement, parentNode: ParentNode, parentIndex: number, parser: Parser): Node => {
   if (element instanceof Array) {
-    const treeNode = new TreeNode(parentIndex)
-    treeNode.parentNode = parentNode
+    const treeNode = new TreeNode(parentIndex);
+    treeNode.parentNode = parentNode;
     treeNode.childs = element.map((eachElement, childIndex) => {
-      return createNodeByElement(eachElement, treeNode, childIndex, parser)
-    })
-    return treeNode
+      return createNodeByElement(eachElement, treeNode, childIndex, parser);
+    });
+    return treeNode;
   }
   if (typeof element === 'string') {
     const matchNode = new MatchNode(
       match(element)(),
       {
         type: 'string',
-        value: element
+        value: element,
       },
-      parentIndex
-    )
-    matchNode.parentNode = parentNode
-    return matchNode
+      parentIndex,
+    );
+    matchNode.parentNode = parentNode;
+    return matchNode;
   }
   if (typeof element === 'boolean') {
     if (element) {
@@ -51,23 +52,23 @@ const createNodeByElement = (element: IElement, parentNode: ParentNode, parentIn
         matchTrue,
         {
           type: 'loose',
-          value: true
+          value: true,
         },
-        parentIndex
-      )
-      trueMatchNode.parentNode = parentNode
-      return trueMatchNode
+        parentIndex,
+      );
+      trueMatchNode.parentNode = parentNode;
+      return trueMatchNode;
     }
     const falseMatchNode = new MatchNode(
       matchFalse,
       {
         type: 'loose',
-        value: false
+        value: false,
       },
-      parentIndex
-    )
-    falseMatchNode.parentNode = parentNode
-    return falseMatchNode
+      parentIndex,
+    );
+    falseMatchNode.parentNode = parentNode;
+    return falseMatchNode;
   }
   if (typeof element === 'function') {
     if (element.parserName === 'match') {
@@ -75,71 +76,71 @@ const createNodeByElement = (element: IElement, parentNode: ParentNode, parentIn
         element(),
         {
           type: 'special',
-          value: element.displayName
+          value: element.displayName,
         },
-        parentIndex
-      )
-      matchNode.parentNode = parentNode
-      return matchNode
+        parentIndex,
+      );
+      matchNode.parentNode = parentNode;
+      return matchNode;
     }
     if (element.parserName === 'chainNodeFactory') {
-      const chainNode = element(parentNode, null, parentIndex, parser)
-      return chainNode
+      const chainNode = element(parentNode, null, parentIndex, parser);
+      return chainNode;
     }
-    const functionNode = new FunctionNode(element as ChainFunction, parentIndex, parser)
-    functionNode.parentNode = parentNode
-    return functionNode
+    const functionNode = new FunctionNode(element as ChainFunction, parentIndex, parser);
+    functionNode.parentNode = parentNode;
+    return functionNode;
   }
-  throw Error(`unknow element in chain ${element}`)
-}
+  throw Error(`unknow element in chain ${element}`);
+};
 
 export const chain: Chain = (...elements) => {
   return (
     solveAst = args => {
-      return args
-    }
+      return args;
+    },
   ) => {
     const chainNodeFactory: ChainNodeFactory = (parentNode, creatorFunction, parentIndex = 0, parser) => {
-      const chainNode = new ChainNode(parentIndex)
-      chainNode.parentNode = parentNode
-      chainNode.creatorFunction = creatorFunction
-      chainNode.solveAst = solveAst
+      const chainNode = new ChainNode(parentIndex);
+      chainNode.parentNode = parentNode;
+      chainNode.creatorFunction = creatorFunction;
+      chainNode.solveAst = solveAst;
 
       chainNode.childs = elements.map((element, index) => {
-        return createNodeByElement(element, chainNode, index, parser)
-      })
+        return createNodeByElement(element, chainNode, index, parser);
+      });
 
       if (creatorFunction) {
-        generateFirstSet(chainNode, parser)
+        generateFirstSet(chainNode, parser);
       }
 
-      return chainNode
+      return chainNode;
     };
-    (chainNodeFactory as any).parserName = 'chainNodeFactory'
+    (chainNodeFactory as any).parserName = 'chainNodeFactory';
 
-    return chainNodeFactory
-  }
-}
+    return chainNodeFactory;
+  };
+};
 
-function getParser (root: ChainFunction) {
+function getParser(root: ChainFunction) {
   if (parserMap.has(root)) {
-    return parserMap.get(root)
+    return parserMap.get(root);
   }
-  const parser = new Parser()
-  parser.rootChainNode = root()(null, null, 0, parser)
-  parserMap.set(root, parser)
-  return parser
+  const parser = new Parser();
+  parser.rootChainNode = root()(null, null, 0, parser);
+  parserMap.set(root, parser);
+  return parser;
 }
 
-function scannerAddCursorToken (scanner: Scanner, cursorIndex: number, options?: CreateParserOptions) {
-  let finalCursorIndex = cursorIndex
+function scannerAddCursorToken(scanner: Scanner, cursorIndex: number, options?: CreateParserOptions) {
+  let finalCursorIndex = cursorIndex;
 
   if (cursorIndex === null) {
-    return { scanner, finalCursorIndex }
+    return { scanner, finalCursorIndex };
   }
 
   // Find where token cursorIndex is in.
-  const cursorToken = scanner.getTokenByCharacterIndex(cursorIndex)
+  const cursorToken = scanner.getTokenByCharacterIndex(cursorIndex);
 
   // Generate cursor token, if cursor position is not in a token.
   if (!cursorToken) {
@@ -147,49 +148,49 @@ function scannerAddCursorToken (scanner: Scanner, cursorIndex: number, options?:
     scanner.addToken({
       type: 'cursor',
       value: null,
-      position: [cursorIndex, cursorIndex]
-    })
+      position: [cursorIndex, cursorIndex],
+    });
   } else if (options.cursorTokenExcludes(cursorToken)) {
     // If cursor is exclude, add a token next!
     scanner.addToken({
       type: 'cursor',
       value: null,
-      position: [cursorIndex + 1, cursorIndex + 1]
-    })
-    finalCursorIndex += 1
+      position: [cursorIndex + 1, cursorIndex + 1],
+    });
+    finalCursorIndex += 1;
   }
 
-  return { scanner, finalCursorIndex }
+  return { scanner, finalCursorIndex };
 }
 
 export const createParser = <AST = {}>(root: ChainFunction, lexer: Lexer, options?: CreateParserOptions) => {
   return (text: string, cursorIndex: number = null): IParseResult => {
     // eslint-disable-next-line no-param-reassign
-    options = defaults(options || {}, new CreateParserOptions())
+    options = defaults(options || {}, new CreateParserOptions());
 
-    const startTime = new Date()
-    const tokens = lexer(text)
-    const lexerTime = new Date()
-    const originScanner = new Scanner(tokens)
-    const { scanner, finalCursorIndex } = scannerAddCursorToken(new Scanner(tokens), cursorIndex, options)
+    const startTime = new Date();
+    const tokens = lexer(text);
+    const lexerTime = new Date();
+    const originScanner = new Scanner(tokens);
+    const { scanner, finalCursorIndex } = scannerAddCursorToken(new Scanner(tokens), cursorIndex, options);
     // eslint-disable-next-line no-param-reassign
-    cursorIndex = finalCursorIndex
-    const parser = getParser(root)
+    cursorIndex = finalCursorIndex;
+    const parser = getParser(root);
 
-    const cursorPrevToken = scanner.getPrevTokenByCharacterIndex(cursorIndex).prevToken
+    const cursorPrevToken = scanner.getPrevTokenByCharacterIndex(cursorIndex).prevToken;
 
     // If cursorPrevToken is null, the cursor prev node is root.
-    let cursorPrevNodes: Node[] = cursorPrevToken === null ? [parser.rootChainNode] : []
+    let cursorPrevNodes: Node[] = cursorPrevToken === null ? [parser.rootChainNode] : [];
 
-    let success = false
-    let ast: AST = null
-    let callVisiterCount = 0
-    let callParentCount = 0
+    let success = false;
+    let ast: AST = null;
+    let callVisiterCount = 0;
+    let callParentCount = 0;
     let lastMatchUnderShortestRestToken: {
       restTokenCount: number;
       matchNode: MatchNode;
       token: IToken;
-    } = null
+    } = null;
 
     // Parse without cursor token
     newVisit({
@@ -197,27 +198,27 @@ export const createParser = <AST = {}>(root: ChainFunction, lexer: Lexer, option
       scanner: originScanner,
       visiterOption: {
         onCallVisiter: (_node, store) => {
-          callVisiterCount += 1
+          callVisiterCount += 1;
 
           if (callVisiterCount > MAX_VISITER_CALL) {
             // eslint-disable-next-line no-param-reassign
-            store.stop = true
+            store.stop = true;
           }
         },
         onVisiterNextNode: (_node, store) => {
-          callParentCount += 1
+          callParentCount += 1;
           if (callParentCount > MAX_VISITER_CALL) {
             // eslint-disable-next-line no-param-reassign
-            store.stop = true
+            store.stop = true;
           }
         },
         onMatchNode: (matchNode, store, currentVisiterOption) => {
-          const matchResult = matchNode.run(store.scanner)
+          const matchResult = matchNode.run(store.scanner);
 
           if (!matchResult.match) {
-            tryChances(matchNode, store, currentVisiterOption)
+            tryChances(matchNode, store, currentVisiterOption);
           } else {
-            const restTokenCount = store.scanner.getRestTokenCount()
+            const restTokenCount = store.scanner.getRestTokenCount();
             // Last match at least token remaining, is the most readable reason for error.
             if (
               !lastMatchUnderShortestRestToken ||
@@ -226,99 +227,96 @@ export const createParser = <AST = {}>(root: ChainFunction, lexer: Lexer, option
               lastMatchUnderShortestRestToken = {
                 matchNode,
                 token: matchResult.token,
-                restTokenCount
-              }
+                restTokenCount,
+              };
             }
 
             visitNextNodeFromParent(matchNode, store, currentVisiterOption, {
               token: true,
-              ...matchResult.token
-            })
+              ...matchResult.token,
+            });
           }
         },
         onSuccess: () => {
-          success = true
+          success = true;
         },
-
         onFail: _node => {
-          success = false
-        }
+          success = false;
+        },
       },
-      parser
-    })
+      parser,
+    });
 
     // Parse with curosr token
     newVisit({
       node: parser.rootChainNode,
       scanner,
       visiterOption: {
-
         onCallVisiter: (_node, store) => {
-          callVisiterCount += 1
+          callVisiterCount += 1;
 
           if (callVisiterCount > MAX_VISITER_CALL) {
             // eslint-disable-next-line no-param-reassign
-            store.stop = true
+            store.stop = true;
           }
         },
-
         onVisiterNextNode: (_node, store) => {
-          callParentCount += 1
+          callParentCount += 1;
           if (callParentCount > MAX_VISITER_CALL) {
             // eslint-disable-next-line no-param-reassign
-            store.stop = true
+            store.stop = true;
           }
         },
         onSuccess: () => {
           ast = parser.rootChainNode.solveAst
             ? parser.rootChainNode.solveAst(parser.rootChainNode.astResults)
-            : parser.rootChainNode.astResults
+            : parser.rootChainNode.astResults;
         },
         onMatchNode: (matchNode, store, currentVisiterOption) => {
-          const matchResult = matchNode.run(store.scanner)
+          const matchResult = matchNode.run(store.scanner);
 
           if (!matchResult.match) {
-            tryChances(matchNode, store, currentVisiterOption)
+            tryChances(matchNode, store, currentVisiterOption);
           } else {
             // If cursor prev token isn't null, it may a cursor prev node.
             if (cursorPrevToken !== null && matchResult.token === cursorPrevToken) {
-              cursorPrevNodes.push(matchNode)
+              cursorPrevNodes.push(matchNode);
             }
 
             visitNextNodeFromParent(matchNode, store, currentVisiterOption, {
               token: true,
-              ...matchResult.token
-            })
+              ...matchResult.token,
+            });
           }
-        }
+        },
       },
-      parser
-    })
+      parser,
+    });
 
-    cursorPrevNodes = uniq(cursorPrevNodes)
+    cursorPrevNodes = uniq(cursorPrevNodes);
 
     // Get next matchings
     let nextMatchNodes = cursorPrevNodes.reduce(
       (all, cursorPrevNode) => {
-        return all.concat(findNextMatchNodes(cursorPrevNode, parser))
+        return all.concat(findNextMatchNodes(cursorPrevNode, parser));
       },
-      [] as MatchNode[]
-    )
+      [] as MatchNode[],
+    );
 
     nextMatchNodes = uniqBy(nextMatchNodes, each => {
-      return each.matching.type + each.matching.value
-    })
+      return each.matching.type + each.matching.value;
+    });
 
     // If has next token, filter nextMatchNodes by cursorNextToken
-    const cursorNextToken = scanner.getNextTokenFromCharacterIndex(cursorIndex)
+    const cursorNextToken = scanner.getNextTokenFromCharacterIndex(cursorIndex);
     if (cursorNextToken) {
       nextMatchNodes = nextMatchNodes.filter(nextMatchNode => {
-        return !compareIgnoreLowerCaseWhenString(nextMatchNode.matching.value, cursorNextToken.value)
-      })
+        return !compareIgnoreLowerCaseWhenString(nextMatchNode.matching.value, cursorNextToken.value);
+      });
     }
 
     // Get error message
-    let error: IParseResult['error'] = null
+    let error: IParseResult['error'] = null;
 
     if (!success) {
       const suggestions = uniqBy(
@@ -326,35 +324,35 @@ export const createParser = <AST = {}>(root: ChainFunction, lexer: Lexer, option
           ? findNextMatchNodes(lastMatchUnderShortestRestToken.matchNode, parser)
           : findNextMatchNodes(parser.rootChainNode, parser)
         ).map(each => {
-          return each.matching
+          return each.matching;
         }),
         each => {
-          return each.type + each.value
-        }
-      )
+          return each.type + each.value;
+        },
+      );
 
       const errorToken =
-        lastMatchUnderShortestRestToken && scanner.getNextByToken(lastMatchUnderShortestRestToken.token)
+        lastMatchUnderShortestRestToken && scanner.getNextByToken(lastMatchUnderShortestRestToken.token);
 
       if (errorToken) {
         error = {
           suggestions,
           token: errorToken,
-          reason: 'wrong'
-        }
+          reason: 'wrong',
+        };
       } else {
         error = {
           suggestions,
           token: lastMatchUnderShortestRestToken ? lastMatchUnderShortestRestToken.token : null,
-          reason: 'incomplete'
-        }
+          reason: 'incomplete',
+        };
       }
     }
 
-    const parserTime = new Date()
+    const parserTime = new Date();
 
     // Find cursor ast from whole ast.
-    const cursorKeyPath = getPathByCursorIndexFromAst(ast, cursorIndex).split('.')
+    const cursorKeyPath = getPathByCursorIndexFromAst(ast, cursorIndex).split('.');
 
     return {
       success,
@@ -363,10 +361,10 @@ export const createParser = <AST = {}>(root: ChainFunction, lexer: Lexer, option
       nextMatchings: nextMatchNodes
         .reverse()
         .map(each => {
-          return each.matching
+          return each.matching;
         })
         .filter(each => {
-          return !!each.value
+          return !!each.value;
         }),
       error,
       debugInfo: {
@@ -374,29 +372,29 @@ export const createParser = <AST = {}>(root: ChainFunction, lexer: Lexer, option
         callVisiterCount,
         costs: {
           lexer: lexerTime.getTime() - startTime.getTime(),
-          parser: parserTime.getTime() - startTime.getTime()
-        }
-      }
-    }
-  }
-}
+          parser: parserTime.getTime() - startTime.getTime(),
+        },
+      },
+    };
+  };
+};
 
-function newVisit ({
+function newVisit({
   node,
   scanner,
   visiterOption,
-  parser
+  parser,
 }: {
   node: Node;
   scanner: Scanner;
   visiterOption: VisiterOption;
   parser: Parser;
 }) {
-  const defaultVisiterOption = new VisiterOption()
-  defaults(visiterOption, defaultVisiterOption)
+  const defaultVisiterOption = new VisiterOption();
+  defaults(visiterOption, defaultVisiterOption);
 
-  const newStore = new VisiterStore(scanner, parser)
-  visit({ node, store: newStore, visiterOption, childIndex: 0 })
+  const newStore = new VisiterStore(scanner, parser);
+  visit({ node, store: newStore, visiterOption, childIndex: 0 });
 }
 
 const visit = tailCallOptimize(
@@ -404,7 +402,7 @@ const visit = tailCallOptimize(
     node,
     store,
     visiterOption,
-    childIndex
+    childIndex,
   }: {
     node: Node;
     store: VisiterStore;
@@ -412,55 +410,55 @@ const visit = tailCallOptimize(
     childIndex: number;
   }) => {
     if (store.stop) {
-      fail(node, store, visiterOption)
-      return
+      fail(node, store, visiterOption);
+      return;
     }
 
     if (!node) {
-      throw Error('no node!')
+      throw Error('no node!');
     }
 
     if (visiterOption.onCallVisiter) {
-      visiterOption.onCallVisiter(node, store)
+      visiterOption.onCallVisiter(node, store);
     }
 
     if (node instanceof ChainNode) {
       if (firstSetUnMatch(node, store, visiterOption, childIndex)) {
-        return // If unmatch, stop!
+        return; // If unmatch, stop!
       }
 
-      visitChildNode({ node, store, visiterOption, childIndex })
+      visitChildNode({ node, store, visiterOption, childIndex });
     } else if (node instanceof TreeNode) {
-      visitChildNode({ node, store, visiterOption, childIndex })
+      visitChildNode({ node, store, visiterOption, childIndex });
     } else if (node instanceof MatchNode) {
       if (node.matching.type === 'loose') {
         if (node.matching.value === true) {
-          visitNextNodeFromParent(node, store, visiterOption, null)
+          visitNextNodeFromParent(node, store, visiterOption, null);
         } else {
-          throw Error('Not support loose false!')
+          throw Error('Not support loose false!');
         }
       } else {
-        visiterOption.onMatchNode(node, store, visiterOption)
+        visiterOption.onMatchNode(node, store, visiterOption);
       }
     } else if (node instanceof FunctionNode) {
-      const functionName = node.chainFunction.name
-      const replacedNode = node.run()
-      replacedNode.functionName = functionName
+      const functionName = node.chainFunction.name;
+      const replacedNode = node.run();
+      replacedNode.functionName = functionName;
 
       // eslint-disable-next-line no-param-reassign
-      node.parentNode.childs[node.parentIndex] = replacedNode
-      visit({ node: replacedNode, store, visiterOption, childIndex: 0 })
+      node.parentNode.childs[node.parentIndex] = replacedNode;
+      visit({ node: replacedNode, store, visiterOption, childIndex: 0 });
     } else {
-      throw Error(`Unexpected node type: ${node}`)
+      throw Error(`Unexpected node type: ${node}`);
     }
-  }
-)
+  },
+);
 
-function visitChildNode ({
+function visitChildNode({
   node,
   store,
   visiterOption,
-  childIndex
+  childIndex,
 }: {
   node: ParentNode;
   store: VisiterStore;
@@ -468,20 +466,20 @@ function visitChildNode ({
   childIndex: number;
 }) {
   if (node instanceof ChainNode) {
-    const child = node.childs[childIndex]
+    const child = node.childs[childIndex];
     if (child) {
-      visit({ node: child, store, visiterOption, childIndex: 0 })
+      visit({ node: child, store, visiterOption, childIndex: 0 });
     } else {
       visitNextNodeFromParent(
         node,
         store,
         visiterOption,
-        visiterOption.generateAst ? node.solveAst(node.astResults) : null
-      )
+        visiterOption.generateAst ? node.solveAst(node.astResults) : null,
+      );
     }
   } else {
     // This case, Node === TreeNode
-    const child = node.childs[childIndex]
+    const child = node.childs[childIndex];
     if (childIndex + 1 < node.childs.length) {
       addChances({
         node,
@@ -489,13 +487,13 @@ function visitChildNode ({
         visiterOption,
         tokenIndex: store.scanner.getIndex(),
         childIndex: childIndex + 1,
-        addToNextMatchNodeFinders: true
-      })
+        addToNextMatchNodeFinders: true,
+      });
     }
     if (child) {
-      visit({ node: child, store, visiterOption, childIndex: 0 })
+      visit({ node: child, store, visiterOption, childIndex: 0 });
     } else {
-      throw Error('tree node unexpect end')
+      throw Error('tree node unexpect end');
     }
   }
 }
@@ -503,49 +501,51 @@ function visitChildNode ({
 const visitNextNodeFromParent = tailCallOptimize(
   (node: Node, store: VisiterStore, visiterOption: VisiterOption, astValue: any) => {
     if (store.stop) {
-      fail(node, store, visiterOption)
-      return
+      fail(node, store, visiterOption);
+      return;
     }
 
     if (visiterOption.onVisiterNextNode) {
-      visiterOption.onVisiterNextNode(node, store)
+      visiterOption.onVisiterNextNode(node, store);
     }
 
     if (!node.parentNode) {
-      return noNextNode(node, store, visiterOption)
+      return noNextNode(node, store, visiterOption);
     }
 
     if (node.parentNode instanceof ChainNode) {
       if (visiterOption.generateAst) {
         // eslint-disable-next-line no-param-reassign
-        node.parentNode.astResults[node.parentIndex] = astValue
+        node.parentNode.astResults[node.parentIndex] = astValue;
       }
 
       // A       B <- next node      C
       // └── node <- current node
-      visit({ node: node.parentNode, store, visiterOption, childIndex: node.parentIndex + 1 })
+      visit({ node: node.parentNode, store, visiterOption, childIndex: node.parentIndex + 1 });
     } else if (node.parentNode instanceof TreeNode) {
-      visitNextNodeFromParent(node.parentNode, store, visiterOption, astValue)
+      visitNextNodeFromParent(node.parentNode, store, visiterOption, astValue);
     } else {
-      throw Error(`Unexpected parent node type: ${node.parentNode}`)
+      throw Error(`Unexpected parent node type: ${node.parentNode}`);
     }
-  }
-)
+  },
+);
 
-function noNextNode (node: Node, store: VisiterStore, visiterOption: VisiterOption) {
+function noNextNode(node: Node, store: VisiterStore, visiterOption: VisiterOption) {
   if (store.scanner.isEnd()) {
     if (visiterOption.onSuccess) {
-      visiterOption.onSuccess()
+      visiterOption.onSuccess();
     }
   } else {
-    tryChances(node, store, visiterOption)
+    tryChances(node, store, visiterOption);
   }
 }
-function addChances ({
+function addChances({
   node,
   store,
+  // visiterOption,
   tokenIndex,
-  childIndex
+  childIndex,
+  // addToNextMatchNodeFinders,
 }: {
   node: ParentNode;
   store: VisiterStore;
@@ -557,136 +557,136 @@ function addChances ({
   const chance = {
     node,
     tokenIndex,
-    childIndex
-  }
+    childIndex,
+  };
 
-  store.restChances.push(chance)
+  store.restChances.push(chance);
 }
 
-function hasParentNodeByFunctionName (node: Node, functionName: string): boolean {
+function hasParentNodeByFunctionName(node: Node, functionName: string): boolean {
   if (node instanceof ChainNode && node.functionName === functionName) {
-    return true
+    return true;
   }
 
   if (node.parentNode) {
-    return hasParentNodeByFunctionName(node.parentNode, functionName)
+    return hasParentNodeByFunctionName(node.parentNode, functionName);
   }
 
-  return false
+  return false;
 }
 
-function tryChances (node: Node, store: VisiterStore, visiterOption: VisiterOption) {
+function tryChances(node: Node, store: VisiterStore, visiterOption: VisiterOption) {
   if (store.restChances.length === 0) {
-    fail(node, store, visiterOption)
-    return
+    fail(node, store, visiterOption);
+    return;
   }
 
-  const nextChance = store.restChances.pop()
+  const nextChance = store.restChances.pop();
 
   // reset scanner index
-  store.scanner.setIndex(nextChance.tokenIndex)
+  store.scanner.setIndex(nextChance.tokenIndex);
 
-  visit({ node: nextChance.node, store, visiterOption, childIndex: nextChance.childIndex })
+  visit({ node: nextChance.node, store, visiterOption, childIndex: nextChance.childIndex });
 }
 
-function fail (node: Node, _store: VisiterStore = null, visiterOption: VisiterOption) {
+function fail(node: Node, _store: VisiterStore, visiterOption: VisiterOption) {
   if (visiterOption.onFail) {
-    visiterOption.onFail(node)
+    visiterOption.onFail(node);
   }
 }
 
 // Find all tokens that may appear next
-function findNextMatchNodes (node: Node, parser: Parser): MatchNode[] {
-  const nextMatchNodes: MatchNode[] = []
+function findNextMatchNodes(node: Node, parser: Parser): MatchNode[] {
+  const nextMatchNodes: MatchNode[] = [];
 
-  let passCurrentNode = false
+  let passCurrentNode = false;
 
   const visiterOption: VisiterOption = {
     generateAst: false,
     enableFirstSet: false,
     onMatchNode: (matchNode, store, currentVisiterOption) => {
       if (matchNode === node && passCurrentNode === false) {
-        passCurrentNode = true
-        visitNextNodeFromParent(matchNode, store, currentVisiterOption, null)
+        passCurrentNode = true;
+        visitNextNodeFromParent(matchNode, store, currentVisiterOption, null);
       } else {
-        nextMatchNodes.push(matchNode)
+        nextMatchNodes.push(matchNode);
       }
 
       // Suppose the match failed, so we can find another possible match chance!
-      tryChances(matchNode, store, currentVisiterOption)
-    }
-  }
+      tryChances(matchNode, store, currentVisiterOption);
+    },
+  };
 
-  newVisit({ node, scanner: new Scanner([]), visiterOption, parser })
+  newVisit({ node, scanner: new Scanner([]), visiterOption, parser });
 
-  return nextMatchNodes
+  return nextMatchNodes;
 }
 
 // First Set -----------------------------------------------------------------
 
-function firstSetUnMatch (node: ChainNode, store: VisiterStore, visiterOption: VisiterOption, childIndex: number) {
+function firstSetUnMatch(node: ChainNode, store: VisiterStore, visiterOption: VisiterOption, childIndex: number) {
   if (
     visiterOption.enableFirstSet &&
     node.creatorFunction &&
     childIndex === 0 &&
     store.parser.firstSet.has(node.creatorFunction)
   ) {
-    const firstMatchNodes = store.parser.firstSet.get(node.creatorFunction)
+    const firstMatchNodes = store.parser.firstSet.get(node.creatorFunction);
 
     // If not match any first match node, try chances
     if (
       !firstMatchNodes.some(firstMatchNode => {
-        return firstMatchNode.run(store.scanner, false).match
+        return firstMatchNode.run(store.scanner, false).match;
       })
     ) {
-      tryChances(node, store, visiterOption)
-      return true // Yes, unMatch.
+      tryChances(node, store, visiterOption);
+      return true; // Yes, unMatch.
     }
-    return false // No, Match.
+    return false; // No, Match.
   }
 }
 
-function generateFirstSet (node: ChainNode, parser: Parser) {
+function generateFirstSet(node: ChainNode, parser: Parser) {
   if (parser.firstSet.has(node.creatorFunction)) {
-    return
+    return;
   }
 
-  const firstMatchNodes = getFirstOrFunctionSet(node, node.creatorFunction, parser)
-  parser.firstOrFunctionSet.set(node.creatorFunction, firstMatchNodes)
+  const firstMatchNodes = getFirstOrFunctionSet(node, node.creatorFunction, parser);
+  parser.firstOrFunctionSet.set(node.creatorFunction, firstMatchNodes);
 
-  solveFirstSet(node.creatorFunction, parser)
+  solveFirstSet(node.creatorFunction, parser);
 }
 
-function getFirstOrFunctionSet (node: Node, creatorFunction: ChainFunction, parser: Parser): FirstOrFunctionSet[] {
+function getFirstOrFunctionSet(node: Node, creatorFunction: ChainFunction, parser: Parser): FirstOrFunctionSet[] {
   if (node instanceof ChainNode) {
     if (node.childs[0]) {
-      return getFirstOrFunctionSet(node.childs[0], creatorFunction, parser)
+      return getFirstOrFunctionSet(node.childs[0], creatorFunction, parser);
     }
   } else if (node instanceof TreeNode) {
     return node.childs.reduce((all, next) => {
-      return all.concat(getFirstOrFunctionSet(next, creatorFunction, parser))
-    }, [])
+      return all.concat(getFirstOrFunctionSet(next, creatorFunction, parser));
+    }, []);
   } else if (node instanceof MatchNode) {
-    return [node]
+    return [node];
   } else if (node instanceof FunctionNode) {
     if (parser.relatedSet.has(node.chainFunction)) {
-      parser.relatedSet.get(node.chainFunction).add(creatorFunction)
+      parser.relatedSet.get(node.chainFunction).add(creatorFunction);
     } else {
-      parser.relatedSet.set(node.chainFunction, new Set([creatorFunction]))
+      parser.relatedSet.set(node.chainFunction, new Set([creatorFunction]));
     }
 
-    return [node.chainFunction]
+    return [node.chainFunction];
   } else {
-    throw Error(`Unexpected node: ${node}`)
+    throw Error(`Unexpected node: ${node}`);
   }
 }
 
-function solveFirstSet (creatorFunction: ChainFunction, parser: Parser) {
+function solveFirstSet(creatorFunction: ChainFunction, parser: Parser) {
   if (parser.firstSet.has(creatorFunction)) {
-    return
+    return;
   }
 
-  const firstMatchNodes = parser.firstOrFunctionSet.get(creatorFunction)
+  const firstMatchNodes = parser.firstOrFunctionSet.get(creatorFunction);
 
   // Try if relate functionName has done first set.
   const newFirstMatchNodes = firstMatchNodes.reduce(
@@ -694,36 +694,35 @@ function solveFirstSet (creatorFunction: ChainFunction, parser: Parser) {
       if (typeof firstMatchNode === 'string') {
         if (parser.firstSet.has(firstMatchNode)) {
           // eslint-disable-next-line no-param-reassign
-          all = all.concat(parser.firstSet.get(firstMatchNode))
+          all = all.concat(parser.firstSet.get(firstMatchNode));
         } else {
-          all.push(firstMatchNode)
+          all.push(firstMatchNode);
         }
       } else {
-        all.push(firstMatchNode)
+        all.push(firstMatchNode);
       }
 
-      return all
+      return all;
     },
-    [] as FirstOrFunctionSet[]
-  )
+    [] as FirstOrFunctionSet[],
+  );
 
-  parser.firstOrFunctionSet.set(creatorFunction, newFirstMatchNodes)
+  parser.firstOrFunctionSet.set(creatorFunction, newFirstMatchNodes);
 
   // If all set hasn't function node, we can solve it's relative set.
   if (
     newFirstMatchNodes.every(firstMatchNode => {
-      return firstMatchNode instanceof MatchNode
+      return firstMatchNode instanceof MatchNode;
     })
   ) {
-    parser.firstSet.set(creatorFunction, newFirstMatchNodes as MatchNode[])
+    parser.firstSet.set(creatorFunction, newFirstMatchNodes as MatchNode[]);
 
     // If this functionName has related functionNames, solve them
     if (parser.relatedSet.has(creatorFunction)) {
-      const relatedFunctionNames = parser.relatedSet.get(creatorFunction)
-      // relatedFunctionName
-      relatedFunctionNames.forEach(() => {
-        return solveFirstSet
-      })
+      const relatedFunctionNames = parser.relatedSet.get(creatorFunction);
+      relatedFunctionNames.forEach(_relatedFunctionName => {
+        return solveFirstSet;
+      });
     }
   }
 }

@@ -1,23 +1,20 @@
 /* eslint-disable no-restricted-globals */
-/* eslint-disable no-case-declarations */
-/* eslint-disable no-use-before-define */
-/* eslint-disable no-plusplus */
-/* eslint-disable no-param-reassign */
 import * as _ from 'lodash';
-import { IParseResult } from '../..';
-import { DefaultOpts, IMonacoVersion, IParserType } from '../src/default-opts';
-import * as MyWorker from '../src/parser.worker';
-import { ICompletionItem, ITableInfo, reader, ICursorInfo } from '../sql-parser';
+import { DefaultOpts, IMonacoVersion, IParserType } from './default-opts';
+import * as ParserWorker from './parser.worker';
+// @ts-ignore
+import xx from 'web-worker:./parser.worker';
+console.log(xx)
+import { ICompletionItem, ITableInfo, reader, ICursorInfo, IParseResult } from '@shuaninfo/sql-parser';
 
-const supportedMonacoEditorVersion = ['0.13.2', '0.15.6'];
+const supportedMonacoEditorVersion = ['0.13.2', '0.15.6', '0.19.3'];
 
 export function monacoSqlAutocomplete(monaco: any, editor: any, opts?: Partial<DefaultOpts>) {
   opts = _.defaults(opts || {}, new DefaultOpts(monaco));
 
   if (supportedMonacoEditorVersion.indexOf(opts.monacoEditorVersion) === -1) {
     throw Error(
-      `monaco-editor version ${
-        opts.monacoEditorVersion
+      `monaco-editor version ${opts.monacoEditorVersion
       } is not allowed, only support ${supportedMonacoEditorVersion.join(' ')}`,
     );
   }
@@ -26,7 +23,8 @@ export function monacoSqlAutocomplete(monaco: any, editor: any, opts?: Partial<D
   let currentParserPromise: any = null;
   let editVersion = 0;
 
-  editor.onDidChangeModelContent((event: any) => {
+  // editor.onDidChangeModelContent((event: any) => {
+  editor.onDidChangeModelContent(() => {
     editVersion++;
     const currentEditVersion = editVersion;
 
@@ -47,29 +45,29 @@ export function monacoSqlAutocomplete(monaco: any, editor: any, opts?: Partial<D
             const newReason =
               parseResult.error.reason === 'incomplete'
                 ? `Incomplete, expect next input: \n${parseResult.error.suggestions
-                    .map((each: any) => {
-                      return each.value;
-                    })
-                    .join('\n')}`
+                  .map((each: any) => {
+                    return each.value;
+                  })
+                  .join('\n')}`
                 : `Wrong input, expect: \n${parseResult.error.suggestions
-                    .map((each: any) => {
-                      return each.value;
-                    })
-                    .join('\n')}`;
+                  .map((each: any) => {
+                    return each.value;
+                  })
+                  .join('\n')}`;
 
             const errorPosition = parseResult.error.token
               ? {
-                  startLineNumber: model.getPositionAt(parseResult.error.token.position[0]).lineNumber,
-                  startColumn: model.getPositionAt(parseResult.error.token.position[0]).column,
-                  endLineNumber: model.getPositionAt(parseResult.error.token.position[1]).lineNumber,
-                  endColumn: model.getPositionAt(parseResult.error.token.position[1]).column + 1,
-                }
+                startLineNumber: model.getPositionAt(parseResult.error.token.position[0]).lineNumber,
+                startColumn: model.getPositionAt(parseResult.error.token.position[0]).column,
+                endLineNumber: model.getPositionAt(parseResult.error.token.position[1]).lineNumber,
+                endColumn: model.getPositionAt(parseResult.error.token.position[1]).column + 1,
+              }
               : {
-                  startLineNumber: 0,
-                  startColumn: 0,
-                  endLineNumber: 0,
-                  endColumn: 0,
-                };
+                startLineNumber: 0,
+                startColumn: 0,
+                endLineNumber: 0,
+                endColumn: 0,
+              };
 
             model.getPositionAt(parseResult.error.token);
 
@@ -131,8 +129,8 @@ export function monacoSqlAutocomplete(monaco: any, editor: any, opts?: Partial<D
               .concat(
                 groups
                   ? Object.keys(groups).map(groupName => {
-                      return opts.onSuggestFieldGroup(groupName);
-                    })
+                    return opts.onSuggestFieldGroup(groupName);
+                  })
                   : [],
               ),
             opts.monacoEditorVersion,
@@ -157,6 +155,7 @@ export function monacoSqlAutocomplete(monaco: any, editor: any, opts?: Partial<D
             opts.monacoEditorVersion,
           );
         case 'tableName':
+          // @ts-ignore
           const tableNames = await opts.onSuggestTableNames(cursorInfo as ICursorInfo<ITableInfo>);
 
           return returnCompletionItemsByVersion(tableNames.concat(parserSuggestion), opts.monacoEditorVersion);
@@ -224,7 +223,8 @@ export function monacoSqlAutocomplete(monaco: any, editor: any, opts?: Partial<D
 }
 
 // 实例化一个 worker
-const worker: Worker = new (MyWorker as any)();
+// const worker: Worker = new (MyWorker as any)();
+const worker: any = new (ParserWorker as any)();
 
 let parserIndex = 0;
 
@@ -240,9 +240,11 @@ const asyncParser = async (text: string, index: number, parserType: IParserType)
     reject = promiseReject;
   });
 
+  console.log('发送: ', worker, text)
   worker.postMessage({ text, index, parserType });
 
-  worker.onmessage = event => {
+  worker.onmessage = (event: any) => {
+    console.log('接受: ', text)
     if (currentParserIndex === parserIndex) {
       resolve(event.data);
     } else {

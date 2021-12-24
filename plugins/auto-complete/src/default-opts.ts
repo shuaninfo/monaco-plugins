@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-parameter-properties */
-/* eslint-disable no-useless-constructor */
 import * as _ from 'lodash';
-import { IMatching, IParseResult } from '../..';
-import { ITableInfo, ICompletionItem, IStatement, ICursorInfo } from '../sql-parser';
+import { IMatching, IParseResult } from '@shuaninfo/sql-parser';
+import { ITableInfo, ICompletionItem, IStatement, ICursorInfo } from '@shuaninfo/sql-parser';
 
 export type IMonacoVersion = '0.13.2' | '0.15.6';
 
@@ -19,11 +17,11 @@ export class DefaultOpts {
     //
   }
 
-  public onParse = (parseResult: IParseResult) => {
-    //
+  public onParse = (_parseResult: IParseResult) => {
+
   };
 
-  public onSuggestTableNames?: (cursorInfo?: ICursorInfo<ITableInfo>) => Promise<ICompletionItem[]> = cursorInfo => {
+  public onSuggestTableNames?: (cursorInfo?: ICursorInfo<ITableInfo>) => Promise<ICompletionItem[]> = _cursorInfo => {
     return Promise.resolve(
       ['dt', 'b2b', 'tmall'].map(name => {
         return {
@@ -58,10 +56,10 @@ export class DefaultOpts {
   };
 
   public pipeKeywords = (keywords: IMatching[]) => {
-    return keywords
-      .filter(matching => {
-        return matching.type === 'string';
-      })
+    console.log('keywords: ', keywords)
+    return keywords.filter(matching => {
+      return matching.type === 'string';
+    })
       .map(matching => {
         const value = /[a-zA-Z]+/.test(matching.value.toString())
           ? _.upperCase(matching.value.toString())
@@ -77,7 +75,7 @@ export class DefaultOpts {
       });
   };
 
-  public onSuggestFunctionName?: (inputValue?: string) => Promise<ICompletionItem[]> = inputValue => {
+  public onSuggestFunctionName?: (inputValue?: string) => Promise<ICompletionItem[]> = _inputValue => {
     return Promise.resolve(
       ['sum', 'count'].map(each => {
         return {

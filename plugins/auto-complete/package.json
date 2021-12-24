@@ -1,21 +1,22 @@
 {
-  "name": "@shuaninfo/sql-parser",
+  "name": "@shuaninfo/auto-complete",
   "version": "2.0.0",
-  "description": "对SQL的解析, 支持: mysql",
+  "description": "对SQL的解析",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
+  "license": "MIT",
   "scripts": {
-    "dev": "npm run build -- --watch",
-    "build": "tsup src/index.ts --dts --format esm,cjs",
+    "dev": "tsup --watch",
+    "build": "tsup",
     "prepack": "unbuild",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@shuaninfo/parser": "^2.0.0"
+    "@shuaninfo/sql-parser": "^2.0.0"
   },
   "devDependencies": {
     "unbuild": "latest"

@@ -1,6 +1,8 @@
 var __create = Object.create;
 var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
 var __getProtoOf = Object.getPrototypeOf;
@@ -18,6 +20,7 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
 var __markAsModule = (target) => __defProp(target, "__esModule", { value: true });
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 var __esm = (fn, res) => function __init() {
@@ -26,28 +29,37 @@ var __esm = (fn, res) => function __init() {
 var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
-var __reExport = (target, module, copyDefault, desc) => {
-  if (module && typeof module === "object" || typeof module === "function") {
-    for (let key of __getOwnPropNames(module))
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __reExport = (target, module2, copyDefault, desc) => {
+  if (module2 && typeof module2 === "object" || typeof module2 === "function") {
+    for (let key of __getOwnPropNames(module2))
       if (!__hasOwnProp.call(target, key) && (copyDefault || key !== "default"))
-        __defProp(target, key, { get: () => module[key], enumerable: !(desc = __getOwnPropDesc(module, key)) || desc.enumerable });
+        __defProp(target, key, { get: () => module2[key], enumerable: !(desc = __getOwnPropDesc(module2, key)) || desc.enumerable });
   }
   return target;
 };
-var __toESM = (module, isNodeMode) => {
-  return __reExport(__markAsModule(__defProp(module != null ? __create(__getProtoOf(module)) : {}, "default", !isNodeMode && module && module.__esModule ? { get: () => module.default, enumerable: true } : { value: module, enumerable: true })), module);
+var __toESM = (module2, isNodeMode) => {
+  return __reExport(__markAsModule(__defProp(module2 != null ? __create(__getProtoOf(module2)) : {}, "default", !isNodeMode && module2 && module2.__esModule ? { get: () => module2.default, enumerable: true } : { value: module2, enumerable: true })), module2);
 };
+var __toCommonJS = /* @__PURE__ */ ((cache) => {
+  return (module2, temp) => {
+    return cache && cache.get(module2) || (temp = __reExport(__markAsModule({}), module2, 1), cache && cache.set(module2, temp), temp);
+  };
+})(typeof WeakMap !== "undefined" ? /* @__PURE__ */ new WeakMap() : 0);
 
-// ../../node_modules/tsup/assets/esm_shims.js
-var init_esm_shims = __esm({
-  "../../node_modules/tsup/assets/esm_shims.js"() {
+// ../../node_modules/tsup/assets/cjs_shims.js
+var init_cjs_shims = __esm({
+  "../../node_modules/tsup/assets/cjs_shims.js"() {
   }
 });
 
 // ../../node_modules/lodash/lodash.js
 var require_lodash = __commonJS({
-  "../../node_modules/lodash/lodash.js"(exports, module) {
-    init_esm_shims();
+  "../../node_modules/lodash/lodash.js"(exports, module2) {
+    init_cjs_shims();
     (function() {
       var undefined;
       var VERSION = "4.17.21";
@@ -421,9 +433,9 @@ var require_lodash = __commonJS({
       var freeParseFloat = parseFloat, freeParseInt = parseInt;
       var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
       var freeSelf = typeof self == "object" && self && self.Object === Object && self;
-      var root = freeGlobal || freeSelf || Function("return this")();
+      var root2 = freeGlobal || freeSelf || Function("return this")();
       var freeExports = typeof exports == "object" && exports && !exports.nodeType && exports;
-      var freeModule = freeExports && typeof module == "object" && module && !module.nodeType && module;
+      var freeModule = freeExports && typeof module2 == "object" && module2 && !module2.nodeType && module2;
       var moduleExports = freeModule && freeModule.exports === freeExports;
       var freeProcess = moduleExports && freeGlobal.process;
       var nodeUtil = function() {
@@ -480,21 +492,21 @@ var require_lodash = __commonJS({
         return array;
       }
       __name(arrayEachRight, "arrayEachRight");
-      function arrayEvery(array, predicate) {
+      function arrayEvery(array, predicate2) {
         var index = -1, length = array == null ? 0 : array.length;
         while (++index < length) {
-          if (!predicate(array[index], index, array)) {
+          if (!predicate2(array[index], index, array)) {
             return false;
           }
         }
         return true;
       }
       __name(arrayEvery, "arrayEvery");
-      function arrayFilter(array, predicate) {
+      function arrayFilter(array, predicate2) {
         var index = -1, length = array == null ? 0 : array.length, resIndex = 0, result = [];
         while (++index < length) {
           var value = array[index];
-          if (predicate(value, index, array)) {
+          if (predicate2(value, index, array)) {
             result[resIndex++] = value;
           }
         }
@@ -554,10 +566,10 @@ var require_lodash = __commonJS({
         return accumulator;
       }
       __name(arrayReduceRight, "arrayReduceRight");
-      function arraySome(array, predicate) {
+      function arraySome(array, predicate2) {
         var index = -1, length = array == null ? 0 : array.length;
         while (++index < length) {
-          if (predicate(array[index], index, array)) {
+          if (predicate2(array[index], index, array)) {
             return true;
           }
         }
@@ -573,10 +585,10 @@ var require_lodash = __commonJS({
         return string.match(reAsciiWord) || [];
       }
       __name(asciiWords, "asciiWords");
-      function baseFindKey(collection1, predicate, eachFunc) {
+      function baseFindKey(collection1, predicate2, eachFunc) {
         var result;
         eachFunc(collection1, function(value, key, collection) {
-          if (predicate(value, key, collection)) {
+          if (predicate2(value, key, collection)) {
             result = key;
             return false;
           }
@@ -584,10 +596,10 @@ var require_lodash = __commonJS({
         return result;
       }
       __name(baseFindKey, "baseFindKey");
-      function baseFindIndex(array, predicate, fromIndex, fromRight) {
+      function baseFindIndex(array, predicate2, fromIndex, fromRight) {
         var length = array.length, index = fromIndex + (fromRight ? 1 : -1);
         while (fromRight ? index-- : ++index < length) {
-          if (predicate(array[index], index, array)) {
+          if (predicate2(array[index], index, array)) {
             return index;
           }
         }
@@ -844,8 +856,8 @@ var require_lodash = __commonJS({
       }
       __name(unicodeWords, "unicodeWords");
       var runInContext1 = /* @__PURE__ */ __name(function runInContext(context) {
-        context = context == null ? root : _.defaults(root.Object(), context, _.pick(root, contextProps));
-        var Array2 = context.Array, Date2 = context.Date, Error2 = context.Error, Function2 = context.Function, Math2 = context.Math, Object2 = context.Object, RegExp2 = context.RegExp, String = context.String, TypeError2 = context.TypeError;
+        context = context == null ? root2 : _2.defaults(root2.Object(), context, _2.pick(root2, contextProps));
+        var Array2 = context.Array, Date = context.Date, Error2 = context.Error, Function2 = context.Function, Math2 = context.Math, Object2 = context.Object, RegExp2 = context.RegExp, String = context.String, TypeError2 = context.TypeError;
         var arrayProto = Array2.prototype, funcProto = Function2.prototype, objectProto = Object2.prototype;
         var coreJsData = context["__core-js_shared__"];
         var funcToString = funcProto.toString;
@@ -857,7 +869,7 @@ var require_lodash = __commonJS({
         }();
         var nativeObjectToString = objectProto.toString;
         var objectCtorString = funcToString.call(Object2);
-        var oldDash = root._;
+        var oldDash = root2._;
         var reIsNative = RegExp2("^" + funcToString.call(hasOwnProperty).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$");
         var Buffer2 = moduleExports ? context.Buffer : undefined, Symbol = context.Symbol, Uint8Array2 = context.Uint8Array, allocUnsafe = Buffer2 ? Buffer2.allocUnsafe : undefined, getPrototype = overArg(Object2.getPrototypeOf, Object2), objectCreate = Object2.create, propertyIsEnumerable = objectProto.propertyIsEnumerable, splice = arrayProto.splice, spreadableSymbol = Symbol ? Symbol.isConcatSpreadable : undefined, symIterator = Symbol ? Symbol.iterator : undefined, symToStringTag = Symbol ? Symbol.toStringTag : undefined;
         var defineProperty = function() {
@@ -868,15 +880,15 @@ var require_lodash = __commonJS({
           } catch (e) {
           }
         }();
-        var ctxClearTimeout = context.clearTimeout !== root.clearTimeout && context.clearTimeout, ctxNow = Date2 && Date2.now !== root.Date.now && Date2.now, ctxSetTimeout = context.setTimeout !== root.setTimeout && context.setTimeout;
-        var nativeCeil = Math2.ceil, nativeFloor = Math2.floor, nativeGetSymbols = Object2.getOwnPropertySymbols, nativeIsBuffer = Buffer2 ? Buffer2.isBuffer : undefined, nativeIsFinite = context.isFinite, nativeJoin = arrayProto.join, nativeKeys = overArg(Object2.keys, Object2), nativeMax = Math2.max, nativeMin = Math2.min, nativeNow = Date2.now, nativeParseInt = context.parseInt, nativeRandom = Math2.random, nativeReverse = arrayProto.reverse;
-        var DataView = getNative(context, "DataView"), Map2 = getNative(context, "Map"), Promise2 = getNative(context, "Promise"), Set2 = getNative(context, "Set"), WeakMap2 = getNative(context, "WeakMap"), nativeCreate = getNative(Object2, "create");
+        var ctxClearTimeout = context.clearTimeout !== root2.clearTimeout && context.clearTimeout, ctxNow = Date && Date.now !== root2.Date.now && Date.now, ctxSetTimeout = context.setTimeout !== root2.setTimeout && context.setTimeout;
+        var nativeCeil = Math2.ceil, nativeFloor = Math2.floor, nativeGetSymbols = Object2.getOwnPropertySymbols, nativeIsBuffer = Buffer2 ? Buffer2.isBuffer : undefined, nativeIsFinite = context.isFinite, nativeJoin = arrayProto.join, nativeKeys = overArg(Object2.keys, Object2), nativeMax = Math2.max, nativeMin = Math2.min, nativeNow = Date.now, nativeParseInt = context.parseInt, nativeRandom = Math2.random, nativeReverse = arrayProto.reverse;
+        var DataView = getNative(context, "DataView"), Map = getNative(context, "Map"), Promise2 = getNative(context, "Promise"), Set = getNative(context, "Set"), WeakMap2 = getNative(context, "WeakMap"), nativeCreate = getNative(Object2, "create");
         var metaMap = WeakMap2 && new WeakMap2();
         var realNames = {};
-        var dataViewCtorString = toSource(DataView), mapCtorString = toSource(Map2), promiseCtorString = toSource(Promise2), setCtorString = toSource(Set2), weakMapCtorString = toSource(WeakMap2);
+        var dataViewCtorString = toSource(DataView), mapCtorString = toSource(Map), promiseCtorString = toSource(Promise2), setCtorString = toSource(Set), weakMapCtorString = toSource(WeakMap2);
         var symbolProto = Symbol ? Symbol.prototype : undefined, symbolValueOf = symbolProto ? symbolProto.valueOf : undefined, symbolToString = symbolProto ? symbolProto.toString : undefined;
         function lodash(value) {
-          if (isObjectLike(value) && !isArray(value) && !(value instanceof LazyWrapper)) {
+          if (isObjectLike(value) && !isArray2(value) && !(value instanceof LazyWrapper)) {
             if (value instanceof LodashWrapper) {
               return value;
             }
@@ -962,7 +974,7 @@ var require_lodash = __commonJS({
         }
         __name(lazyReverse, "lazyReverse");
         function lazyValue() {
-          var array = this.__wrapped__.value(), dir = this.__dir__, isArr = isArray(array), isRight = dir < 0, arrLength = isArr ? array.length : 0, view = getView(0, arrLength, this.__views__), start = view.start, end = view.end, length = end - start, index = isRight ? end : start - 1, iteratees = this.__iteratees__, iterLength = iteratees.length, resIndex = 0, takeCount = nativeMin(length, this.__takeCount__);
+          var array = this.__wrapped__.value(), dir = this.__dir__, isArr = isArray2(array), isRight = dir < 0, arrLength = isArr ? array.length : 0, view = getView(0, arrLength, this.__views__), start = view.start, end = view.end, length = end - start, index = isRight ? end : start - 1, iteratees = this.__iteratees__, iterLength = iteratees.length, resIndex = 0, takeCount = nativeMin(length, this.__takeCount__);
           if (!isArr || !isRight && arrLength == length && takeCount == length) {
             return baseWrapperValue(array, this.__actions__);
           }
@@ -1106,7 +1118,7 @@ var require_lodash = __commonJS({
           this.size = 0;
           this.__data__ = {
             "hash": new Hash(),
-            "map": new (Map2 || ListCache)(),
+            "map": new (Map || ListCache)(),
             "string": new Hash()
           };
         }
@@ -1184,7 +1196,7 @@ var require_lodash = __commonJS({
           var data = this.__data__;
           if (data instanceof ListCache) {
             var pairs = data.__data__;
-            if (!Map2 || pairs.length < LARGE_ARRAY_SIZE - 1) {
+            if (!Map || pairs.length < LARGE_ARRAY_SIZE - 1) {
               pairs.push([
                 key,
                 value
@@ -1205,7 +1217,7 @@ var require_lodash = __commonJS({
         Stack.prototype.has = stackHas;
         Stack.prototype.set = stackSet;
         function arrayLikeKeys(value, inherited) {
-          var isArr = isArray(value), isArg = !isArr && isArguments(value), isBuff = !isArr && !isArg && isBuffer(value), isType = !isArr && !isArg && !isBuff && isTypedArray(value), skipIndexes = isArr || isArg || isBuff || isType, result = skipIndexes ? baseTimes(value.length, String) : [], length = result.length;
+          var isArr = isArray2(value), isArg = !isArr && isArguments(value), isBuff = !isArr && !isArg && isBuffer(value), isType = !isArr && !isArg && !isBuff && isTypedArray(value), skipIndexes = isArr || isArg || isBuff || isType, result = skipIndexes ? baseTimes(value.length, String) : [], length = result.length;
           for (var key in value) {
             if ((inherited || hasOwnProperty.call(value, key)) && !(skipIndexes && (key == "length" || isBuff && (key == "offset" || key == "parent") || isType && (key == "buffer" || key == "byteLength" || key == "byteOffset") || isIndex(key, length)))) {
               result.push(key);
@@ -1281,7 +1293,7 @@ var require_lodash = __commonJS({
         function baseAt(object, paths) {
           var index = -1, length = paths.length, result = Array2(length), skip = object == null;
           while (++index < length) {
-            result[index] = skip ? undefined : get(object, paths[index]);
+            result[index] = skip ? undefined : get2(object, paths[index]);
           }
           return result;
         }
@@ -1309,7 +1321,7 @@ var require_lodash = __commonJS({
           if (!isObject(value)) {
             return value;
           }
-          var isArr = isArray(value);
+          var isArr = isArray2(value);
           if (isArr) {
             result = initCloneArray(value);
             if (!isDeep) {
@@ -1373,8 +1385,8 @@ var require_lodash = __commonJS({
           }
           object = Object2(object);
           while (length--) {
-            var key = props[length], predicate = source[key], value = object[key];
-            if (value === undefined && !(key in object) || !predicate(value)) {
+            var key = props[length], predicate2 = source[key], value = object[key];
+            if (value === undefined && !(key in object) || !predicate2(value)) {
               return false;
             }
           }
@@ -1427,10 +1439,10 @@ var require_lodash = __commonJS({
         __name(baseDifference, "baseDifference");
         var baseEach = createBaseEach(baseForOwn);
         var baseEachRight = createBaseEach(baseForOwnRight, true);
-        function baseEvery(collection4, predicate) {
+        function baseEvery(collection4, predicate2) {
           var result = true;
           baseEach(collection4, function(value, index, collection) {
-            result = !!predicate(value, index, collection);
+            result = !!predicate2(value, index, collection);
             return result;
           });
           return result;
@@ -1464,25 +1476,25 @@ var require_lodash = __commonJS({
           return array;
         }
         __name(baseFill, "baseFill");
-        function baseFilter(collection5, predicate) {
+        function baseFilter(collection5, predicate2) {
           var result = [];
           baseEach(collection5, function(value, index, collection) {
-            if (predicate(value, index, collection)) {
+            if (predicate2(value, index, collection)) {
               result.push(value);
             }
           });
           return result;
         }
         __name(baseFilter, "baseFilter");
-        function baseFlatten(array, depth, predicate, isStrict, result) {
+        function baseFlatten(array, depth, predicate2, isStrict, result) {
           var index = -1, length = array.length;
-          predicate || (predicate = isFlattenable);
+          predicate2 || (predicate2 = isFlattenable);
           result || (result = []);
           while (++index < length) {
             var value = array[index];
-            if (depth > 0 && predicate(value)) {
+            if (depth > 0 && predicate2(value)) {
               if (depth > 1) {
-                baseFlatten(value, depth - 1, predicate, isStrict, result);
+                baseFlatten(value, depth - 1, predicate2, isStrict, result);
               } else {
                 arrayPush(result, value);
               }
@@ -1520,7 +1532,7 @@ var require_lodash = __commonJS({
         __name(baseGet, "baseGet");
         function baseGetAllKeys(object, keysFunc, symbolsFunc) {
           var result = keysFunc(object);
-          return isArray(object) ? result : arrayPush(result, symbolsFunc(object));
+          return isArray2(object) ? result : arrayPush(result, symbolsFunc(object));
         }
         __name(baseGetAllKeys, "baseGetAllKeys");
         function baseGetTag(value) {
@@ -1616,7 +1628,7 @@ var require_lodash = __commonJS({
         }
         __name(baseIsEqual, "baseIsEqual");
         function baseIsEqualDeep(object, other, bitmask, customizer, equalFunc, stack) {
-          var objIsArr = isArray(object), othIsArr = isArray(other), objTag = objIsArr ? arrayTag : getTag(object), othTag = othIsArr ? arrayTag : getTag(other);
+          var objIsArr = isArray2(object), othIsArr = isArray2(other), objTag = objIsArr ? arrayTag : getTag(object), othTag = othIsArr ? arrayTag : getTag(other);
           objTag = objTag == argsTag ? objectTag : objTag;
           othTag = othTag == argsTag ? objectTag : othTag;
           var objIsObj = objTag == objectTag, othIsObj = othTag == objectTag, isSameTag = objTag == othTag;
@@ -1710,7 +1722,7 @@ var require_lodash = __commonJS({
             return identity;
           }
           if (typeof value == "object") {
-            return isArray(value) ? baseMatchesProperty(value[0], value[1]) : baseMatches(value);
+            return isArray2(value) ? baseMatchesProperty(value[0], value[1]) : baseMatches(value);
           }
           return property(value);
         }
@@ -1768,7 +1780,7 @@ var require_lodash = __commonJS({
             return matchesStrictComparable(toKey(path), srcValue);
           }
           return function(object) {
-            var objValue = get(object, path);
+            var objValue = get2(object, path);
             return objValue === undefined && objValue === srcValue ? hasIn(object, path) : baseIsEqual(srcValue, objValue, COMPARE_PARTIAL_FLAG | COMPARE_UNORDERED_FLAG);
           };
         }
@@ -1800,10 +1812,10 @@ var require_lodash = __commonJS({
           var newValue = customizer ? customizer(objValue, srcValue, key + "", object, source, stack) : undefined;
           var isCommon = newValue === undefined;
           if (isCommon) {
-            var isArr = isArray(srcValue), isBuff = !isArr && isBuffer(srcValue), isTyped = !isArr && !isBuff && isTypedArray(srcValue);
+            var isArr = isArray2(srcValue), isBuff = !isArr && isBuffer(srcValue), isTyped = !isArr && !isBuff && isTypedArray(srcValue);
             newValue = srcValue;
             if (isArr || isBuff || isTyped) {
-              if (isArray(objValue)) {
+              if (isArray2(objValue)) {
                 newValue = objValue;
               } else if (isArrayLikeObject(objValue)) {
                 newValue = copyArray(objValue);
@@ -1847,7 +1859,7 @@ var require_lodash = __commonJS({
         function baseOrderBy(collection, iteratees, orders) {
           if (iteratees.length) {
             iteratees = arrayMap(iteratees, function(iteratee) {
-              if (isArray(iteratee)) {
+              if (isArray2(iteratee)) {
                 return function(value) {
                   return baseGet(value, iteratee.length === 1 ? iteratee[0] : iteratee);
                 };
@@ -1882,11 +1894,11 @@ var require_lodash = __commonJS({
           });
         }
         __name(basePick, "basePick");
-        function basePickBy(object, paths, predicate) {
+        function basePickBy(object, paths, predicate2) {
           var index = -1, length = paths.length, result = {};
           while (++index < length) {
             var path = paths[index], value = baseGet(object, path);
-            if (predicate(value, path)) {
+            if (predicate2(value, path)) {
               baseSet(result, castPath(path, object), value);
             }
           }
@@ -2036,10 +2048,10 @@ var require_lodash = __commonJS({
           return result;
         }
         __name(baseSlice, "baseSlice");
-        function baseSome(collection7, predicate) {
+        function baseSome(collection7, predicate2) {
           var result;
           baseEach(collection7, function(value, index, collection) {
-            result = predicate(value, index, collection);
+            result = predicate2(value, index, collection);
             return !result;
           });
           return !!result;
@@ -2118,7 +2130,7 @@ var require_lodash = __commonJS({
           if (typeof value == "string") {
             return value;
           }
-          if (isArray(value)) {
+          if (isArray2(value)) {
             return arrayMap(value, baseToString) + "";
           }
           if (isSymbol(value)) {
@@ -2179,9 +2191,9 @@ var require_lodash = __commonJS({
           return baseSet(object, path, updater(baseGet(object, path)), customizer);
         }
         __name(baseUpdate, "baseUpdate");
-        function baseWhile(array, predicate, isDrop, fromRight) {
+        function baseWhile(array, predicate2, isDrop, fromRight) {
           var length = array.length, index = fromRight ? length : -1;
-          while ((fromRight ? index-- : ++index < length) && predicate(array[index], index, array)) {
+          while ((fromRight ? index-- : ++index < length) && predicate2(array[index], index, array)) {
           }
           return isDrop ? baseSlice(array, fromRight ? 0 : index, fromRight ? index + 1 : length) : baseSlice(array, fromRight ? index + 1 : 0, fromRight ? length : index);
         }
@@ -2228,12 +2240,12 @@ var require_lodash = __commonJS({
           return isArrayLikeObject(value) ? value : [];
         }
         __name(castArrayLikeObject, "castArrayLikeObject");
-        function castFunction(value) {
+        function castFunction2(value) {
           return typeof value == "function" ? value : identity;
         }
-        __name(castFunction, "castFunction");
+        __name(castFunction2, "castFunction");
         function castPath(value, object) {
-          if (isArray(value)) {
+          if (isArray2(value)) {
             return value;
           }
           return isKey(value, object) ? [
@@ -2249,7 +2261,7 @@ var require_lodash = __commonJS({
         }
         __name(castSlice, "castSlice");
         var clearTimeout = ctxClearTimeout || function(id) {
-          return root.clearTimeout(id);
+          return root2.clearTimeout(id);
         };
         function cloneBuffer(buffer, isDeep) {
           if (isDeep) {
@@ -2386,7 +2398,7 @@ var require_lodash = __commonJS({
         __name(copySymbolsIn, "copySymbolsIn");
         function createAggregator(setter, initializer) {
           return function(collection, iteratee) {
-            var func = isArray(collection) ? arrayAggregator : baseAggregator, accumulator = initializer ? initializer() : {};
+            var func = isArray2(collection) ? arrayAggregator : baseAggregator, accumulator = initializer ? initializer() : {};
             return func(collection, setter, getIteratee(iteratee, 2), accumulator);
           };
         }
@@ -2444,7 +2456,7 @@ var require_lodash = __commonJS({
         function createBind(func, bitmask, thisArg) {
           var isBind = bitmask & WRAP_BIND_FLAG, Ctor = createCtor(func);
           function wrapper() {
-            var fn = this && this !== root && this instanceof wrapper ? Ctor : func;
+            var fn = this && this !== root2 && this instanceof wrapper ? Ctor : func;
             return fn.apply(isBind ? thisArg : this, arguments);
           }
           __name(wrapper, "wrapper");
@@ -2505,7 +2517,7 @@ var require_lodash = __commonJS({
             if (length < arity) {
               return createRecurry(func, bitmask, createHybrid, wrapper.placeholder, undefined, args, holders, undefined, undefined, arity - length);
             }
-            var fn = this && this !== root && this instanceof wrapper ? Ctor : func;
+            var fn = this && this !== root2 && this instanceof wrapper ? Ctor : func;
             return apply(fn, this, args);
           }
           __name(wrapper, "wrapper");
@@ -2513,16 +2525,16 @@ var require_lodash = __commonJS({
         }
         __name(createCurry, "createCurry");
         function createFind(findIndexFunc) {
-          return function(collection, predicate, fromIndex) {
+          return function(collection, predicate2, fromIndex) {
             var iterable = Object2(collection);
             if (!isArrayLike(collection)) {
-              var iteratee = getIteratee(predicate, 3);
+              var iteratee = getIteratee(predicate2, 3);
               collection = keys(collection);
-              predicate = /* @__PURE__ */ __name(function(key) {
+              predicate2 = /* @__PURE__ */ __name(function(key) {
                 return iteratee(iterable[key], key, iterable);
               }, "predicate");
             }
-            var index = findIndexFunc(collection, predicate, fromIndex);
+            var index = findIndexFunc(collection, predicate2, fromIndex);
             return index > -1 ? iterable[iteratee ? collection[index] : index] : undefined;
           };
         }
@@ -2554,7 +2566,7 @@ var require_lodash = __commonJS({
             }
             return function() {
               var args = arguments, value = args[0];
-              if (wrapper && args.length == 1 && isArray(value)) {
+              if (wrapper && args.length == 1 && isArray2(value)) {
                 return wrapper.plant(value).value();
               }
               var index = 0, result = length ? funcs[index].apply(this, args) : value;
@@ -2597,7 +2609,7 @@ var require_lodash = __commonJS({
             if (isAry && ary < length) {
               args.length = ary;
             }
-            if (this && this !== root && this instanceof wrapper) {
+            if (this && this !== root2 && this instanceof wrapper) {
               fn = Ctor || createCtor(fn);
             }
             return fn.apply(thisBinding, args);
@@ -2663,7 +2675,7 @@ var require_lodash = __commonJS({
         function createPartial(func, bitmask, thisArg, partials) {
           var isBind = bitmask & WRAP_BIND_FLAG, Ctor = createCtor(func);
           function wrapper() {
-            var argsIndex = -1, argsLength = arguments.length, leftIndex = -1, leftLength = partials.length, args = Array2(leftLength + argsLength), fn = this && this !== root && this instanceof wrapper ? Ctor : func;
+            var argsIndex = -1, argsLength = arguments.length, leftIndex = -1, leftLength = partials.length, args = Array2(leftLength + argsLength), fn = this && this !== root2 && this instanceof wrapper ? Ctor : func;
             while (++leftIndex < leftLength) {
               args[leftIndex] = partials[leftIndex];
             }
@@ -2744,11 +2756,11 @@ var require_lodash = __commonJS({
           };
         }
         __name(createRound, "createRound");
-        var createSet = !(Set2 && 1 / setToArray(new Set2([
+        var createSet = !(Set && 1 / setToArray(new Set([
           ,
           -0
         ]))[1] == INFINITY) ? noop : function(values) {
-          return new Set2(values);
+          return new Set(values);
         };
         function createToPairs(keysFunc) {
           return function(object) {
@@ -2974,7 +2986,7 @@ var require_lodash = __commonJS({
         }
         __name(equalObjects, "equalObjects");
         function flatRest(func) {
-          return setToString(overRest(func, undefined, flatten), func + "");
+          return setToString(overRest(func, undefined, flatten2), func + "");
         }
         __name(flatRest, "flatRest");
         function getAllKeys(object) {
@@ -3069,7 +3081,7 @@ var require_lodash = __commonJS({
           return result;
         };
         var getTag = baseGetTag;
-        if (DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag || Map2 && getTag(new Map2()) != mapTag || Promise2 && getTag(Promise2.resolve()) != promiseTag || Set2 && getTag(new Set2()) != setTag || WeakMap2 && getTag(new WeakMap2()) != weakMapTag) {
+        if (DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag || Map && getTag(new Map()) != mapTag || Promise2 && getTag(Promise2.resolve()) != promiseTag || Set && getTag(new Set()) != setTag || WeakMap2 && getTag(new WeakMap2()) != weakMapTag) {
           getTag = /* @__PURE__ */ __name(function(value) {
             var result = baseGetTag(value), Ctor = result == objectTag ? value.constructor : undefined, ctorString = Ctor ? toSource(Ctor) : "";
             if (ctorString) {
@@ -3115,8 +3127,8 @@ var require_lodash = __commonJS({
         }
         __name(getView, "getView");
         function getWrapDetails(source) {
-          var match2 = source.match(reWrapDetails);
-          return match2 ? match2[1].split(reSplitDetails) : [];
+          var match = source.match(reWrapDetails);
+          return match ? match[1].split(reSplitDetails) : [];
         }
         __name(getWrapDetails, "getWrapDetails");
         function hasPath(object, path, hasFunc) {
@@ -3133,7 +3145,7 @@ var require_lodash = __commonJS({
             return result;
           }
           length = object == null ? 0 : object.length;
-          return !!length && isLength(length) && isIndex(key, length) && (isArray(object) || isArguments(object));
+          return !!length && isLength(length) && isIndex(key, length) && (isArray2(object) || isArguments(object));
         }
         __name(hasPath, "hasPath");
         function initCloneArray(array) {
@@ -3195,7 +3207,7 @@ var require_lodash = __commonJS({
         }
         __name(insertWrapDetails, "insertWrapDetails");
         function isFlattenable(value) {
-          return isArray(value) || isArguments(value) || !!(spreadableSymbol && value && value[spreadableSymbol]);
+          return isArray2(value) || isArguments(value) || !!(spreadableSymbol && value && value[spreadableSymbol]);
         }
         __name(isFlattenable, "isFlattenable");
         function isIndex(value, length) {
@@ -3216,7 +3228,7 @@ var require_lodash = __commonJS({
         }
         __name(isIterateeCall, "isIterateeCall");
         function isKey(value, object) {
-          if (isArray(value)) {
+          if (isArray2(value)) {
             return false;
           }
           var type = typeof value;
@@ -3370,7 +3382,7 @@ var require_lodash = __commonJS({
         __name(safeGet, "safeGet");
         var setData = shortOut(baseSetData);
         var setTimeout = ctxSetTimeout || function(func, wait) {
-          return root.setTimeout(func, wait);
+          return root2.setTimeout(func, wait);
         };
         var setToString = shortOut(baseSetToString);
         function setWrapToString(wrapper, reference, bitmask) {
@@ -3411,8 +3423,8 @@ var require_lodash = __commonJS({
           if (string.charCodeAt(0) === 46) {
             result.push("");
           }
-          string.replace(rePropName, function(match2, number, quote, subString) {
-            result.push(quote ? subString.replace(reEscapeChar, "$1") : number || match2);
+          string.replace(rePropName, function(match, number, quote, subString) {
+            result.push(quote ? subString.replace(reEscapeChar, "$1") : number || match);
           });
           return result;
         });
@@ -3496,7 +3508,7 @@ var require_lodash = __commonJS({
           while (index--) {
             args[index - 1] = arguments[index];
           }
-          return arrayPush(isArray(array) ? copyArray(array) : [
+          return arrayPush(isArray2(array) ? copyArray(array) : [
             array
           ], baseFlatten(args, 1));
         }
@@ -3537,12 +3549,12 @@ var require_lodash = __commonJS({
           return baseSlice(array, 0, n < 0 ? 0 : n);
         }
         __name(dropRight, "dropRight");
-        function dropRightWhile(array, predicate) {
-          return array && array.length ? baseWhile(array, getIteratee(predicate, 3), true, true) : [];
+        function dropRightWhile(array, predicate2) {
+          return array && array.length ? baseWhile(array, getIteratee(predicate2, 3), true, true) : [];
         }
         __name(dropRightWhile, "dropRightWhile");
-        function dropWhile(array, predicate) {
-          return array && array.length ? baseWhile(array, getIteratee(predicate, 3), true) : [];
+        function dropWhile(array, predicate2) {
+          return array && array.length ? baseWhile(array, getIteratee(predicate2, 3), true) : [];
         }
         __name(dropWhile, "dropWhile");
         function fill(array, value, start, end) {
@@ -3557,7 +3569,7 @@ var require_lodash = __commonJS({
           return baseFill(array, value, start, end);
         }
         __name(fill, "fill");
-        function findIndex(array, predicate, fromIndex) {
+        function findIndex(array, predicate2, fromIndex) {
           var length = array == null ? 0 : array.length;
           if (!length) {
             return -1;
@@ -3566,10 +3578,10 @@ var require_lodash = __commonJS({
           if (index < 0) {
             index = nativeMax(length + index, 0);
           }
-          return baseFindIndex(array, getIteratee(predicate, 3), index);
+          return baseFindIndex(array, getIteratee(predicate2, 3), index);
         }
         __name(findIndex, "findIndex");
-        function findLastIndex(array, predicate, fromIndex) {
+        function findLastIndex(array, predicate2, fromIndex) {
           var length = array == null ? 0 : array.length;
           if (!length) {
             return -1;
@@ -3579,14 +3591,14 @@ var require_lodash = __commonJS({
             index = toInteger(fromIndex);
             index = fromIndex < 0 ? nativeMax(length + index, 0) : nativeMin(index, length - 1);
           }
-          return baseFindIndex(array, getIteratee(predicate, 3), index, true);
+          return baseFindIndex(array, getIteratee(predicate2, 3), index, true);
         }
         __name(findLastIndex, "findLastIndex");
-        function flatten(array) {
+        function flatten2(array) {
           var length = array == null ? 0 : array.length;
           return length ? baseFlatten(array, 1) : [];
         }
-        __name(flatten, "flatten");
+        __name(flatten2, "flatten");
         function flattenDeep(array) {
           var length = array == null ? 0 : array.length;
           return length ? baseFlatten(array, INFINITY) : [];
@@ -3698,16 +3710,16 @@ var require_lodash = __commonJS({
           }).sort(compareAscending));
           return result;
         });
-        function remove(array, predicate) {
+        function remove(array, predicate2) {
           var result = [];
           if (!(array && array.length)) {
             return result;
           }
           var index = -1, indexes = [], length = array.length;
-          predicate = getIteratee(predicate, 3);
+          predicate2 = getIteratee(predicate2, 3);
           while (++index < length) {
             var value = array[index];
-            if (predicate(value, index, array)) {
+            if (predicate2(value, index, array)) {
               result.push(value);
               indexes.push(index);
             }
@@ -3804,15 +3816,15 @@ var require_lodash = __commonJS({
           return baseSlice(array, n < 0 ? 0 : n, length);
         }
         __name(takeRight, "takeRight");
-        function takeRightWhile(array, predicate) {
-          return array && array.length ? baseWhile(array, getIteratee(predicate, 3), false, true) : [];
+        function takeRightWhile(array, predicate2) {
+          return array && array.length ? baseWhile(array, getIteratee(predicate2, 3), false, true) : [];
         }
         __name(takeRightWhile, "takeRightWhile");
-        function takeWhile(array, predicate) {
-          return array && array.length ? baseWhile(array, getIteratee(predicate, 3)) : [];
+        function takeWhile(array, predicate2) {
+          return array && array.length ? baseWhile(array, getIteratee(predicate2, 3)) : [];
         }
         __name(takeWhile, "takeWhile");
-        var union = baseRest(function(arrays) {
+        var union2 = baseRest(function(arrays) {
           return baseUniq(baseFlatten(arrays, 1, isArrayLikeObject, true));
         });
         var unionBy = baseRest(function(arrays) {
@@ -3827,14 +3839,14 @@ var require_lodash = __commonJS({
           comparator = typeof comparator == "function" ? comparator : undefined;
           return baseUniq(baseFlatten(arrays, 1, isArrayLikeObject, true), undefined, comparator);
         });
-        function uniq2(array) {
+        function uniq(array) {
           return array && array.length ? baseUniq(array) : [];
         }
-        __name(uniq2, "uniq");
-        function uniqBy2(array, iteratee) {
+        __name(uniq, "uniq");
+        function uniqBy(array, iteratee) {
           return array && array.length ? baseUniq(array, getIteratee(iteratee, 2)) : [];
         }
-        __name(uniqBy2, "uniqBy");
+        __name(uniqBy, "uniqBy");
         function uniqWith(array, comparator) {
           comparator = typeof comparator == "function" ? comparator : undefined;
           return array && array.length ? baseUniq(array, undefined, comparator) : [];
@@ -4010,17 +4022,17 @@ var require_lodash = __commonJS({
             baseAssignValue(result, key, 1);
           }
         });
-        function every(collection, predicate, guard) {
-          var func = isArray(collection) ? arrayEvery : baseEvery;
-          if (guard && isIterateeCall(collection, predicate, guard)) {
-            predicate = undefined;
+        function every(collection, predicate2, guard) {
+          var func = isArray2(collection) ? arrayEvery : baseEvery;
+          if (guard && isIterateeCall(collection, predicate2, guard)) {
+            predicate2 = undefined;
           }
-          return func(collection, getIteratee(predicate, 3));
+          return func(collection, getIteratee(predicate2, 3));
         }
         __name(every, "every");
-        function filter(collection, predicate) {
-          var func = isArray(collection) ? arrayFilter : baseFilter;
-          return func(collection, getIteratee(predicate, 3));
+        function filter(collection, predicate2) {
+          var func = isArray2(collection) ? arrayFilter : baseFilter;
+          return func(collection, getIteratee(predicate2, 3));
         }
         __name(filter, "filter");
         var find = createFind(findIndex);
@@ -4039,12 +4051,12 @@ var require_lodash = __commonJS({
         }
         __name(flatMapDepth, "flatMapDepth");
         function forEach(collection, iteratee) {
-          var func = isArray(collection) ? arrayEach : baseEach;
+          var func = isArray2(collection) ? arrayEach : baseEach;
           return func(collection, getIteratee(iteratee, 3));
         }
         __name(forEach, "forEach");
         function forEachRight(collection, iteratee) {
-          var func = isArray(collection) ? arrayEachRight : baseEachRight;
+          var func = isArray2(collection) ? arrayEachRight : baseEachRight;
           return func(collection, getIteratee(iteratee, 3));
         }
         __name(forEachRight, "forEachRight");
@@ -4078,7 +4090,7 @@ var require_lodash = __commonJS({
           baseAssignValue(result, key, value);
         });
         function map1(collection, iteratee) {
-          var func = isArray(collection) ? arrayMap : baseMap;
+          var func = isArray2(collection) ? arrayMap : baseMap;
           return func(collection, getIteratee(iteratee, 3));
         }
         __name(map1, "map1");
@@ -4086,13 +4098,13 @@ var require_lodash = __commonJS({
           if (collection == null) {
             return [];
           }
-          if (!isArray(iteratees)) {
+          if (!isArray2(iteratees)) {
             iteratees = iteratees == null ? [] : [
               iteratees
             ];
           }
           orders = guard ? undefined : orders;
-          if (!isArray(orders)) {
+          if (!isArray2(orders)) {
             orders = orders == null ? [] : [
               orders
             ];
@@ -4109,22 +4121,22 @@ var require_lodash = __commonJS({
           ];
         });
         function reduce(collection, iteratee, accumulator) {
-          var func = isArray(collection) ? arrayReduce : baseReduce, initAccum = arguments.length < 3;
+          var func = isArray2(collection) ? arrayReduce : baseReduce, initAccum = arguments.length < 3;
           return func(collection, getIteratee(iteratee, 4), accumulator, initAccum, baseEach);
         }
         __name(reduce, "reduce");
         function reduceRight(collection, iteratee, accumulator) {
-          var func = isArray(collection) ? arrayReduceRight : baseReduce, initAccum = arguments.length < 3;
+          var func = isArray2(collection) ? arrayReduceRight : baseReduce, initAccum = arguments.length < 3;
           return func(collection, getIteratee(iteratee, 4), accumulator, initAccum, baseEachRight);
         }
         __name(reduceRight, "reduceRight");
-        function reject(collection, predicate) {
-          var func = isArray(collection) ? arrayFilter : baseFilter;
-          return func(collection, negate(getIteratee(predicate, 3)));
+        function reject(collection, predicate2) {
+          var func = isArray2(collection) ? arrayFilter : baseFilter;
+          return func(collection, negate(getIteratee(predicate2, 3)));
         }
         __name(reject, "reject");
         function sample(collection) {
-          var func = isArray(collection) ? arraySample : baseSample;
+          var func = isArray2(collection) ? arraySample : baseSample;
           return func(collection);
         }
         __name(sample, "sample");
@@ -4134,12 +4146,12 @@ var require_lodash = __commonJS({
           } else {
             n = toInteger(n);
           }
-          var func = isArray(collection) ? arraySampleSize : baseSampleSize;
+          var func = isArray2(collection) ? arraySampleSize : baseSampleSize;
           return func(collection, n);
         }
         __name(sampleSize, "sampleSize");
         function shuffle(collection) {
-          var func = isArray(collection) ? arrayShuffle : baseShuffle;
+          var func = isArray2(collection) ? arrayShuffle : baseShuffle;
           return func(collection);
         }
         __name(shuffle, "shuffle");
@@ -4157,12 +4169,12 @@ var require_lodash = __commonJS({
           return baseKeys(collection).length;
         }
         __name(size1, "size1");
-        function some(collection, predicate, guard) {
-          var func = isArray(collection) ? arraySome : baseSome;
-          if (guard && isIterateeCall(collection, predicate, guard)) {
-            predicate = undefined;
+        function some(collection, predicate2, guard) {
+          var func = isArray2(collection) ? arraySome : baseSome;
+          if (guard && isIterateeCall(collection, predicate2, guard)) {
+            predicate2 = undefined;
           }
-          return func(collection, getIteratee(predicate, 3));
+          return func(collection, getIteratee(predicate2, 3));
         }
         __name(some, "some");
         var sortBy = baseRest(function(collection, iteratees) {
@@ -4180,7 +4192,7 @@ var require_lodash = __commonJS({
           return baseOrderBy(collection, baseFlatten(iteratees, 1), []);
         });
         var now = ctxNow || function() {
-          return root.Date.now();
+          return root2.Date.now();
         };
         function after(n, func) {
           if (typeof func != "function") {
@@ -4366,23 +4378,23 @@ var require_lodash = __commonJS({
         }
         __name(memoize, "memoize");
         memoize.Cache = MapCache;
-        function negate(predicate) {
-          if (typeof predicate != "function") {
+        function negate(predicate2) {
+          if (typeof predicate2 != "function") {
             throw new TypeError2(FUNC_ERROR_TEXT);
           }
           return function() {
             var args = arguments;
             switch (args.length) {
               case 0:
-                return !predicate.call(this);
+                return !predicate2.call(this);
               case 1:
-                return !predicate.call(this, args[0]);
+                return !predicate2.call(this, args[0]);
               case 2:
-                return !predicate.call(this, args[0], args[1]);
+                return !predicate2.call(this, args[0], args[1]);
               case 3:
-                return !predicate.call(this, args[0], args[1], args[2]);
+                return !predicate2.call(this, args[0], args[1], args[2]);
             }
-            return !predicate.apply(this, args);
+            return !predicate2.apply(this, args);
           };
         }
         __name(negate, "negate");
@@ -4391,7 +4403,7 @@ var require_lodash = __commonJS({
         }
         __name(once, "once");
         var overArgs = castRest(function(func, transforms) {
-          transforms = transforms.length == 1 && isArray(transforms[0]) ? arrayMap(transforms[0], baseUnary(getIteratee())) : arrayMap(baseFlatten(transforms, 1), baseUnary(getIteratee()));
+          transforms = transforms.length == 1 && isArray2(transforms[0]) ? arrayMap(transforms[0], baseUnary(getIteratee())) : arrayMap(baseFlatten(transforms, 1), baseUnary(getIteratee()));
           var funcsLength = transforms.length;
           return baseRest(function(args) {
             var index = -1, length = nativeMin(args.length, funcsLength);
@@ -4455,7 +4467,7 @@ var require_lodash = __commonJS({
         }
         __name(unary, "unary");
         function wrap(value, wrapper) {
-          return partial(castFunction(wrapper), value);
+          return partial(castFunction2(wrapper), value);
         }
         __name(wrap, "wrap");
         function castArray() {
@@ -4463,7 +4475,7 @@ var require_lodash = __commonJS({
             return [];
           }
           var value = arguments[0];
-          return isArray(value) ? value : [
+          return isArray2(value) ? value : [
             value
           ];
         }
@@ -4503,7 +4515,7 @@ var require_lodash = __commonJS({
         }()) ? baseIsArguments : function(value) {
           return isObjectLike(value) && hasOwnProperty.call(value, "callee") && !propertyIsEnumerable.call(value, "callee");
         };
-        var isArray = Array2.isArray;
+        var isArray2 = Array2.isArray;
         var isArrayBuffer = nodeIsArrayBuffer ? baseUnary(nodeIsArrayBuffer) : baseIsArrayBuffer;
         function isArrayLike(value) {
           return value != null && isLength(value.length) && !isFunction(value);
@@ -4527,7 +4539,7 @@ var require_lodash = __commonJS({
           if (value == null) {
             return true;
           }
-          if (isArrayLike(value) && (isArray(value) || typeof value == "string" || typeof value.splice == "function" || isBuffer(value) || isTypedArray(value) || isArguments(value))) {
+          if (isArrayLike(value) && (isArray2(value) || typeof value == "string" || typeof value.splice == "function" || isBuffer(value) || isTypedArray(value) || isArguments(value))) {
             return !value.length;
           }
           var tag = getTag(value);
@@ -4644,7 +4656,7 @@ var require_lodash = __commonJS({
         __name(isSafeInteger, "isSafeInteger");
         var isSet = nodeIsSet ? baseUnary(nodeIsSet) : baseIsSet;
         function isString(value) {
-          return typeof value == "string" || !isArray(value) && isObjectLike(value) && baseGetTag(value) == stringTag;
+          return typeof value == "string" || !isArray2(value) && isObjectLike(value) && baseGetTag(value) == stringTag;
         }
         __name(isString, "isString");
         function isSymbol(value) {
@@ -4760,7 +4772,7 @@ var require_lodash = __commonJS({
           return properties == null ? result : baseAssign(result, properties);
         }
         __name(create, "create");
-        var defaults2 = baseRest(function(object, sources) {
+        var defaults = baseRest(function(object, sources) {
           object = Object2(object);
           var index = -1;
           var length = sources.length;
@@ -4787,12 +4799,12 @@ var require_lodash = __commonJS({
           args.push(undefined, customDefaultsMerge);
           return apply(mergeWith, undefined, args);
         });
-        function findKey(object, predicate) {
-          return baseFindKey(object, getIteratee(predicate, 3), baseForOwn);
+        function findKey(object, predicate2) {
+          return baseFindKey(object, getIteratee(predicate2, 3), baseForOwn);
         }
         __name(findKey, "findKey");
-        function findLastKey(object, predicate) {
-          return baseFindKey(object, getIteratee(predicate, 3), baseForOwnRight);
+        function findLastKey(object, predicate2) {
+          return baseFindKey(object, getIteratee(predicate2, 3), baseForOwnRight);
         }
         __name(findLastKey, "findLastKey");
         function forIn(object, iteratee) {
@@ -4819,15 +4831,15 @@ var require_lodash = __commonJS({
           return object == null ? [] : baseFunctions(object, keysIn(object));
         }
         __name(functionsIn, "functionsIn");
-        function get(object, path, defaultValue) {
+        function get2(object, path, defaultValue) {
           var result = object == null ? undefined : baseGet(object, path);
           return result === undefined ? defaultValue : result;
         }
-        __name(get, "get");
-        function has(object, path) {
+        __name(get2, "get");
+        function has2(object, path) {
           return object != null && hasPath(object, path, baseHas);
         }
-        __name(has, "has");
+        __name(has2, "has");
         function hasIn(object, path) {
           return object != null && hasPath(object, path, baseHasIn);
         }
@@ -4904,14 +4916,14 @@ var require_lodash = __commonJS({
           }
           return result;
         });
-        function omitBy(object, predicate) {
-          return pickBy(object, negate(getIteratee(predicate)));
+        function omitBy(object, predicate2) {
+          return pickBy(object, negate(getIteratee(predicate2)));
         }
         __name(omitBy, "omitBy");
         var pick = flatRest(function(object, paths) {
           return object == null ? {} : basePick(object, paths);
         });
-        function pickBy(object, predicate) {
+        function pickBy(object, predicate2) {
           if (object == null) {
             return {};
           }
@@ -4920,9 +4932,9 @@ var require_lodash = __commonJS({
               prop
             ];
           });
-          predicate = getIteratee(predicate);
+          predicate2 = getIteratee(predicate2);
           return basePickBy(object, props, function(value, path) {
-            return predicate(value, path[0]);
+            return predicate2(value, path[0]);
           });
         }
         __name(pickBy, "pickBy");
@@ -4956,7 +4968,7 @@ var require_lodash = __commonJS({
         var toPairs = createToPairs(keys);
         var toPairsIn = createToPairs(keysIn);
         function transform1(object4, iteratee, accumulator) {
-          var isArr = isArray(object4), isArrLike = isArr || isBuffer(object4) || isTypedArray(object4);
+          var isArr = isArray2(object4), isArrLike = isArr || isBuffer(object4) || isTypedArray(object4);
           iteratee = getIteratee(iteratee, 4);
           if (accumulator == null) {
             var Ctor = object4 && object4.constructor;
@@ -4979,12 +4991,12 @@ var require_lodash = __commonJS({
         }
         __name(unset, "unset");
         function update(object, path, updater) {
-          return object == null ? object : baseUpdate(object, path, castFunction(updater));
+          return object == null ? object : baseUpdate(object, path, castFunction2(updater));
         }
         __name(update, "update");
         function updateWith(object, path, updater, customizer) {
           customizer = typeof customizer == "function" ? customizer : undefined;
-          return object == null ? object : baseUpdate(object, path, castFunction(updater), customizer);
+          return object == null ? object : baseUpdate(object, path, castFunction2(updater), customizer);
         }
         __name(updateWith, "updateWith");
         function values1(object) {
@@ -5190,7 +5202,7 @@ var require_lodash = __commonJS({
           var isEscaping, isEvaluating, index = 0, interpolate = options.interpolate || reNoMatch, source = "__p += '";
           var reDelimiters = RegExp2((options.escape || reNoMatch).source + "|" + interpolate.source + "|" + (interpolate === reInterpolate ? reEsTemplate : reNoMatch).source + "|" + (options.evaluate || reNoMatch).source + "|$", "g");
           var sourceURL = "//# sourceURL=" + (hasOwnProperty.call(options, "sourceURL") ? (options.sourceURL + "").replace(/\s/g, " ") : "lodash.templateSources[" + ++templateCounter + "]") + "\n";
-          string.replace(reDelimiters, function(match2, escapeValue, interpolateValue, esTemplateValue, evaluateValue, offset) {
+          string.replace(reDelimiters, function(match, escapeValue, interpolateValue, esTemplateValue, evaluateValue, offset) {
             interpolateValue || (interpolateValue = esTemplateValue);
             source += string.slice(index, offset).replace(reUnescapedString, escapeStringChar);
             if (escapeValue) {
@@ -5204,8 +5216,8 @@ var require_lodash = __commonJS({
             if (interpolateValue) {
               source += "' +\n((__t = (" + interpolateValue + ")) == null ? '' : __t) +\n'";
             }
-            index = offset + match2.length;
-            return match2;
+            index = offset + match.length;
+            return match;
           });
           source += "';\n";
           var variable = hasOwnProperty.call(options, "variable") && options.variable;
@@ -5299,13 +5311,13 @@ var require_lodash = __commonJS({
           }
           if (isRegExp(separator)) {
             if (string.slice(end).search(separator)) {
-              var match2, substring = result;
+              var match, substring = result;
               if (!separator.global) {
                 separator = RegExp2(separator.source, toString(reFlags.exec(separator)) + "g");
               }
               separator.lastIndex = 0;
-              while (match2 = separator.exec(substring)) {
-                var newEnd = match2.index;
+              while (match = separator.exec(substring)) {
+                var newEnd = match.index;
               }
               result = result.slice(0, newEnd === undefined ? end : newEnd);
             }
@@ -5422,14 +5434,14 @@ var require_lodash = __commonJS({
             object = this;
             methodNames = baseFunctions(source, keys(source));
           }
-          var chain2 = !(isObject(options) && "chain" in options) || !!options.chain, isFunc = isFunction(object);
+          var chain4 = !(isObject(options) && "chain" in options) || !!options.chain, isFunc = isFunction(object);
           arrayEach(methodNames, function(methodName) {
             var func = source[methodName];
             object[methodName] = func;
             if (isFunc) {
               object.prototype[methodName] = function() {
                 var chainAll = this.__chain__;
-                if (chain2 || chainAll) {
+                if (chain4 || chainAll) {
                   var result = object(this.__wrapped__), actions = result.__actions__ = copyArray(this.__actions__);
                   actions.push({
                     "func": func,
@@ -5449,8 +5461,8 @@ var require_lodash = __commonJS({
         }
         __name(mixin, "mixin");
         function noConflict() {
-          if (root._ === this) {
-            root._ = oldDash;
+          if (root2._ === this) {
+            root2._ = oldDash;
           }
           return this;
         }
@@ -5516,7 +5528,7 @@ var require_lodash = __commonJS({
         }
         __name(times, "times");
         function toPath(value) {
-          if (isArray(value)) {
+          if (isArray2(value)) {
             return arrayMap(value, toKey);
           }
           return isSymbol(value) ? [
@@ -5600,7 +5612,7 @@ var require_lodash = __commonJS({
         lodash.curry = curry;
         lodash.curryRight = curryRight;
         lodash.debounce = debounce;
-        lodash.defaults = defaults2;
+        lodash.defaults = defaults;
         lodash.defaultsDeep = defaultsDeep;
         lodash.defer = defer;
         lodash.delay = delay;
@@ -5616,7 +5628,7 @@ var require_lodash = __commonJS({
         lodash.flatMap = flatMap;
         lodash.flatMapDeep = flatMapDeep;
         lodash.flatMapDepth = flatMapDepth;
-        lodash.flatten = flatten;
+        lodash.flatten = flatten2;
         lodash.flattenDeep = flattenDeep;
         lodash.flattenDepth = flattenDepth;
         lodash.flip = flip;
@@ -5702,11 +5714,11 @@ var require_lodash = __commonJS({
         lodash.toPlainObject = toPlainObject;
         lodash.transform = transform1;
         lodash.unary = unary;
-        lodash.union = union;
+        lodash.union = union2;
         lodash.unionBy = unionBy;
         lodash.unionWith = unionWith;
-        lodash.uniq = uniq2;
-        lodash.uniqBy = uniqBy2;
+        lodash.uniq = uniq;
+        lodash.uniqBy = uniqBy;
         lodash.uniqWith = uniqWith;
         lodash.unset = unset;
         lodash.unzip = unzip;
@@ -5762,10 +5774,10 @@ var require_lodash = __commonJS({
         lodash.forInRight = forInRight;
         lodash.forOwn = forOwn;
         lodash.forOwnRight = forOwnRight;
-        lodash.get = get;
+        lodash.get = get2;
         lodash.gt = gt;
         lodash.gte = gte;
-        lodash.has = has;
+        lodash.has = has2;
         lodash.hasIn = hasIn;
         lodash.head = head;
         lodash.identity = identity;
@@ -5774,7 +5786,7 @@ var require_lodash = __commonJS({
         lodash.inRange = inRange;
         lodash.invoke = invoke;
         lodash.isArguments = isArguments;
-        lodash.isArray = isArray;
+        lodash.isArray = isArray2;
         lodash.isArrayBuffer = isArrayBuffer;
         lodash.isArrayLike = isArrayLike;
         lodash.isArrayLikeObject = isArrayLikeObject;
@@ -5962,11 +5974,11 @@ var require_lodash = __commonJS({
         LazyWrapper.prototype.compact = function() {
           return this.filter(identity);
         };
-        LazyWrapper.prototype.find = function(predicate) {
-          return this.filter(predicate).head();
+        LazyWrapper.prototype.find = function(predicate2) {
+          return this.filter(predicate2).head();
         };
-        LazyWrapper.prototype.findLast = function(predicate) {
-          return this.reverse().find(predicate);
+        LazyWrapper.prototype.findLast = function(predicate2) {
+          return this.reverse().find(predicate2);
         };
         LazyWrapper.prototype.invokeMap = baseRest(function(path, args) {
           if (typeof path == "function") {
@@ -5976,8 +5988,8 @@ var require_lodash = __commonJS({
             return baseInvoke(value, path, args);
           });
         });
-        LazyWrapper.prototype.reject = function(predicate) {
-          return this.filter(negate(getIteratee(predicate)));
+        LazyWrapper.prototype.reject = function(predicate2) {
+          return this.filter(negate(getIteratee(predicate2)));
         };
         LazyWrapper.prototype.slice = function(start, end) {
           start = toInteger(start);
@@ -5996,8 +6008,8 @@ var require_lodash = __commonJS({
           }
           return result;
         };
-        LazyWrapper.prototype.takeRightWhile = function(predicate) {
-          return this.reverse().takeWhile(predicate).reverse();
+        LazyWrapper.prototype.takeRightWhile = function(predicate2) {
+          return this.reverse().takeWhile(predicate2).reverse();
         };
         LazyWrapper.prototype.toArray = function() {
           return this.take(MAX_ARRAY_LENGTH);
@@ -6010,7 +6022,7 @@ var require_lodash = __commonJS({
           lodash.prototype[methodName] = function() {
             var value1 = this.__wrapped__, args = isTaker ? [
               1
-            ] : arguments, isLazy = value1 instanceof LazyWrapper, iteratee = args[0], useLazy = isLazy || isArray(value1);
+            ] : arguments, isLazy = value1 instanceof LazyWrapper, iteratee = args[0], useLazy = isLazy || isArray2(value1);
             var interceptor = /* @__PURE__ */ __name(function(value) {
               var result = lodashFunc.apply(lodash, arrayPush([
                 value
@@ -6053,10 +6065,10 @@ var require_lodash = __commonJS({
             var args = arguments;
             if (retUnwrapped && !this.__chain__) {
               var value = this.value();
-              return func.apply(isArray(value) ? value : [], args);
+              return func.apply(isArray2(value) ? value : [], args);
             }
             return this[chainName](function(value2) {
-              return func.apply(isArray(value2) ? value2 : [], args);
+              return func.apply(isArray2(value2) ? value2 : [], args);
             });
           };
         });
@@ -6095,1017 +6107,1119 @@ var require_lodash = __commonJS({
         }
         return lodash;
       }, "runInContext");
-      var _ = runInContext1();
+      var _2 = runInContext1();
       if (typeof define == "function" && typeof define.amd == "object" && define.amd) {
-        root._ = _;
+        root2._ = _2;
         define(function() {
-          return _;
+          return _2;
         });
       } else if (freeModule) {
-        (freeModule.exports = _)._ = _;
-        freeExports._ = _;
+        (freeModule.exports = _2)._ = _2;
+        freeExports._ = _2;
       } else {
-        root._ = _;
+        root2._ = _2;
       }
     }).call(exports);
   }
 });
 
 // src/index.ts
-init_esm_shims();
+var src_exports = {};
+__export(src_exports, {
+  IMatching: () => import_parser.IMatching,
+  IParseResult: () => import_parser.IParseResult,
+  IToken: () => import_parser.IToken,
+  mysqlParser: () => mysqlParser,
+  reader: () => reader_exports
+});
+init_cjs_shims();
 
-// src/parser/index.ts
-init_esm_shims();
-
-// src/parser/chain.ts
-init_esm_shims();
-var import_lodash = __toESM(require_lodash(), 1);
-
-// src/parser/define.ts
-init_esm_shims();
-var parserMap = /* @__PURE__ */ new Map();
-var MAX_VISITER_CALL = 1e6;
-var Parser = class {
-  constructor() {
-    this.rootChainNode = null;
-    this.firstSet = /* @__PURE__ */ new Map();
-    this.firstOrFunctionSet = /* @__PURE__ */ new Map();
-    this.relatedSet = /* @__PURE__ */ new Map();
+// src/base/reader.ts
+var reader_exports = {};
+__export(reader_exports, {
+  findFieldExtraInfo: () => findFieldExtraInfo,
+  findNearestStatement: () => findNearestStatement,
+  getCursorInfo: () => getCursorInfo,
+  getFieldsFromStatement: () => getFieldsFromStatement
+});
+init_cjs_shims();
+var _ = __toESM(require_lodash(), 1);
+async function getCursorInfo(rootStatement, keyPath) {
+  if (!rootStatement) {
+    return null;
   }
-};
-__name(Parser, "Parser");
-var VisiterStore = class {
-  constructor(scanner, parser) {
-    this.scanner = scanner;
-    this.parser = parser;
-    this.restChances = [];
-    this.stop = false;
+  const cursorValue = _.get(rootStatement, keyPath);
+  const cursorKey = keyPath.slice().pop();
+  const parentStatement = _.get(rootStatement, keyPath.slice(0, keyPath.length - 1));
+  if (!parentStatement) {
+    return null;
   }
-};
-__name(VisiterStore, "VisiterStore");
-var VisiterOption = class {
-  constructor() {
-    this.generateAst = true;
-    this.enableFirstSet = true;
-  }
-};
-__name(VisiterOption, "VisiterOption");
-var ChainNode = class {
-  constructor(parentIndex) {
-    this.parentIndex = parentIndex;
-    this.childs = [];
-    this.astResults = [];
-    this.creatorFunction = null;
-    this.solveAst = null;
-  }
-};
-__name(ChainNode, "ChainNode");
-var TreeNode = class {
-  constructor(parentIndex) {
-    this.parentIndex = parentIndex;
-    this.childs = [];
-  }
-};
-__name(TreeNode, "TreeNode");
-var FunctionNode = class {
-  constructor(chainFunction, parentIndex, parser) {
-    this.chainFunction = chainFunction;
-    this.parentIndex = parentIndex;
-    this.parser = parser;
-    this.run = () => {
-      return this.chainFunction()(this.parentNode, this.chainFunction, this.parentIndex, this.parser);
-    };
-  }
-};
-__name(FunctionNode, "FunctionNode");
-var MatchNode = class {
-  constructor(matchFunction, matching, parentIndex) {
-    this.matchFunction = matchFunction;
-    this.matching = matching;
-    this.parentIndex = parentIndex;
-    this.run = (scanner, isCostToken = true) => {
-      return this.matchFunction(scanner, isCostToken);
-    };
-  }
-};
-__name(MatchNode, "MatchNode");
-var CreateParserOptions = class {
-  constructor() {
-    this.cursorTokenExcludes = () => {
-      return false;
-    };
-  }
-};
-__name(CreateParserOptions, "CreateParserOptions");
-
-// src/parser/match.ts
-init_esm_shims();
-function equalWordOrIncludeWords(str, word) {
-  if (typeof word === "string") {
-    return judgeMatch(str, word);
-  }
-  return word.some((eachWord) => {
-    return judgeMatch(str, eachWord);
+  return await judgeStatement(parentStatement, async (typePlusVariant) => {
+    switch (typePlusVariant) {
+      case "identifier.tableName":
+        return {
+          type: "tableName",
+          variant: cursorKey,
+          token: cursorValue,
+          tableInfo: parentStatement
+        };
+      case "identifier.column":
+        if (cursorKey === "name") {
+          return {
+            type: "tableField",
+            token: cursorValue
+          };
+        }
+        return null;
+      case "identifier.columnAfterGroup":
+        return {
+          type: "tableFieldAfterGroup",
+          token: cursorValue,
+          groupName: parentStatement.groupName.value
+        };
+      case "function":
+        return {
+          type: "functionName",
+          token: cursorValue
+        };
+      default:
+    }
   });
 }
-__name(equalWordOrIncludeWords, "equalWordOrIncludeWords");
-function judgeMatch(source, target) {
-  if (source === null) {
-    return false;
+__name(getCursorInfo, "getCursorInfo");
+function findNearestStatement(rootStatement, keyPath, callback) {
+  if (!rootStatement) {
+    return null;
   }
-  return (source && source.toLowerCase()) === (target && target.toLowerCase());
-}
-__name(judgeMatch, "judgeMatch");
-function matchToken(scanner, compare, isCostToken) {
-  const token = scanner.read();
-  if (!token) {
-    return {
-      token: null,
-      match: false
-    };
+  if (keyPath.length === 0) {
+    return null;
   }
-  if (compare(token)) {
-    if (isCostToken) {
-      scanner.next();
+  const value = _.get(rootStatement, keyPath);
+  if (!value) {
+    throw Error("Path not found from ast!");
+  }
+  if (!value.token && value.type === "statement") {
+    if (callback) {
+      if (callback(value) === true) {
+        return value;
+      }
+    } else {
+      return value;
     }
-    return {
-      token,
-      match: true
-    };
   }
-  return {
-    token,
-    match: false
-  };
+  if (keyPath.length > 1) {
+    return findNearestStatement(rootStatement, keyPath.slice(0, keyPath.length - 1), callback);
+  }
+  return null;
 }
-__name(matchToken, "matchToken");
-function createMatch(fn, specialName) {
-  return (arg) => {
-    function foo() {
-      return (scanner, isCostToken) => {
-        return fn(scanner, arg, isCostToken);
-      };
+__name(findNearestStatement, "findNearestStatement");
+async function getFieldsFromStatement(rootStatement, cursorKeyPath, getFieldsByTableName) {
+  const cursorInfo = await getCursorInfo(rootStatement, cursorKeyPath);
+  const cursorRootStatement = findNearestStatement(rootStatement, cursorKeyPath);
+  if (!cursorRootStatement) {
+    return [];
+  }
+  switch (cursorRootStatement.variant) {
+    case "select":
+      return getFieldsByFromClauses(cursorRootStatement, _.get(cursorRootStatement, "from.sources", []), cursorInfo, getFieldsByTableName);
+    case "join":
+      const parentCursorKeyPath = cursorKeyPath.slice();
+      parentCursorKeyPath.pop();
+      const parentSelectStatement = findNearestStatement(rootStatement, parentCursorKeyPath, (eachStatement) => {
+        return eachStatement.variant === "select";
+      });
+      return getFieldsByFromClauses(parentSelectStatement, _.get(parentSelectStatement, "from.sources", []), cursorInfo, getFieldsByTableName);
+    default:
+  }
+  return [];
+}
+__name(getFieldsFromStatement, "getFieldsFromStatement");
+async function getFieldsByFromClauses(rootStatement, fromStatements, cursorInfo, getFieldsByTableName) {
+  const fields = await Promise.all(fromStatements.map((fromStatement) => {
+    return getFieldsByFromClause(rootStatement, fromStatement, cursorInfo, getFieldsByTableName);
+  }));
+  return _.flatten(fields).filter((item) => {
+    return !!item;
+  });
+}
+__name(getFieldsByFromClauses, "getFieldsByFromClauses");
+async function getFieldsByFromClause(rootStatement, fromStatement, cursorInfo, getFieldsByTableName) {
+  return judgeStatement(fromStatement, async (typePlusVariant) => {
+    switch (typePlusVariant) {
+      case "statement.tableSource":
+        const tableSourceFields = await getFieldsByFromClause(rootStatement, fromStatement.source, cursorInfo, getFieldsByTableName);
+        const joinsFields = _.isArray(fromStatement.joins) ? await getFieldsByFromClauses(rootStatement, _.get(fromStatement, "joins", []), cursorInfo, getFieldsByTableName) : [];
+        return tableSourceFields.concat(joinsFields);
+      case "statement.join":
+        return getFieldsByFromClause(rootStatement, fromStatement.join, cursorInfo, getFieldsByTableName);
+      case "identifier.table":
+        const itFromStatement = fromStatement;
+        let originFields = await getFieldsByTableName(itFromStatement.name, cursorInfo.token.value, rootStatement);
+        const tableNames = _.get(itFromStatement, "name.tableNames", []);
+        let groupPickerName = null;
+        const tableNameAlias = _.get(itFromStatement, "alias.value");
+        if (tableNameAlias) {
+          groupPickerName = tableNameAlias;
+        } else {
+          let existKeyCount = 0;
+          tableNames.forEach((tableName2) => {
+            const eachTableName = _.get(itFromStatement, `name.${tableName2}.value`);
+            if (eachTableName) {
+              existKeyCount++;
+              groupPickerName = eachTableName;
+            }
+          });
+          if (existKeyCount > 1) {
+            groupPickerName = null;
+          }
+        }
+        originFields = originFields.map((originField) => {
+          return __spreadProps(__spreadValues({}, originField), {
+            tableInfo: itFromStatement.name,
+            groupPickerName,
+            originFieldName: originField.label
+          });
+        });
+        return originFields;
+      case "statement.select":
+        const ssFromStatement = fromStatement;
+        let statementSelectFields = [];
+        const fields = await getFieldsByFromClauses(ssFromStatement, ssFromStatement.from.sources, cursorInfo, getFieldsByTableName);
+        if (ssFromStatement.result.length === 1 && ssFromStatement.result[0].name.value === "*") {
+          statementSelectFields = fields.slice();
+        } else {
+          statementSelectFields = fields.map((field2) => {
+            const selectedField = ssFromStatement.result.find((result) => {
+              if (_.get(result.name, "token") === true) {
+                return result.name.value === field2.label;
+              }
+              if (_.get(result.name, "type") === "identifier" && _.get(result.name, "variant") === "columnAfterGroup") {
+                return _.get(result.name, "name.value") === field2.label;
+              }
+              if (_.get(result.name, "type") === "identifier" && _.get(result.name, "variant") === "groupAll") {
+                return _.get(result.name, "groupName.value") === field2.groupPickerName;
+              }
+              return false;
+            });
+            if (!selectedField) {
+              return null;
+            }
+            if (selectedField.alias) {
+              return __spreadProps(__spreadValues({}, field2), {
+                label: selectedField.alias.value
+              });
+            }
+            return field2;
+          }).filter((field2) => {
+            return field2 !== null;
+          }).slice();
+        }
+        if (_.has(ssFromStatement, "alias.value")) {
+          statementSelectFields = statementSelectFields.map((statementSelectField) => {
+            return __spreadProps(__spreadValues({}, statementSelectField), {
+              groupPickerName: _.get(ssFromStatement, "alias.value")
+            });
+          });
+        }
+        return statementSelectFields;
+      default:
+        return null;
     }
-    __name(foo, "foo");
-    foo.parserName = "match";
-    foo.displayName = specialName;
-    return foo;
-  };
+  });
 }
-__name(createMatch, "createMatch");
-var match = createMatch((scanner, word, isCostToken) => {
-  return matchToken(scanner, (token) => {
-    return equalWordOrIncludeWords(token.value, word);
-  }, isCostToken);
-});
-var matchTokenType = /* @__PURE__ */ __name((tokenType, opts = {}) => {
-  const options = __spreadValues({
-    includes: [],
-    excludes: []
-  }, opts);
-  return createMatch((scanner, _word, isCostToken) => {
-    return matchToken(scanner, (token) => {
-      if (options.includes.some((includeValue) => {
-        return judgeMatch(includeValue, token.value);
-      })) {
-        return true;
-      }
-      if (options.excludes.some((includeValue) => {
-        return judgeMatch(includeValue, token.value);
-      })) {
-        return false;
-      }
-      if (token.type !== tokenType) {
-        return false;
-      }
-      return true;
-    }, isCostToken);
-  }, tokenType)();
-}, "matchTokenType");
-var matchTrue = /* @__PURE__ */ __name(() => {
-  return {
-    token: null,
-    match: true
-  };
-}, "matchTrue");
-var matchFalse = /* @__PURE__ */ __name(() => {
-  return {
-    token: null,
-    match: true
-  };
-}, "matchFalse");
-var optional = /* @__PURE__ */ __name((...elements) => {
-  if (elements.length === 0) {
-    throw Error("Must have arguments!");
+__name(getFieldsByFromClause, "getFieldsByFromClause");
+async function judgeStatement(statement2, callback) {
+  if (!statement2) {
+    return null;
   }
-  return chain([
-    chain(...elements)((ast) => {
-      return elements.length === 1 ? ast[0] : ast;
+  if (statement2.variant) {
+    return callback(`${statement2.type}.${statement2.variant}`);
+  }
+  return callback(statement2.type);
+}
+__name(judgeStatement, "judgeStatement");
+async function findFieldExtraInfo(rootStatement, cursorInfo, getFieldsByTableName, fieldKeyPath) {
+  const fields = await getFieldsFromStatement(rootStatement, fieldKeyPath, getFieldsByTableName);
+  const field2 = fields.find((eachField) => {
+    return eachField.label === cursorInfo.token.value;
+  });
+  if (!field2) {
+    return null;
+  }
+  return field2;
+}
+__name(findFieldExtraInfo, "findFieldExtraInfo");
+
+// src/base/define.ts
+init_cjs_shims();
+var import_parser = require("@shuaninfo/parser");
+
+// src/mysql/index.ts
+init_cjs_shims();
+var import_parser7 = require("@shuaninfo/parser");
+
+// src/mysql/lexer.ts
+init_cjs_shims();
+var import_parser2 = require("@shuaninfo/parser");
+var sqlTokenizer = (0, import_parser2.createLexer)([
+  {
+    type: "whitespace",
+    regexes: [
+      /^(\s+)/
+    ],
+    ignore: true
+  },
+  {
+    type: "comment",
+    regexes: [
+      /^((?:#|--).*?(?:\n|$))/,
+      /^(\/\*[^]*?(?:\*\/|$))/
+    ],
+    ignore: true
+  },
+  {
+    type: "number",
+    regexes: [
+      /^([0-9]+(\.[0-9]+)?|0x[0-9a-fA-F]+|0b[01]+)\b/
+    ]
+  },
+  {
+    type: "word",
+    regexes: [
+      /^([a-zA-Z0-9_]+)/,
+      /^(\$\{[a-zA-Z0-9_]+\})/
+    ]
+  },
+  {
+    type: "string",
+    regexes: [
+      /^((?=")(?:"[^"\\]*(?:\\[\s\S][^"\\]*)*"))/,
+      /^((?=')(?:'[^'\\]*(?:\\[\s\S][^'\\]*)*'))/,
+      /^((?=`)(?:`[^`\\]*(?:\\[\s\S][^`\\]*)*`))/
+    ]
+  },
+  {
+    type: "special",
+    regexes: [
+      /^(\(|\))/,
+      /^(!=|<>|==|<=|>=|!<|!>|\|\||::|->>|->|~~\*|~~|!~~\*|!~~|~\*|!~\*|!~|.)/
+    ]
+  }
+]);
+
+// src/mysql/parser.ts
+init_cjs_shims();
+var import_parser5 = require("@shuaninfo/parser");
+
+// src/base/four-operations.ts
+init_cjs_shims();
+var import_parser3 = require("@shuaninfo/parser");
+function createFourOperations(field2) {
+  const addExpr = /* @__PURE__ */ __name(() => {
+    return (0, import_parser3.chain)(term, exprTail)((ast) => {
+      return ast[0];
+    });
+  }, "addExpr");
+  const exprTail = /* @__PURE__ */ __name(() => {
+    return (0, import_parser3.chain)((0, import_parser3.optional)(addOp, term, exprTail))();
+  }, "exprTail");
+  const term = /* @__PURE__ */ __name(() => {
+    return (0, import_parser3.chain)(factor, termTail)((ast) => {
+      return ast[0];
+    });
+  }, "term");
+  const termTail = /* @__PURE__ */ __name(() => {
+    return (0, import_parser3.chain)((0, import_parser3.optional)(mulOp, factor, termTail))();
+  }, "termTail");
+  const mulOp = /* @__PURE__ */ __name(() => {
+    return (0, import_parser3.chain)([
+      "*",
+      "/",
+      "%"
+    ])((ast) => {
+      return ast[0];
+    });
+  }, "mulOp");
+  const addOp = /* @__PURE__ */ __name(() => {
+    return (0, import_parser3.chain)([
+      "+",
+      "-"
+    ])((ast) => {
+      return ast[0];
+    });
+  }, "addOp");
+  const factor = /* @__PURE__ */ __name(() => {
+    return (0, import_parser3.chain)([
+      (0, import_parser3.chain)("(", addExpr, ")")((ast) => {
+        return ast[1];
+      }),
+      field2
+    ])((ast) => {
+      return ast[0];
+    });
+  }, "factor");
+  return addExpr;
+}
+__name(createFourOperations, "createFourOperations");
+
+// src/base/parser.ts
+init_cjs_shims();
+var import_parser4 = require("@shuaninfo/parser");
+
+// src/base/reserve-keys.ts
+init_cjs_shims();
+var reserveKeys = [
+  "select",
+  "create",
+  "insert",
+  "from",
+  "where",
+  "order",
+  "limit",
+  "by",
+  "sounds",
+  "like",
+  "is",
+  "in",
+  "between",
+  "regexp",
+  "isnull",
+  "lateral",
+  "left",
+  "right",
+  "inner",
+  "outer",
+  "join"
+];
+
+// src/base/parser.ts
+var dataType = /* @__PURE__ */ __name(() => {
+  return (0, import_parser4.chain)([
+    (0, import_parser4.chain)([
+      "char",
+      "varchar",
+      "tinytext",
+      "text",
+      "mediumtext",
+      "longtext"
+    ])((ast) => {
+      return ast[0];
     }),
-    true
+    (0, import_parser4.chain)([
+      "tinyint",
+      "smallint",
+      "mediumint",
+      "int",
+      "integer",
+      "bigint"
+    ])((ast) => {
+      return ast[0];
+    }),
+    (0, import_parser4.chain)([
+      "real",
+      "double",
+      "float"
+    ])((ast) => {
+      return ast[0];
+    }),
+    (0, import_parser4.chain)([
+      "decimal",
+      "numberic"
+    ])((ast) => {
+      return ast[0];
+    }),
+    (0, import_parser4.chain)([
+      "date",
+      "tinyblob",
+      "blob",
+      "mediumblob",
+      "longblob",
+      "bool",
+      "boolean"
+    ])((ast) => {
+      return ast[0];
+    }),
+    (0, import_parser4.chain)([
+      "bit",
+      "time",
+      "timestamp",
+      "datetime",
+      "binary",
+      "varbinary",
+      "year"
+    ])((ast) => {
+      return ast[0];
+    }),
+    (0, import_parser4.chain)([
+      "enum",
+      "set"
+    ])((ast) => {
+      return ast[0];
+    }),
+    (0, import_parser4.chain)("geometrycollection", "linestring", "multilinestring", "multipoint", "multipolygon", "point", "polygon")((ast) => {
+      return ast[0];
+    })
   ])((ast) => {
     return ast[0];
   });
-}, "optional");
-var plus = /* @__PURE__ */ __name((...elements) => {
-  if (elements.length === 0) {
-    throw Error("Must have arguments!");
-  }
-  const plusFunction = /* @__PURE__ */ __name(() => {
-    return chain(chain(...elements)((ast) => {
-      return elements.length === 1 ? ast[0] : ast;
-    }), optional(plusFunction))((ast) => {
-      if (ast[1]) {
-        return [
-          ast[0]
-        ].concat(ast[1]);
-      }
-      return [
-        ast[0]
-      ];
-    });
-  }, "plusFunction");
-  return plusFunction;
-}, "plus");
-var many = /* @__PURE__ */ __name((...elements) => {
-  if (elements.length === 0) {
-    throw Error("Must have arguments!");
-  }
-  return optional(plus(...elements));
-}, "many");
-
-// src/parser/scanner.ts
-init_esm_shims();
-var Scanner = class {
-  constructor(tokens, index1 = 0) {
-    this.tokens = [];
-    this.index = 0;
-    this.read = () => {
-      const token = this.tokens[this.index];
-      if (token) {
-        return token;
-      }
-      return false;
-    };
-    this.next = () => {
-      this.index += 1;
-    };
-    this.isEnd = () => {
-      return this.index >= this.tokens.length;
-    };
-    this.getIndex = () => {
-      return this.index;
-    };
-    this.setIndex = (index) => {
-      this.index = index;
-      return index;
-    };
-    this.getRestTokenCount = () => {
-      return this.tokens.length - this.index - 1;
-    };
-    this.getNextByToken = (token) => {
-      const currentTokenIndex = this.tokens.findIndex((eachToken) => {
-        return eachToken === token;
-      });
-      if (currentTokenIndex > -1) {
-        if (currentTokenIndex + 1 < this.tokens.length) {
-          return this.tokens[currentTokenIndex + 1];
-        }
-        return null;
-      }
-      throw Error(`token ${token.value.toString()} not exist in scanner.`);
-    };
-    this.getTokenByCharacterIndex = (characterIndex) => {
-      if (characterIndex === null) {
-        return null;
-      }
-      for (const token of this.tokens) {
-        if (characterIndex >= token.position[0] && characterIndex - 1 <= token.position[1]) {
-          return token;
-        }
-      }
-      return null;
-    };
-    this.getPrevTokenByCharacterIndex = (characterIndex) => {
-      let prevToken = null;
-      let prevTokenIndex = null;
-      this.tokens.forEach((token, index) => {
-        if (token.position[1] < characterIndex - 1) {
-          prevToken = token;
-          prevTokenIndex = index;
-        }
-      });
-      return {
-        prevToken,
-        prevTokenIndex
-      };
-    };
-    this.getNextTokenFromCharacterIndex = (characterIndex) => {
-      for (const token of this.tokens) {
-        if (token.position[0] > characterIndex) {
-          return token;
-        }
-      }
-      return null;
-    };
-    this.addToken = (token) => {
-      const { prevToken, prevTokenIndex } = this.getPrevTokenByCharacterIndex(token.position[0]);
-      if (prevToken) {
-        this.tokens.splice(prevTokenIndex + 1, 0, token);
-      } else {
-        this.tokens.unshift(token);
-      }
-    };
-    this.tokens = tokens.slice();
-    this.index = index1;
-  }
-};
-__name(Scanner, "Scanner");
-
-// src/parser/utils.ts
-init_esm_shims();
-var compareIgnoreLowerCaseWhenString = /* @__PURE__ */ __name((source, target) => {
-  if (typeof source === "string" && typeof target === "string") {
-    return source.toLowerCase() === target.toLowerCase();
-  }
-  return source === target;
-}, "compareIgnoreLowerCaseWhenString");
-function tailCallOptimize(f) {
-  let value;
-  let active = false;
-  const accumulated = [];
-  return /* @__PURE__ */ __name(function accumulator() {
-    accumulated.push(arguments);
-    if (!active) {
-      active = true;
-      while (accumulated.length) {
-        value = f.apply(this, accumulated.shift());
-      }
-      active = false;
-      return value;
-    }
-  }, "accumulator");
-}
-__name(tailCallOptimize, "tailCallOptimize");
-function getPathByCursorIndexFromAst(obj, cursorIndex, path) {
-  path = path || "";
-  let fullpath = "";
-  for (const key in obj) {
-    if (obj[key] && obj[key].token === true && obj[key].position[0] <= cursorIndex && obj[key].position[1] + 1 >= cursorIndex) {
-      if (path === "") {
-        return key;
-      }
-      return `${path}.${key}`;
-    }
-    if (typeof obj[key] === "object") {
-      fullpath = getPathByCursorIndexFromAst(obj[key], cursorIndex, path === "" ? key : `${path}.${key}`) || fullpath;
-    }
-  }
-  return fullpath;
-}
-__name(getPathByCursorIndexFromAst, "getPathByCursorIndexFromAst");
-
-// src/parser/chain.ts
-var createNodeByElement = /* @__PURE__ */ __name((element, parentNode, parentIndex, parser) => {
-  if (element instanceof Array) {
-    const treeNode = new TreeNode(parentIndex);
-    treeNode.parentNode = parentNode;
-    treeNode.childs = element.map((eachElement, childIndex) => {
-      return createNodeByElement(eachElement, treeNode, childIndex, parser);
-    });
-    return treeNode;
-  }
-  if (typeof element === "string") {
-    const matchNode = new MatchNode(match(element)(), {
-      type: "string",
-      value: element
-    }, parentIndex);
-    matchNode.parentNode = parentNode;
-    return matchNode;
-  }
-  if (typeof element === "boolean") {
-    if (element) {
-      const trueMatchNode = new MatchNode(matchTrue, {
-        type: "loose",
-        value: true
-      }, parentIndex);
-      trueMatchNode.parentNode = parentNode;
-      return trueMatchNode;
-    }
-    const falseMatchNode = new MatchNode(matchFalse, {
-      type: "loose",
-      value: false
-    }, parentIndex);
-    falseMatchNode.parentNode = parentNode;
-    return falseMatchNode;
-  }
-  if (typeof element === "function") {
-    if (element.parserName === "match") {
-      const matchNode = new MatchNode(element(), {
-        type: "special",
-        value: element.displayName
-      }, parentIndex);
-      matchNode.parentNode = parentNode;
-      return matchNode;
-    }
-    if (element.parserName === "chainNodeFactory") {
-      const chainNode = element(parentNode, null, parentIndex, parser);
-      return chainNode;
-    }
-    const functionNode = new FunctionNode(element, parentIndex, parser);
-    functionNode.parentNode = parentNode;
-    return functionNode;
-  }
-  throw Error(`unknow element in chain ${element}`);
-}, "createNodeByElement");
-var chain = /* @__PURE__ */ __name((...elements) => {
-  return (solveAst = (args) => {
-    return args;
-  }) => {
-    const chainNodeFactory = /* @__PURE__ */ __name((parentNode, creatorFunction, parentIndex = 0, parser) => {
-      const chainNode = new ChainNode(parentIndex);
-      chainNode.parentNode = parentNode;
-      chainNode.creatorFunction = creatorFunction;
-      chainNode.solveAst = solveAst;
-      chainNode.childs = elements.map((element, index) => {
-        return createNodeByElement(element, chainNode, index, parser);
-      });
-      if (creatorFunction) {
-        generateFirstSet(chainNode, parser);
-      }
-      return chainNode;
-    }, "chainNodeFactory");
-    chainNodeFactory.parserName = "chainNodeFactory";
-    return chainNodeFactory;
-  };
-}, "chain");
-function getParser(root) {
-  if (parserMap.has(root)) {
-    return parserMap.get(root);
-  }
-  const parser = new Parser();
-  parser.rootChainNode = root()(null, null, 0, parser);
-  parserMap.set(root, parser);
-  return parser;
-}
-__name(getParser, "getParser");
-function scannerAddCursorToken(scanner, cursorIndex, options) {
-  let finalCursorIndex = cursorIndex;
-  if (cursorIndex === null) {
-    return {
-      scanner,
-      finalCursorIndex
-    };
-  }
-  const cursorToken = scanner.getTokenByCharacterIndex(cursorIndex);
-  if (!cursorToken) {
-    scanner.addToken({
-      type: "cursor",
-      value: null,
-      position: [
-        cursorIndex,
-        cursorIndex
-      ]
-    });
-  } else if (options.cursorTokenExcludes(cursorToken)) {
-    scanner.addToken({
-      type: "cursor",
-      value: null,
-      position: [
-        cursorIndex + 1,
-        cursorIndex + 1
-      ]
-    });
-    finalCursorIndex += 1;
-  }
-  return {
-    scanner,
-    finalCursorIndex
-  };
-}
-__name(scannerAddCursorToken, "scannerAddCursorToken");
-var createParser = /* @__PURE__ */ __name((root, lexer, options) => {
-  return (text, cursorIndex = null) => {
-    options = (0, import_lodash.defaults)(options || {}, new CreateParserOptions());
-    const startTime = new Date();
-    const tokens = lexer(text);
-    const lexerTime = new Date();
-    const originScanner = new Scanner(tokens);
-    const { scanner, finalCursorIndex } = scannerAddCursorToken(new Scanner(tokens), cursorIndex, options);
-    cursorIndex = finalCursorIndex;
-    const parser = getParser(root);
-    const cursorPrevToken = scanner.getPrevTokenByCharacterIndex(cursorIndex).prevToken;
-    let cursorPrevNodes = cursorPrevToken === null ? [
-      parser.rootChainNode
-    ] : [];
-    let success = false;
-    let ast = null;
-    let callVisiterCount = 0;
-    let callParentCount = 0;
-    let lastMatchUnderShortestRestToken = null;
-    newVisit({
-      node: parser.rootChainNode,
-      scanner: originScanner,
-      visiterOption: {
-        onCallVisiter: (_node, store) => {
-          callVisiterCount += 1;
-          if (callVisiterCount > MAX_VISITER_CALL) {
-            store.stop = true;
-          }
-        },
-        onVisiterNextNode: (_node, store) => {
-          callParentCount += 1;
-          if (callParentCount > MAX_VISITER_CALL) {
-            store.stop = true;
-          }
-        },
-        onMatchNode: (matchNode, store, currentVisiterOption) => {
-          const matchResult = matchNode.run(store.scanner);
-          if (!matchResult.match) {
-            tryChances(matchNode, store, currentVisiterOption);
-          } else {
-            const restTokenCount = store.scanner.getRestTokenCount();
-            if (!lastMatchUnderShortestRestToken || lastMatchUnderShortestRestToken && lastMatchUnderShortestRestToken.restTokenCount > restTokenCount) {
-              lastMatchUnderShortestRestToken = {
-                matchNode,
-                token: matchResult.token,
-                restTokenCount
-              };
-            }
-            visitNextNodeFromParent(matchNode, store, currentVisiterOption, __spreadValues({
-              token: true
-            }, matchResult.token));
-          }
-        },
-        onSuccess: () => {
-          success = true;
-        },
-        onFail: (_node) => {
-          success = false;
-        }
-      },
-      parser
-    });
-    newVisit({
-      node: parser.rootChainNode,
-      scanner,
-      visiterOption: {
-        onCallVisiter: (_node, store) => {
-          callVisiterCount += 1;
-          if (callVisiterCount > MAX_VISITER_CALL) {
-            store.stop = true;
-          }
-        },
-        onVisiterNextNode: (_node, store) => {
-          callParentCount += 1;
-          if (callParentCount > MAX_VISITER_CALL) {
-            store.stop = true;
-          }
-        },
-        onSuccess: () => {
-          ast = parser.rootChainNode.solveAst ? parser.rootChainNode.solveAst(parser.rootChainNode.astResults) : parser.rootChainNode.astResults;
-        },
-        onMatchNode: (matchNode, store, currentVisiterOption) => {
-          const matchResult = matchNode.run(store.scanner);
-          if (!matchResult.match) {
-            tryChances(matchNode, store, currentVisiterOption);
-          } else {
-            if (cursorPrevToken !== null && matchResult.token === cursorPrevToken) {
-              cursorPrevNodes.push(matchNode);
-            }
-            visitNextNodeFromParent(matchNode, store, currentVisiterOption, __spreadValues({
-              token: true
-            }, matchResult.token));
-          }
-        }
-      },
-      parser
-    });
-    cursorPrevNodes = (0, import_lodash.uniq)(cursorPrevNodes);
-    let nextMatchNodes = cursorPrevNodes.reduce((all, cursorPrevNode) => {
-      return all.concat(findNextMatchNodes(cursorPrevNode, parser));
-    }, []);
-    nextMatchNodes = (0, import_lodash.uniqBy)(nextMatchNodes, (each) => {
-      return each.matching.type + each.matching.value;
-    });
-    const cursorNextToken = scanner.getNextTokenFromCharacterIndex(cursorIndex);
-    if (cursorNextToken) {
-      nextMatchNodes = nextMatchNodes.filter((nextMatchNode) => {
-        return !compareIgnoreLowerCaseWhenString(nextMatchNode.matching.value, cursorNextToken.value);
-      });
-    }
-    let error = null;
-    if (!success) {
-      const suggestions = (0, import_lodash.uniqBy)((lastMatchUnderShortestRestToken ? findNextMatchNodes(lastMatchUnderShortestRestToken.matchNode, parser) : findNextMatchNodes(parser.rootChainNode, parser)).map((each) => {
-        return each.matching;
-      }), (each) => {
-        return each.type + each.value;
-      });
-      const errorToken = lastMatchUnderShortestRestToken && scanner.getNextByToken(lastMatchUnderShortestRestToken.token);
-      if (errorToken) {
-        error = {
-          suggestions,
-          token: errorToken,
-          reason: "wrong"
-        };
-      } else {
-        error = {
-          suggestions,
-          token: lastMatchUnderShortestRestToken ? lastMatchUnderShortestRestToken.token : null,
-          reason: "incomplete"
-        };
-      }
-    }
-    const parserTime = new Date();
-    const cursorKeyPath = getPathByCursorIndexFromAst(ast, cursorIndex).split(".");
-    return {
-      success,
-      ast,
-      cursorKeyPath: cursorKeyPath[0] === "" ? [] : cursorKeyPath,
-      nextMatchings: nextMatchNodes.reverse().map((each) => {
-        return each.matching;
-      }).filter((each) => {
-        return !!each.value;
-      }),
-      error,
-      debugInfo: {
-        tokens,
-        callVisiterCount,
-        costs: {
-          lexer: lexerTime.getTime() - startTime.getTime(),
-          parser: parserTime.getTime() - startTime.getTime()
-        }
-      }
-    };
-  };
-}, "createParser");
-function newVisit({ node, scanner, visiterOption, parser }) {
-  const defaultVisiterOption = new VisiterOption();
-  (0, import_lodash.defaults)(visiterOption, defaultVisiterOption);
-  const newStore = new VisiterStore(scanner, parser);
-  visit({
-    node,
-    store: newStore,
-    visiterOption,
-    childIndex: 0
+}, "dataType");
+var setValue = /* @__PURE__ */ __name(() => {
+  return (0, import_parser4.chain)(wordSym, "=", [
+    stringSym,
+    numberSym
+  ])();
+}, "setValue");
+var setValueList = /* @__PURE__ */ __name(() => {
+  return (0, import_parser4.chain)(setValue, (0, import_parser4.many)(",", setValue))();
+}, "setValueList");
+var wordSym = /* @__PURE__ */ __name(() => {
+  return (0, import_parser4.chain)([
+    (0, import_parser4.matchTokenType)("cursor"),
+    (0, import_parser4.matchTokenType)("word", {
+      excludes: reserveKeys
+    })
+  ])((ast) => {
+    return ast[0];
   });
-}
-__name(newVisit, "newVisit");
-var visit = tailCallOptimize(({ node, store, visiterOption, childIndex }) => {
-  if (store.stop) {
-    fail(node, store, visiterOption);
-    return;
-  }
-  if (!node) {
-    throw Error("no node!");
-  }
-  if (visiterOption.onCallVisiter) {
-    visiterOption.onCallVisiter(node, store);
-  }
-  if (node instanceof ChainNode) {
-    if (firstSetUnMatch(node, store, visiterOption, childIndex)) {
-      return;
-    }
-    visitChildNode({
-      node,
-      store,
-      visiterOption,
-      childIndex
-    });
-  } else if (node instanceof TreeNode) {
-    visitChildNode({
-      node,
-      store,
-      visiterOption,
-      childIndex
-    });
-  } else if (node instanceof MatchNode) {
-    if (node.matching.type === "loose") {
-      if (node.matching.value === true) {
-        visitNextNodeFromParent(node, store, visiterOption, null);
-      } else {
-        throw Error("Not support loose false!");
-      }
-    } else {
-      visiterOption.onMatchNode(node, store, visiterOption);
-    }
-  } else if (node instanceof FunctionNode) {
-    const functionName = node.chainFunction.name;
-    const replacedNode = node.run();
-    replacedNode.functionName = functionName;
-    node.parentNode.childs[node.parentIndex] = replacedNode;
-    visit({
-      node: replacedNode,
-      store,
-      visiterOption,
-      childIndex: 0
-    });
-  } else {
-    throw Error(`Unexpected node type: ${node}`);
-  }
-});
-function visitChildNode({ node, store, visiterOption, childIndex }) {
-  if (node instanceof ChainNode) {
-    const child = node.childs[childIndex];
-    if (child) {
-      visit({
-        node: child,
-        store,
-        visiterOption,
-        childIndex: 0
-      });
-    } else {
-      visitNextNodeFromParent(node, store, visiterOption, visiterOption.generateAst ? node.solveAst(node.astResults) : null);
-    }
-  } else {
-    const child = node.childs[childIndex];
-    if (childIndex + 1 < node.childs.length) {
-      addChances({
-        node,
-        store,
-        visiterOption,
-        tokenIndex: store.scanner.getIndex(),
-        childIndex: childIndex + 1,
-        addToNextMatchNodeFinders: true
-      });
-    }
-    if (child) {
-      visit({
-        node: child,
-        store,
-        visiterOption,
-        childIndex: 0
-      });
-    } else {
-      throw Error("tree node unexpect end");
-    }
-  }
-}
-__name(visitChildNode, "visitChildNode");
-var visitNextNodeFromParent = tailCallOptimize((node, store, visiterOption, astValue) => {
-  if (store.stop) {
-    fail(node, store, visiterOption);
-    return;
-  }
-  if (visiterOption.onVisiterNextNode) {
-    visiterOption.onVisiterNextNode(node, store);
-  }
-  if (!node.parentNode) {
-    return noNextNode(node, store, visiterOption);
-  }
-  if (node.parentNode instanceof ChainNode) {
-    if (visiterOption.generateAst) {
-      node.parentNode.astResults[node.parentIndex] = astValue;
-    }
-    visit({
-      node: node.parentNode,
-      store,
-      visiterOption,
-      childIndex: node.parentIndex + 1
-    });
-  } else if (node.parentNode instanceof TreeNode) {
-    visitNextNodeFromParent(node.parentNode, store, visiterOption, astValue);
-  } else {
-    throw Error(`Unexpected parent node type: ${node.parentNode}`);
-  }
-});
-function noNextNode(node, store, visiterOption) {
-  if (store.scanner.isEnd()) {
-    if (visiterOption.onSuccess) {
-      visiterOption.onSuccess();
-    }
-  } else {
-    tryChances(node, store, visiterOption);
-  }
-}
-__name(noNextNode, "noNextNode");
-function addChances({
-  node,
-  store,
-  tokenIndex,
-  childIndex
-}) {
-  const chance = {
-    node,
-    tokenIndex,
-    childIndex
-  };
-  store.restChances.push(chance);
-}
-__name(addChances, "addChances");
-function tryChances(node, store, visiterOption) {
-  if (store.restChances.length === 0) {
-    fail(node, store, visiterOption);
-    return;
-  }
-  const nextChance = store.restChances.pop();
-  store.scanner.setIndex(nextChance.tokenIndex);
-  visit({
-    node: nextChance.node,
-    store,
-    visiterOption,
-    childIndex: nextChance.childIndex
+}, "wordSym");
+var stringSym = /* @__PURE__ */ __name(() => {
+  return (0, import_parser4.chain)((0, import_parser4.matchTokenType)("string"))((ast) => {
+    return ast[0];
   });
-}
-__name(tryChances, "tryChances");
-function fail(node, _store, visiterOption) {
-  if (visiterOption.onFail) {
-    visiterOption.onFail(node);
-  }
-}
-__name(fail, "fail");
-function findNextMatchNodes(node, parser) {
-  const nextMatchNodes = [];
-  let passCurrentNode = false;
-  const visiterOption = {
-    generateAst: false,
-    enableFirstSet: false,
-    onMatchNode: (matchNode, store, currentVisiterOption) => {
-      if (matchNode === node && passCurrentNode === false) {
-        passCurrentNode = true;
-        visitNextNodeFromParent(matchNode, store, currentVisiterOption, null);
-      } else {
-        nextMatchNodes.push(matchNode);
-      }
-      tryChances(matchNode, store, currentVisiterOption);
-    }
-  };
-  newVisit({
-    node,
-    scanner: new Scanner([]),
-    visiterOption,
-    parser
+}, "stringSym");
+var numberSym = /* @__PURE__ */ __name(() => {
+  return (0, import_parser4.chain)((0, import_parser4.matchTokenType)("number"))((ast) => {
+    return ast[0];
   });
-  return nextMatchNodes;
+}, "numberSym");
+var stringOrWord = /* @__PURE__ */ __name(() => {
+  return (0, import_parser4.chain)([
+    wordSym,
+    stringSym
+  ])((ast) => {
+    return ast[0];
+  });
+}, "stringOrWord");
+var stringOrWordOrNumber = /* @__PURE__ */ __name(() => {
+  return (0, import_parser4.chain)([
+    wordSym,
+    stringSym,
+    numberChain
+  ])((ast) => {
+    return ast[0];
+  });
+}, "stringOrWordOrNumber");
+var numberChain = /* @__PURE__ */ __name(() => {
+  return (0, import_parser4.chain)((0, import_parser4.optional)([
+    "-",
+    "+"
+  ]), numberSym)();
+}, "numberChain");
+var logicalOperator = /* @__PURE__ */ __name(() => {
+  return (0, import_parser4.chain)([
+    "and",
+    "&&",
+    "xor",
+    "or",
+    "||"
+  ])((ast) => {
+    return ast[0];
+  });
+}, "logicalOperator");
+var normalOperator = /* @__PURE__ */ __name(() => {
+  return (0, import_parser4.chain)([
+    "&&",
+    "||"
+  ])((ast) => {
+    return ast[0];
+  });
+}, "normalOperator");
+var comparisonOperator = /* @__PURE__ */ __name(() => {
+  return (0, import_parser4.chain)([
+    "=",
+    ">",
+    "<",
+    "<=",
+    ">=",
+    "<>",
+    "!=",
+    "<=>"
+  ])((ast) => {
+    return ast[0];
+  });
+}, "comparisonOperator");
+var notOperator = /* @__PURE__ */ __name(() => {
+  return (0, import_parser4.chain)([
+    "not",
+    "!"
+  ])((ast) => {
+    return ast[0];
+  });
+}, "notOperator");
+var selectSpec = /* @__PURE__ */ __name(() => {
+  return (0, import_parser4.chain)([
+    "all",
+    "distinct",
+    "distinctrow",
+    "high_priority",
+    "straight_join",
+    "sql_small_result",
+    "sql_big_result",
+    "sql_buffer_result",
+    "sql_cache",
+    "sql_no_cache",
+    "sql_calc_found_rows"
+  ])((ast) => {
+    return ast[0];
+  });
+}, "selectSpec");
+
+// src/base/utils.ts
+init_cjs_shims();
+function isOkay(obj) {
+  return obj != null;
 }
-__name(findNextMatchNodes, "findNextMatchNodes");
-function firstSetUnMatch(node, store, visiterOption, childIndex) {
-  if (visiterOption.enableFirstSet && node.creatorFunction && childIndex === 0 && store.parser.firstSet.has(node.creatorFunction)) {
-    const firstMatchNodes = store.parser.firstSet.get(node.creatorFunction);
-    if (!firstMatchNodes.some((firstMatchNode) => {
-      return firstMatchNode.run(store.scanner, false).match;
-    })) {
-      tryChances(node, store, visiterOption);
-      return true;
-    }
-    return false;
-  }
-}
-__name(firstSetUnMatch, "firstSetUnMatch");
-function generateFirstSet(node, parser) {
-  if (parser.firstSet.has(node.creatorFunction)) {
-    return;
-  }
-  const firstMatchNodes = getFirstOrFunctionSet(node, node.creatorFunction, parser);
-  parser.firstOrFunctionSet.set(node.creatorFunction, firstMatchNodes);
-  solveFirstSet(node.creatorFunction, parser);
-}
-__name(generateFirstSet, "generateFirstSet");
-function getFirstOrFunctionSet(node, creatorFunction, parser) {
-  if (node instanceof ChainNode) {
-    if (node.childs[0]) {
-      return getFirstOrFunctionSet(node.childs[0], creatorFunction, parser);
-    }
-  } else if (node instanceof TreeNode) {
-    return node.childs.reduce((all, next) => {
-      return all.concat(getFirstOrFunctionSet(next, creatorFunction, parser));
-    }, []);
-  } else if (node instanceof MatchNode) {
-    return [
-      node
-    ];
-  } else if (node instanceof FunctionNode) {
-    if (parser.relatedSet.has(node.chainFunction)) {
-      parser.relatedSet.get(node.chainFunction).add(creatorFunction);
-    } else {
-      parser.relatedSet.set(node.chainFunction, /* @__PURE__ */ new Set([
-        creatorFunction
-      ]));
-    }
-    return [
-      node.chainFunction
-    ];
-  } else {
-    throw Error(`Unexpected node: ${node}`);
-  }
-}
-__name(getFirstOrFunctionSet, "getFirstOrFunctionSet");
-function solveFirstSet(creatorFunction, parser) {
-  if (parser.firstSet.has(creatorFunction)) {
-    return;
-  }
-  const firstMatchNodes = parser.firstOrFunctionSet.get(creatorFunction);
-  const newFirstMatchNodes = firstMatchNodes.reduce((all, firstMatchNode) => {
-    if (typeof firstMatchNode === "string") {
-      if (parser.firstSet.has(firstMatchNode)) {
-        all = all.concat(parser.firstSet.get(firstMatchNode));
-      } else {
-        all.push(firstMatchNode);
-      }
-    } else {
-      all.push(firstMatchNode);
-    }
-    return all;
+__name(isOkay, "isOkay");
+function flattenAll(arr) {
+  return arr.filter((part) => {
+    return isOkay(part);
+  }).reduce((prev, cur) => {
+    return prev.concat(cur);
   }, []);
-  parser.firstOrFunctionSet.set(creatorFunction, newFirstMatchNodes);
-  if (newFirstMatchNodes.every((firstMatchNode) => {
-    return firstMatchNode instanceof MatchNode;
-  })) {
-    parser.firstSet.set(creatorFunction, newFirstMatchNodes);
-    if (parser.relatedSet.has(creatorFunction)) {
-      const relatedFunctionNames = parser.relatedSet.get(creatorFunction);
-      relatedFunctionNames.forEach((_relatedFunctionName) => {
-        return solveFirstSet;
+}
+__name(flattenAll, "flattenAll");
+function createTableName(tableNames) {
+  const returnValue = {
+    type: "identifier",
+    variant: "tableName"
+  };
+  Object.keys(tableNames).forEach((eachTableNamesKey) => {
+    returnValue[eachTableNamesKey] = tableNames[eachTableNamesKey];
+  });
+  returnValue.tableNames = Object.keys(tableNames);
+  return returnValue;
+}
+__name(createTableName, "createTableName");
+
+// src/mysql/parser.ts
+var root = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)(statements, (0, import_parser5.optional)(";"))((ast) => {
+    return ast[0];
+  });
+}, "root");
+var statements = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)(statement, (0, import_parser5.many)((0, import_parser5.chain)(";", statement)((ast) => {
+    return ast[1];
+  })))(flattenAll);
+}, "statements");
+var statement = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)([
+    selectStatement,
+    createTableStatement,
+    insertStatement,
+    createViewStatement,
+    setStatement,
+    createIndexStatement,
+    createFunctionStatement,
+    updateStatement
+  ])((ast) => {
+    return ast[0];
+  });
+}, "statement");
+var selectStatement = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)("select", selectList, (0, import_parser5.optional)(fromClause), (0, import_parser5.optional)(orderByClause), (0, import_parser5.optional)(limitClause), (0, import_parser5.optional)(union, selectStatement))((ast) => {
+    const result = {
+      type: "statement",
+      variant: "select",
+      result: ast[1],
+      from: ast[2]
+    };
+    if (ast[5]) {
+      result.union = ast[5];
+    }
+    return result;
+  });
+}, "selectStatement");
+var union = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)("union", [
+    "all",
+    "distinct"
+  ])();
+}, "union");
+var fromClause = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)("from", tableSources, (0, import_parser5.optional)(whereStatement), (0, import_parser5.optional)(groupByStatement), (0, import_parser5.optional)(havingStatement))((ast) => {
+    return {
+      sources: ast[1],
+      where: ast[2],
+      group: ast[3],
+      having: ast[4]
+    };
+  });
+}, "fromClause");
+var selectList = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)(selectField, (0, import_parser5.many)(selectListTail))(flattenAll);
+}, "selectList");
+var selectListTail = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)(",", selectField)((ast) => {
+    return ast[1];
+  });
+}, "selectListTail");
+var selectField = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)([
+    (0, import_parser5.chain)((0, import_parser5.many)("not"), [
+      (0, import_parser5.chain)(field, (0, import_parser5.optional)(overClause))((ast) => {
+        return ast[0];
+      }),
+      (0, import_parser5.chain)("(", field, ")")()
+    ], (0, import_parser5.optional)(alias))((ast) => {
+      return {
+        type: "identifier",
+        variant: "column",
+        name: ast[1],
+        alias: ast[2]
+      };
+    }),
+    "*"
+  ])((ast) => {
+    return ast[0];
+  });
+}, "selectField");
+var whereStatement = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)("where", expression)((ast) => {
+    return ast[1];
+  });
+}, "whereStatement");
+var fieldList = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)(columnField, (0, import_parser5.many)(",", columnField))();
+}, "fieldList");
+var tableSources = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)(tableSource, (0, import_parser5.many)((0, import_parser5.chain)(",", tableSource)((ast) => {
+    return ast[1];
+  })))(flattenAll);
+}, "tableSources");
+var tableSource = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)(tableSourceItem, (0, import_parser5.many)(joinPart))((ast) => {
+    return {
+      source: ast[0],
+      joins: ast[1],
+      type: "statement",
+      variant: "tableSource"
+    };
+  });
+}, "tableSource");
+var tableSourceItem = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)([
+    (0, import_parser5.chain)(tableName, (0, import_parser5.optional)(alias))((ast) => {
+      return {
+        type: "identifier",
+        variant: "table",
+        name: ast[0],
+        alias: ast[1]
+      };
+    }),
+    (0, import_parser5.chain)([
+      selectStatement,
+      (0, import_parser5.chain)("(", selectStatement, ")")((ast) => {
+        return ast[1];
+      })
+    ], alias)((ast) => {
+      return __spreadProps(__spreadValues({}, ast[0]), {
+        alias: ast[1]
+      });
+    })
+  ])((ast) => {
+    return ast[0];
+  });
+}, "tableSourceItem");
+var joinPart = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)([
+    "join",
+    "straight_join",
+    (0, import_parser5.chain)([
+      "inner",
+      "cross",
+      "full"
+    ], "join")(),
+    (0, import_parser5.chain)([
+      "left",
+      "right"
+    ], (0, import_parser5.optional)("outer"), "join")(),
+    (0, import_parser5.chain)("natural", (0, import_parser5.optional)([
+      "left",
+      "right"
+    ], (0, import_parser5.optional)("outer")), "join")()
+  ], tableSourceItem, (0, import_parser5.optional)("on", expression))((ast) => {
+    return {
+      type: "statement",
+      variant: "join",
+      join: ast[1],
+      conditions: ast[2]
+    };
+  });
+}, "joinPart");
+var alias = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)([
+    (0, import_parser5.chain)("as", stringOrWord)((ast) => {
+      return ast[1];
+    }),
+    stringOrWord
+  ])((ast) => {
+    return ast[0];
+  });
+}, "alias");
+var createTableStatement = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)("create", "table", stringOrWord, "(", tableOptions, ")", (0, import_parser5.optional)(withStatement))();
+}, "createTableStatement");
+var withStatement = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)("with", "(", withStatements, ")")();
+}, "withStatement");
+var withStatements = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)(withStatementsTail, (0, import_parser5.many)(",", withStatementsTail))();
+}, "withStatements");
+var withStatementsTail = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)(wordSym, "=", stringSym)();
+}, "withStatementsTail");
+var tableOptions = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)(tableOption, (0, import_parser5.many)(",", tableOption))();
+}, "tableOptions");
+var tableOption = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)(stringOrWord, dataType)();
+}, "tableOption");
+var tableName = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)([
+    (0, import_parser5.chain)(stringOrWord)(),
+    (0, import_parser5.chain)(stringOrWord, ".", stringOrWord)((ast) => {
+      return [
+        ast[0],
+        ast[2]
+      ];
+    })
+  ])((ast) => {
+    if (ast[0].length === 1) {
+      return createTableName({
+        namespace: null,
+        tableName: ast[0][0]
       });
     }
-  }
-}
-__name(solveFirstSet, "solveFirstSet");
-
-// src/lexer/index.ts
-init_esm_shims();
-var Tokenizer = /* @__PURE__ */ __name(class Tokenizer2 {
-  tokenize(input) {
-    const tokens = [];
-    let token;
-    let lastPosition = 0;
-    while (input.length) {
-      const result = this.getNextToken(input);
-      if (!result || !result.token) {
-        throw Error(`Lexer: Unexpected string "${input}".`);
-      }
-      token = result.token;
-      if (!token.value) {
-        throw Error(`Lexer: Regex parse error, please check your lexer config.`);
-      }
-      token.position = [
-        lastPosition,
-        lastPosition + token.value.length - 1
-      ];
-      lastPosition += token.value.length;
-      input = input.substring(token.value.length);
-      if (!result.config.ignore) {
-        tokens.push(token);
-      }
+    if (ast[0].length === 2) {
+      return createTableName({
+        namespace: ast[0][0],
+        tableName: ast[0][1]
+      });
     }
-    return tokens;
-  }
-  getNextToken(input) {
-    for (const eachLexer of this.lexerConfig) {
-      for (const regex of eachLexer.regexes) {
-        const token = this.getTokenOnFirstMatch({
-          input,
-          type: eachLexer.type,
-          regex
-        });
-        if (token) {
-          return {
-            token,
-            config: eachLexer
-          };
-        }
-      }
+  });
+}, "tableName");
+var havingStatement = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)("having", expression)();
+}, "havingStatement");
+var createViewStatement = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)("create", "view", wordSym, "as", selectStatement)();
+}, "createViewStatement");
+var insertStatement = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)("insert", (0, import_parser5.optional)("ignore"), "into", tableName, (0, import_parser5.optional)(selectFieldsInfo), [
+    selectStatement
+  ])((ast) => {
+    return {
+      type: "statement",
+      variant: "insert",
+      into: {
+        type: "indentifier",
+        variant: "table",
+        name: ast[3]
+      },
+      result: ast[5]
+    };
+  });
+}, "insertStatement");
+var selectFieldsInfo = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)("(", selectFields, ")")();
+}, "selectFieldsInfo");
+var selectFields = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)(wordSym, (0, import_parser5.many)(",", wordSym))();
+}, "selectFields");
+var groupByStatement = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)("group", "by", fieldList)();
+}, "groupByStatement");
+var orderByClause = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)("order", "by", orderByExpressionList)();
+}, "orderByClause");
+var orderByExpressionList = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)(orderByExpression, (0, import_parser5.many)(",", orderByExpression))();
+}, "orderByExpressionList");
+var orderByExpression = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)(expression, (0, import_parser5.optional)([
+    "asc",
+    "desc"
+  ]))();
+}, "orderByExpression");
+var partitionByClause = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)([
+    wordSym,
+    (0, import_parser5.chain)("partition", "by", expression)()
+  ])((ast) => {
+    return ast;
+  });
+}, "partitionByClause");
+var overClause = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)("over", "(", overTailExpression, ")")();
+}, "overClause");
+var overTailExpression = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)([
+    partitionByClause,
+    (0, import_parser5.chain)(field, orderByClause)()
+  ], (0, import_parser5.many)(",", overTailExpression))();
+}, "overTailExpression");
+var limitClause = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)("limit", [
+    numberSym,
+    (0, import_parser5.chain)(numberSym, ",", numberSym)(),
+    (0, import_parser5.chain)(numberSym, "offset", numberSym)()
+  ])();
+}, "limitClause");
+var functionChain = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)([
+    castFunction,
+    normalFunction,
+    ifFunction
+  ])((ast) => {
+    return ast[0];
+  });
+}, "functionChain");
+var ifFunction = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)("if", "(", predicate, ",", field, ",", field, ")")((ast) => {
+    return {
+      type: "function",
+      name: "if",
+      args: [
+        ast[2],
+        ast[4],
+        ast[6]
+      ]
+    };
+  });
+}, "ifFunction");
+var castFunction = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)("cast", "(", field, "as", dataType, ")")((ast) => {
+    return {
+      type: "function",
+      name: "cast",
+      args: [
+        ast[2],
+        ast[4]
+      ]
+    };
+  });
+}, "castFunction");
+var normalFunction = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)(wordSym, "(", (0, import_parser5.optional)(functionFields), ")", (0, import_parser5.optional)("filter", "(", whereStatement, ")"))((ast) => {
+    return {
+      type: "function",
+      name: ast[0],
+      args: ast[2]
+    };
+  });
+}, "normalFunction");
+var functionFields = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)(functionFieldItem, (0, import_parser5.many)(",", functionFieldItem))();
+}, "functionFields");
+var functionFieldItem = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)((0, import_parser5.many)(selectSpec), [
+    columnField,
+    caseStatement
+  ])((ast) => {
+    return ast;
+  });
+}, "functionFieldItem");
+var caseStatement = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)("case", (0, import_parser5.plus)(caseAlternative), (0, import_parser5.optional)("else", [
+    columnField,
+    "null"
+  ]), [
+    "end",
+    (0, import_parser5.chain)("end", "as", wordSym)()
+  ])();
+}, "caseStatement");
+var caseAlternative = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)("when", expression, "then", fieldItem)();
+}, "caseAlternative");
+var setStatement = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)("set", variableAssignments)();
+}, "setStatement");
+var variableAssignments = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)(variableAssignment, (0, import_parser5.many)(",", variableAssignment))();
+}, "variableAssignments");
+var variableAssignment = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)(variableLeftValue, "=", [
+    "true",
+    "false",
+    stringSym,
+    numberSym
+  ])();
+}, "variableAssignment");
+var variableLeftValue = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)(wordSym, (0, import_parser5.many)(".", wordSym))();
+}, "variableLeftValue");
+var expression = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)(expressionHead, (0, import_parser5.many)(logicalOperator, expression))(flattenAll);
+}, "expression");
+var expressionHead = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)([
+    (0, import_parser5.chain)("(", expression, ")")(),
+    (0, import_parser5.chain)(notOperator, expression)(),
+    (0, import_parser5.chain)(booleanPrimary)
+  ], (0, import_parser5.optional)((0, import_parser5.chain)("is", (0, import_parser5.optional)("not"), [
+    "true",
+    "false",
+    "unknown"
+  ])()))((ast) => {
+    return ast[0];
+  });
+}, "expressionHead");
+var booleanPrimary = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)(predicate, (0, import_parser5.many)([
+    "isnull",
+    (0, import_parser5.chain)([
+      (0, import_parser5.chain)("is", "not")(),
+      "is",
+      "not"
+    ], [
+      "null",
+      columnField
+    ])()
+  ]))(flattenAll);
+}, "booleanPrimary");
+var predicate = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)([
+    (0, import_parser5.chain)(columnField, predicateAddonComparison)(),
+    (0, import_parser5.chain)("(", predicate, ")", predicateAddonComparison)()
+  ])();
+}, "predicate");
+var predicateAddonComparison = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)((0, import_parser5.optional)([
+    (0, import_parser5.chain)(comparisonOperator, columnField)(),
+    (0, import_parser5.chain)("sounds", "like", columnField)(),
+    isOrNotExpression
+  ]), (0, import_parser5.optional)([
+    "or",
+    predicate
+  ]))();
+}, "predicateAddonComparison");
+var columnField = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)(field)((ast) => {
+    return {
+      type: "identifier",
+      variant: "column",
+      name: ast[0]
+    };
+  });
+}, "columnField");
+var isOrNotExpression = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)((0, import_parser5.optional)("is"), (0, import_parser5.optional)("not"), [
+    (0, import_parser5.chain)("in", "(", [
+      selectStatement,
+      fieldList
+    ], ")")(),
+    (0, import_parser5.chain)("between", field, "and", predicate)(),
+    (0, import_parser5.chain)("like", field, (0, import_parser5.optional)("escape", field))(),
+    (0, import_parser5.chain)("regexp", field)(),
+    "null"
+  ])();
+}, "isOrNotExpression");
+var fieldItem = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)(fieldItemDetail, (0, import_parser5.many)(normalOperator, fieldItemDetail))((ast) => {
+    if (!ast[1]) {
+      return ast[0];
     }
-    return null;
-  }
-  getTokenOnFirstMatch({ input, type, regex }) {
-    const matches = input.match(regex);
-    if (matches) {
+    return [
+      ast[0],
+      ast[1]
+    ];
+  });
+}, "fieldItem");
+var fieldItemDetail = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)([
+    functionChain,
+    caseStatement,
+    (0, import_parser5.chain)(stringOrWordOrNumber, (0, import_parser5.optional)([
+      (0, import_parser5.chain)(".", "*")((ast) => {
+        return {
+          type: "identifier",
+          variant: "groupAll"
+        };
+      }),
+      (0, import_parser5.chain)(":", normalFunction)(),
+      dotStringOrWordOrNumber
+    ]))((ast) => {
+      if (!ast[1]) {
+        return ast[0];
+      }
+      return __spreadProps(__spreadValues({}, ast[1]), {
+        groupName: ast[0]
+      });
+    }),
+    "*"
+  ])((ast) => {
+    return ast[0];
+  });
+}, "fieldItemDetail");
+var dotStringOrWordOrNumber = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)(".", [
+    stringSym,
+    numberSym,
+    (0, import_parser5.chain)(wordSym)((ast) => {
       return {
-        type,
-        value: matches[1]
+        type: "identifier",
+        variant: "columnAfterGroup",
+        name: ast[0]
       };
-    }
+    })
+  ])((ast) => {
+    return ast[1];
+  });
+}, "dotStringOrWordOrNumber");
+var field = /* @__PURE__ */ __name(() => {
+  return createFourOperations(fieldItem)();
+}, "field");
+var createIndexStatement = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)("create", "index", indexItem, onStatement, whereStatement)();
+}, "createIndexStatement");
+var indexItem = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)(stringSym, (0, import_parser5.many)(".", stringSym))();
+}, "indexItem");
+var onStatement = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)("ON", stringSym, "(", fieldForIndexList, ")")();
+}, "onStatement");
+var fieldForIndex = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)(stringSym, (0, import_parser5.optional)([
+    "ASC",
+    "DESC"
+  ]))();
+}, "fieldForIndex");
+var fieldForIndexList = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)(fieldForIndex, (0, import_parser5.many)(",", fieldForIndex))();
+}, "fieldForIndexList");
+var createFunctionStatement = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)("create", "function", wordSym, "as", stringSym)();
+}, "createFunctionStatement");
+var updateStatement = /* @__PURE__ */ __name(() => {
+  return (0, import_parser5.chain)("UPDATE", tableSourceItem, "SET", setValueList, (0, import_parser5.optional)(whereStatement))();
+}, "updateStatement");
+
+// src/mysql/index.ts
+var mysqlParser = (0, import_parser7.createParser)(root, sqlTokenizer, {
+  cursorTokenExcludes: (token) => {
+    return token.value === "." || token.value === ":";
   }
-  constructor(lexerConfig) {
-    this.lexerConfig = lexerConfig;
-  }
-}, "Tokenizer");
-var createLexer = /* @__PURE__ */ __name((lexerConfig) => {
-  return (text) => {
-    return new Tokenizer(lexerConfig).tokenize(text);
-  };
-}, "createLexer");
-export {
-  ChainNode,
-  CreateParserOptions,
-  FunctionNode,
-  MAX_VISITER_CALL,
-  MatchNode,
-  Parser,
-  Scanner,
-  TreeNode,
-  VisiterOption,
-  VisiterStore,
-  chain,
-  createLexer,
-  createParser,
-  many,
-  matchTokenType,
-  optional,
-  parserMap,
-  plus
-};
+});
+module.exports = __toCommonJS(src_exports);
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  IMatching,
+  IParseResult,
+  IToken,
+  mysqlParser,
+  reader
+});
 /**
  * @license
  * Lodash <https://lodash.com/>
