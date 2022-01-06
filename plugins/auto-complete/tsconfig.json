@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "allowJs": true,
+    "module": "esnext",
+    "target": "esnext",
+    "lib": ["esnext","es6", "dom"],
+    "esModuleInterop": true,
+    "strict": true,
+    "strictNullChecks": false,
+    "experimentalDecorators": true,
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "noUnusedParameters": true,
+    "emitDecoratorMetadata": true,
+    "preserveConstEnums": true,
+    "types": ["node"]
+  },
+  "exclude": [
+    "**/dist",
+    "**/node_modules",
+    "**/test"
+  ]
+}

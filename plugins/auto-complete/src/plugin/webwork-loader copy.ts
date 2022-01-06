@@ -1,35 +1,23 @@
 /* web woker 加载插件 */
-// import fs from 'fs'
+import fs from 'fs'
 import path from 'path'
 import { Plugin, PluginBuild, OnResolveArgs, OnLoadArgs, build } from 'esbuild'
-/**
- * /^web-worker\((.+)\)/
- */
-const REGX = /^web-worker\((.+)\)/
-/**
- * /^web-worker\:(.+)/
- */
-// const REGX = /^web-worker\:(.+)/
 const plugin: Plugin = {
   name: 'esbuild-plugin-webwork-loader',
   setup(plugin: PluginBuild) {
-    plugin.onResolve({ filter: REGX },
+    plugin.onResolve({ filter: /^web-worker:(.+)/ },
       (args: OnResolveArgs) => {
-        // ./parser.worker2.ts
-        let match = REGX.exec(args.path)
-        let workerPath = match[1];
-        console.debug(`The web worker plugin matched an import to ${args.path} from ${args.importer}, resolve path ${workerPath}`);
+        console.log('-----args.path: ', args.path)
         return {
-          // path: workerPath,
-          path: args.path,
+          // args.path
+          path: './parser.worker2',
           namespace: 'web-worker',
-          pluginData: { importer: args.importer },
+          // pluginData: { importer: args.importer },
         }
-      });
-    plugin.onLoad({ filter: REGX, namespace: 'web-worker' },
+      })
+    plugin.onLoad({ filter: /^web-worker:(.+)/, namespace: 'web-worker' },
       async (args: OnLoadArgs) => {
-        const { path: importPath, pluginData: { importer } } = args;
-        let match = REGX.exec(importPath)
+        let match = /^web-worker:(.+)/.exec(args.path)
         let workerPath = match[1];
         let outfile = null
         if (!workerPath.endsWith('.ts')) {
@@ -41,11 +29,11 @@ const plugin: Plugin = {
           outfile = path.join("dist", path.basename(workerPath + '.js'));
         }
 
-        // 全路径
-        const workerFullPath = path.join(path.dirname(importer), workerPath);
+        // TODO: 暂停
+        console.log('match:xxxxxxxxxxxx', args.path, match[1], '::', workerPath, outfile)
         try {
           await build({
-            entryPoints: [workerFullPath],
+            entryPoints: [workerPath],
             outfile,
             minify: true,
             bundle: true,
@@ -54,9 +42,6 @@ const plugin: Plugin = {
             contents: `export default ${JSON.stringify(workerPath)};`
           }
         } catch (error) {
-          return {
-            contents: `export default {};`
-          }
           // console.error('Could not build worker script:', error);
         }
       })

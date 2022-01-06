@@ -3,8 +3,9 @@
 /.vscode
 /.idea
 /.temp
-/dist
-/.DS_Store
+dist
+dist/*
+.DS_Store
 /coverage
 /.nyc_output
 /npm-debug.log
