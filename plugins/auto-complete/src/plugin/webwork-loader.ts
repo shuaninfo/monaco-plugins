@@ -6,7 +6,7 @@
  */
 import path from 'path'
 import fs from 'fs'
-import { Plugin, PluginBuild, OnResolveArgs, OnLoadArgs, buildSync } from 'esbuild'
+import { Plugin, PluginBuild, OnResolveArgs, OnLoadArgs, build } from 'esbuild'
 /**
  * /^web-worker\((.+)\)/
  */
@@ -24,7 +24,7 @@ const plugin: Plugin = {
         }
       });
     plugin.onLoad({ filter: WEB_WORK_REGEXP, namespace: 'web-worker' },
-      (args: OnLoadArgs) => {
+      async (args: OnLoadArgs) => {
         const { path: importPath, pluginData: { importer } } = args;
         const workerPath = WEB_WORK_REGEXP.exec(importPath)[1]
         const extname = path.extname(workerPath)
@@ -40,27 +40,25 @@ const plugin: Plugin = {
         // 全路径
         const workerFullPath = path.join(path.dirname(importer), workerPath);
         try {
-          buildSync({
+          await build({
             entryPoints: [workerFullPath],
             outfile,
-            minify: true,
+            minify: true, // 必填
             bundle: true,
-            // format: 'cjs'
-            // sourcemap: true
+            sourcemap: true
           })
           const worktext = fs.readFileSync(outfile, 'utf8')
+          const miniworktext = worktext.split('\n')[0]
           return {
             contents:
               `
-              // TODO: 
-                const blob = new Blob([
-                  (function(){${worktext}}).toString().slice(11)
-                ], 
-                  {type: "text/javascript"});
-
                 export default class {
                   constructor() {
-                    return new Worker(URL.createObjectURL(blob));
+                    return new Worker(URL.createObjectURL(
+                      new Blob([
+                        '${miniworktext}'
+                      ], {type: "text/javascript"})
+                    ));
                   }
                 }
               `

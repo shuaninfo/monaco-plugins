@@ -6,7 +6,7 @@ export default defineConfig((options: Options) => {
     entry: ['src/index.ts'],
     splitting: false,
     sourcemap: true,
-    // bundle: true,
+    bundle: true,
     clean: true,
     minify: !options.watch,
     dts: true,
