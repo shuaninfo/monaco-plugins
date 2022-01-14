@@ -6,12 +6,7 @@
 
 <script>
 import * as monaco from 'monaco-editor'
-import {monacoSqlAutocomplete}from '@shuaninfo/auto-complete'
-import { mysqlParser } from '@shuaninfo/sql-parser';
-const result = mysqlParser(`SELECT *
-FROM bananas
-WHERE color = 'red'`);
-console.log('[app.vue] mysqlParser:', result)
+import { monacoSqlAutocomplete } from '@shuaninfo/auto-complete'
 export default {
   name: 'App',
   methods:{
