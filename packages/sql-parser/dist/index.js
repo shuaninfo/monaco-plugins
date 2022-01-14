@@ -6339,7 +6339,6 @@ __name(findFieldExtraInfo, "findFieldExtraInfo");
 
 // src/base/define.ts
 init_esm_shims();
-import { IToken, IParseResult, IMatching } from "@shuaninfo/parser";
 
 // src/mysql/index.ts
 init_esm_shims();
@@ -7199,9 +7198,6 @@ var mysqlParser = createParser(root, sqlTokenizer, {
   }
 });
 export {
-  IMatching,
-  IParseResult,
-  IToken,
   mysqlParser,
   reader_exports as reader
 };

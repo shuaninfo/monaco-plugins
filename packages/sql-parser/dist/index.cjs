@@ -6126,9 +6126,6 @@ var require_lodash = __commonJS({
 // src/index.ts
 var src_exports = {};
 __export(src_exports, {
-  IMatching: () => import_parser.IMatching,
-  IParseResult: () => import_parser.IParseResult,
-  IToken: () => import_parser.IToken,
   mysqlParser: () => mysqlParser,
   reader: () => reader_exports
 });
@@ -6352,16 +6349,15 @@ __name(findFieldExtraInfo, "findFieldExtraInfo");
 
 // src/base/define.ts
 init_cjs_shims();
-var import_parser = require("@shuaninfo/parser");
 
 // src/mysql/index.ts
 init_cjs_shims();
-var import_parser7 = require("@shuaninfo/parser");
+var import_parser6 = require("@shuaninfo/parser");
 
 // src/mysql/lexer.ts
 init_cjs_shims();
-var import_parser2 = require("@shuaninfo/parser");
-var sqlTokenizer = (0, import_parser2.createLexer)([
+var import_parser = require("@shuaninfo/parser");
+var sqlTokenizer = (0, import_parser.createLexer)([
   {
     type: "whitespace",
     regexes: [
@@ -6409,30 +6405,30 @@ var sqlTokenizer = (0, import_parser2.createLexer)([
 
 // src/mysql/parser.ts
 init_cjs_shims();
-var import_parser5 = require("@shuaninfo/parser");
+var import_parser4 = require("@shuaninfo/parser");
 
 // src/base/four-operations.ts
 init_cjs_shims();
-var import_parser3 = require("@shuaninfo/parser");
+var import_parser2 = require("@shuaninfo/parser");
 function createFourOperations(field2) {
   const addExpr = /* @__PURE__ */ __name(() => {
-    return (0, import_parser3.chain)(term, exprTail)((ast) => {
+    return (0, import_parser2.chain)(term, exprTail)((ast) => {
       return ast[0];
     });
   }, "addExpr");
   const exprTail = /* @__PURE__ */ __name(() => {
-    return (0, import_parser3.chain)((0, import_parser3.optional)(addOp, term, exprTail))();
+    return (0, import_parser2.chain)((0, import_parser2.optional)(addOp, term, exprTail))();
   }, "exprTail");
   const term = /* @__PURE__ */ __name(() => {
-    return (0, import_parser3.chain)(factor, termTail)((ast) => {
+    return (0, import_parser2.chain)(factor, termTail)((ast) => {
       return ast[0];
     });
   }, "term");
   const termTail = /* @__PURE__ */ __name(() => {
-    return (0, import_parser3.chain)((0, import_parser3.optional)(mulOp, factor, termTail))();
+    return (0, import_parser2.chain)((0, import_parser2.optional)(mulOp, factor, termTail))();
   }, "termTail");
   const mulOp = /* @__PURE__ */ __name(() => {
-    return (0, import_parser3.chain)([
+    return (0, import_parser2.chain)([
       "*",
       "/",
       "%"
@@ -6441,7 +6437,7 @@ function createFourOperations(field2) {
     });
   }, "mulOp");
   const addOp = /* @__PURE__ */ __name(() => {
-    return (0, import_parser3.chain)([
+    return (0, import_parser2.chain)([
       "+",
       "-"
     ])((ast) => {
@@ -6449,8 +6445,8 @@ function createFourOperations(field2) {
     });
   }, "addOp");
   const factor = /* @__PURE__ */ __name(() => {
-    return (0, import_parser3.chain)([
-      (0, import_parser3.chain)("(", addExpr, ")")((ast) => {
+    return (0, import_parser2.chain)([
+      (0, import_parser2.chain)("(", addExpr, ")")((ast) => {
         return ast[1];
       }),
       field2
@@ -6464,7 +6460,7 @@ __name(createFourOperations, "createFourOperations");
 
 // src/base/parser.ts
 init_cjs_shims();
-var import_parser4 = require("@shuaninfo/parser");
+var import_parser3 = require("@shuaninfo/parser");
 
 // src/base/reserve-keys.ts
 init_cjs_shims();
@@ -6494,8 +6490,8 @@ var reserveKeys = [
 
 // src/base/parser.ts
 var dataType = /* @__PURE__ */ __name(() => {
-  return (0, import_parser4.chain)([
-    (0, import_parser4.chain)([
+  return (0, import_parser3.chain)([
+    (0, import_parser3.chain)([
       "char",
       "varchar",
       "tinytext",
@@ -6505,7 +6501,7 @@ var dataType = /* @__PURE__ */ __name(() => {
     ])((ast) => {
       return ast[0];
     }),
-    (0, import_parser4.chain)([
+    (0, import_parser3.chain)([
       "tinyint",
       "smallint",
       "mediumint",
@@ -6515,20 +6511,20 @@ var dataType = /* @__PURE__ */ __name(() => {
     ])((ast) => {
       return ast[0];
     }),
-    (0, import_parser4.chain)([
+    (0, import_parser3.chain)([
       "real",
       "double",
       "float"
     ])((ast) => {
       return ast[0];
     }),
-    (0, import_parser4.chain)([
+    (0, import_parser3.chain)([
       "decimal",
       "numberic"
     ])((ast) => {
       return ast[0];
     }),
-    (0, import_parser4.chain)([
+    (0, import_parser3.chain)([
       "date",
       "tinyblob",
       "blob",
@@ -6539,7 +6535,7 @@ var dataType = /* @__PURE__ */ __name(() => {
     ])((ast) => {
       return ast[0];
     }),
-    (0, import_parser4.chain)([
+    (0, import_parser3.chain)([
       "bit",
       "time",
       "timestamp",
@@ -6550,13 +6546,13 @@ var dataType = /* @__PURE__ */ __name(() => {
     ])((ast) => {
       return ast[0];
     }),
-    (0, import_parser4.chain)([
+    (0, import_parser3.chain)([
       "enum",
       "set"
     ])((ast) => {
       return ast[0];
     }),
-    (0, import_parser4.chain)("geometrycollection", "linestring", "multilinestring", "multipoint", "multipolygon", "point", "polygon")((ast) => {
+    (0, import_parser3.chain)("geometrycollection", "linestring", "multilinestring", "multipoint", "multipolygon", "point", "polygon")((ast) => {
       return ast[0];
     })
   ])((ast) => {
@@ -6564,18 +6560,18 @@ var dataType = /* @__PURE__ */ __name(() => {
   });
 }, "dataType");
 var setValue = /* @__PURE__ */ __name(() => {
-  return (0, import_parser4.chain)(wordSym, "=", [
+  return (0, import_parser3.chain)(wordSym, "=", [
     stringSym,
     numberSym
   ])();
 }, "setValue");
 var setValueList = /* @__PURE__ */ __name(() => {
-  return (0, import_parser4.chain)(setValue, (0, import_parser4.many)(",", setValue))();
+  return (0, import_parser3.chain)(setValue, (0, import_parser3.many)(",", setValue))();
 }, "setValueList");
 var wordSym = /* @__PURE__ */ __name(() => {
-  return (0, import_parser4.chain)([
-    (0, import_parser4.matchTokenType)("cursor"),
-    (0, import_parser4.matchTokenType)("word", {
+  return (0, import_parser3.chain)([
+    (0, import_parser3.matchTokenType)("cursor"),
+    (0, import_parser3.matchTokenType)("word", {
       excludes: reserveKeys
     })
   ])((ast) => {
@@ -6583,17 +6579,17 @@ var wordSym = /* @__PURE__ */ __name(() => {
   });
 }, "wordSym");
 var stringSym = /* @__PURE__ */ __name(() => {
-  return (0, import_parser4.chain)((0, import_parser4.matchTokenType)("string"))((ast) => {
+  return (0, import_parser3.chain)((0, import_parser3.matchTokenType)("string"))((ast) => {
     return ast[0];
   });
 }, "stringSym");
 var numberSym = /* @__PURE__ */ __name(() => {
-  return (0, import_parser4.chain)((0, import_parser4.matchTokenType)("number"))((ast) => {
+  return (0, import_parser3.chain)((0, import_parser3.matchTokenType)("number"))((ast) => {
     return ast[0];
   });
 }, "numberSym");
 var stringOrWord = /* @__PURE__ */ __name(() => {
-  return (0, import_parser4.chain)([
+  return (0, import_parser3.chain)([
     wordSym,
     stringSym
   ])((ast) => {
@@ -6601,7 +6597,7 @@ var stringOrWord = /* @__PURE__ */ __name(() => {
   });
 }, "stringOrWord");
 var stringOrWordOrNumber = /* @__PURE__ */ __name(() => {
-  return (0, import_parser4.chain)([
+  return (0, import_parser3.chain)([
     wordSym,
     stringSym,
     numberChain
@@ -6610,13 +6606,13 @@ var stringOrWordOrNumber = /* @__PURE__ */ __name(() => {
   });
 }, "stringOrWordOrNumber");
 var numberChain = /* @__PURE__ */ __name(() => {
-  return (0, import_parser4.chain)((0, import_parser4.optional)([
+  return (0, import_parser3.chain)((0, import_parser3.optional)([
     "-",
     "+"
   ]), numberSym)();
 }, "numberChain");
 var logicalOperator = /* @__PURE__ */ __name(() => {
-  return (0, import_parser4.chain)([
+  return (0, import_parser3.chain)([
     "and",
     "&&",
     "xor",
@@ -6627,7 +6623,7 @@ var logicalOperator = /* @__PURE__ */ __name(() => {
   });
 }, "logicalOperator");
 var normalOperator = /* @__PURE__ */ __name(() => {
-  return (0, import_parser4.chain)([
+  return (0, import_parser3.chain)([
     "&&",
     "||"
   ])((ast) => {
@@ -6635,7 +6631,7 @@ var normalOperator = /* @__PURE__ */ __name(() => {
   });
 }, "normalOperator");
 var comparisonOperator = /* @__PURE__ */ __name(() => {
-  return (0, import_parser4.chain)([
+  return (0, import_parser3.chain)([
     "=",
     ">",
     "<",
@@ -6649,7 +6645,7 @@ var comparisonOperator = /* @__PURE__ */ __name(() => {
   });
 }, "comparisonOperator");
 var notOperator = /* @__PURE__ */ __name(() => {
-  return (0, import_parser4.chain)([
+  return (0, import_parser3.chain)([
     "not",
     "!"
   ])((ast) => {
@@ -6657,7 +6653,7 @@ var notOperator = /* @__PURE__ */ __name(() => {
   });
 }, "notOperator");
 var selectSpec = /* @__PURE__ */ __name(() => {
-  return (0, import_parser4.chain)([
+  return (0, import_parser3.chain)([
     "all",
     "distinct",
     "distinctrow",
@@ -6703,17 +6699,17 @@ __name(createTableName, "createTableName");
 
 // src/mysql/parser.ts
 var root = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)(statements, (0, import_parser5.optional)(";"))((ast) => {
+  return (0, import_parser4.chain)(statements, (0, import_parser4.optional)(";"))((ast) => {
     return ast[0];
   });
 }, "root");
 var statements = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)(statement, (0, import_parser5.many)((0, import_parser5.chain)(";", statement)((ast) => {
+  return (0, import_parser4.chain)(statement, (0, import_parser4.many)((0, import_parser4.chain)(";", statement)((ast) => {
     return ast[1];
   })))(flattenAll);
 }, "statements");
 var statement = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)([
+  return (0, import_parser4.chain)([
     selectStatement,
     createTableStatement,
     insertStatement,
@@ -6727,7 +6723,7 @@ var statement = /* @__PURE__ */ __name(() => {
   });
 }, "statement");
 var selectStatement = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)("select", selectList, (0, import_parser5.optional)(fromClause), (0, import_parser5.optional)(orderByClause), (0, import_parser5.optional)(limitClause), (0, import_parser5.optional)(union, selectStatement))((ast) => {
+  return (0, import_parser4.chain)("select", selectList, (0, import_parser4.optional)(fromClause), (0, import_parser4.optional)(orderByClause), (0, import_parser4.optional)(limitClause), (0, import_parser4.optional)(union, selectStatement))((ast) => {
     const result = {
       type: "statement",
       variant: "select",
@@ -6741,13 +6737,13 @@ var selectStatement = /* @__PURE__ */ __name(() => {
   });
 }, "selectStatement");
 var union = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)("union", [
+  return (0, import_parser4.chain)("union", [
     "all",
     "distinct"
   ])();
 }, "union");
 var fromClause = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)("from", tableSources, (0, import_parser5.optional)(whereStatement), (0, import_parser5.optional)(groupByStatement), (0, import_parser5.optional)(havingStatement))((ast) => {
+  return (0, import_parser4.chain)("from", tableSources, (0, import_parser4.optional)(whereStatement), (0, import_parser4.optional)(groupByStatement), (0, import_parser4.optional)(havingStatement))((ast) => {
     return {
       sources: ast[1],
       where: ast[2],
@@ -6757,21 +6753,21 @@ var fromClause = /* @__PURE__ */ __name(() => {
   });
 }, "fromClause");
 var selectList = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)(selectField, (0, import_parser5.many)(selectListTail))(flattenAll);
+  return (0, import_parser4.chain)(selectField, (0, import_parser4.many)(selectListTail))(flattenAll);
 }, "selectList");
 var selectListTail = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)(",", selectField)((ast) => {
+  return (0, import_parser4.chain)(",", selectField)((ast) => {
     return ast[1];
   });
 }, "selectListTail");
 var selectField = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)([
-    (0, import_parser5.chain)((0, import_parser5.many)("not"), [
-      (0, import_parser5.chain)(field, (0, import_parser5.optional)(overClause))((ast) => {
+  return (0, import_parser4.chain)([
+    (0, import_parser4.chain)((0, import_parser4.many)("not"), [
+      (0, import_parser4.chain)(field, (0, import_parser4.optional)(overClause))((ast) => {
         return ast[0];
       }),
-      (0, import_parser5.chain)("(", field, ")")()
-    ], (0, import_parser5.optional)(alias))((ast) => {
+      (0, import_parser4.chain)("(", field, ")")()
+    ], (0, import_parser4.optional)(alias))((ast) => {
       return {
         type: "identifier",
         variant: "column",
@@ -6785,20 +6781,20 @@ var selectField = /* @__PURE__ */ __name(() => {
   });
 }, "selectField");
 var whereStatement = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)("where", expression)((ast) => {
+  return (0, import_parser4.chain)("where", expression)((ast) => {
     return ast[1];
   });
 }, "whereStatement");
 var fieldList = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)(columnField, (0, import_parser5.many)(",", columnField))();
+  return (0, import_parser4.chain)(columnField, (0, import_parser4.many)(",", columnField))();
 }, "fieldList");
 var tableSources = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)(tableSource, (0, import_parser5.many)((0, import_parser5.chain)(",", tableSource)((ast) => {
+  return (0, import_parser4.chain)(tableSource, (0, import_parser4.many)((0, import_parser4.chain)(",", tableSource)((ast) => {
     return ast[1];
   })))(flattenAll);
 }, "tableSources");
 var tableSource = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)(tableSourceItem, (0, import_parser5.many)(joinPart))((ast) => {
+  return (0, import_parser4.chain)(tableSourceItem, (0, import_parser4.many)(joinPart))((ast) => {
     return {
       source: ast[0],
       joins: ast[1],
@@ -6808,8 +6804,8 @@ var tableSource = /* @__PURE__ */ __name(() => {
   });
 }, "tableSource");
 var tableSourceItem = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)([
-    (0, import_parser5.chain)(tableName, (0, import_parser5.optional)(alias))((ast) => {
+  return (0, import_parser4.chain)([
+    (0, import_parser4.chain)(tableName, (0, import_parser4.optional)(alias))((ast) => {
       return {
         type: "identifier",
         variant: "table",
@@ -6817,9 +6813,9 @@ var tableSourceItem = /* @__PURE__ */ __name(() => {
         alias: ast[1]
       };
     }),
-    (0, import_parser5.chain)([
+    (0, import_parser4.chain)([
       selectStatement,
-      (0, import_parser5.chain)("(", selectStatement, ")")((ast) => {
+      (0, import_parser4.chain)("(", selectStatement, ")")((ast) => {
         return ast[1];
       })
     ], alias)((ast) => {
@@ -6832,23 +6828,23 @@ var tableSourceItem = /* @__PURE__ */ __name(() => {
   });
 }, "tableSourceItem");
 var joinPart = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)([
+  return (0, import_parser4.chain)([
     "join",
     "straight_join",
-    (0, import_parser5.chain)([
+    (0, import_parser4.chain)([
       "inner",
       "cross",
       "full"
     ], "join")(),
-    (0, import_parser5.chain)([
+    (0, import_parser4.chain)([
       "left",
       "right"
-    ], (0, import_parser5.optional)("outer"), "join")(),
-    (0, import_parser5.chain)("natural", (0, import_parser5.optional)([
+    ], (0, import_parser4.optional)("outer"), "join")(),
+    (0, import_parser4.chain)("natural", (0, import_parser4.optional)([
       "left",
       "right"
-    ], (0, import_parser5.optional)("outer")), "join")()
-  ], tableSourceItem, (0, import_parser5.optional)("on", expression))((ast) => {
+    ], (0, import_parser4.optional)("outer")), "join")()
+  ], tableSourceItem, (0, import_parser4.optional)("on", expression))((ast) => {
     return {
       type: "statement",
       variant: "join",
@@ -6858,8 +6854,8 @@ var joinPart = /* @__PURE__ */ __name(() => {
   });
 }, "joinPart");
 var alias = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)([
-    (0, import_parser5.chain)("as", stringOrWord)((ast) => {
+  return (0, import_parser4.chain)([
+    (0, import_parser4.chain)("as", stringOrWord)((ast) => {
       return ast[1];
     }),
     stringOrWord
@@ -6868,27 +6864,27 @@ var alias = /* @__PURE__ */ __name(() => {
   });
 }, "alias");
 var createTableStatement = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)("create", "table", stringOrWord, "(", tableOptions, ")", (0, import_parser5.optional)(withStatement))();
+  return (0, import_parser4.chain)("create", "table", stringOrWord, "(", tableOptions, ")", (0, import_parser4.optional)(withStatement))();
 }, "createTableStatement");
 var withStatement = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)("with", "(", withStatements, ")")();
+  return (0, import_parser4.chain)("with", "(", withStatements, ")")();
 }, "withStatement");
 var withStatements = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)(withStatementsTail, (0, import_parser5.many)(",", withStatementsTail))();
+  return (0, import_parser4.chain)(withStatementsTail, (0, import_parser4.many)(",", withStatementsTail))();
 }, "withStatements");
 var withStatementsTail = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)(wordSym, "=", stringSym)();
+  return (0, import_parser4.chain)(wordSym, "=", stringSym)();
 }, "withStatementsTail");
 var tableOptions = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)(tableOption, (0, import_parser5.many)(",", tableOption))();
+  return (0, import_parser4.chain)(tableOption, (0, import_parser4.many)(",", tableOption))();
 }, "tableOptions");
 var tableOption = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)(stringOrWord, dataType)();
+  return (0, import_parser4.chain)(stringOrWord, dataType)();
 }, "tableOption");
 var tableName = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)([
-    (0, import_parser5.chain)(stringOrWord)(),
-    (0, import_parser5.chain)(stringOrWord, ".", stringOrWord)((ast) => {
+  return (0, import_parser4.chain)([
+    (0, import_parser4.chain)(stringOrWord)(),
+    (0, import_parser4.chain)(stringOrWord, ".", stringOrWord)((ast) => {
       return [
         ast[0],
         ast[2]
@@ -6910,13 +6906,13 @@ var tableName = /* @__PURE__ */ __name(() => {
   });
 }, "tableName");
 var havingStatement = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)("having", expression)();
+  return (0, import_parser4.chain)("having", expression)();
 }, "havingStatement");
 var createViewStatement = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)("create", "view", wordSym, "as", selectStatement)();
+  return (0, import_parser4.chain)("create", "view", wordSym, "as", selectStatement)();
 }, "createViewStatement");
 var insertStatement = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)("insert", (0, import_parser5.optional)("ignore"), "into", tableName, (0, import_parser5.optional)(selectFieldsInfo), [
+  return (0, import_parser4.chain)("insert", (0, import_parser4.optional)("ignore"), "into", tableName, (0, import_parser4.optional)(selectFieldsInfo), [
     selectStatement
   ])((ast) => {
     return {
@@ -6932,52 +6928,52 @@ var insertStatement = /* @__PURE__ */ __name(() => {
   });
 }, "insertStatement");
 var selectFieldsInfo = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)("(", selectFields, ")")();
+  return (0, import_parser4.chain)("(", selectFields, ")")();
 }, "selectFieldsInfo");
 var selectFields = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)(wordSym, (0, import_parser5.many)(",", wordSym))();
+  return (0, import_parser4.chain)(wordSym, (0, import_parser4.many)(",", wordSym))();
 }, "selectFields");
 var groupByStatement = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)("group", "by", fieldList)();
+  return (0, import_parser4.chain)("group", "by", fieldList)();
 }, "groupByStatement");
 var orderByClause = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)("order", "by", orderByExpressionList)();
+  return (0, import_parser4.chain)("order", "by", orderByExpressionList)();
 }, "orderByClause");
 var orderByExpressionList = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)(orderByExpression, (0, import_parser5.many)(",", orderByExpression))();
+  return (0, import_parser4.chain)(orderByExpression, (0, import_parser4.many)(",", orderByExpression))();
 }, "orderByExpressionList");
 var orderByExpression = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)(expression, (0, import_parser5.optional)([
+  return (0, import_parser4.chain)(expression, (0, import_parser4.optional)([
     "asc",
     "desc"
   ]))();
 }, "orderByExpression");
 var partitionByClause = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)([
+  return (0, import_parser4.chain)([
     wordSym,
-    (0, import_parser5.chain)("partition", "by", expression)()
+    (0, import_parser4.chain)("partition", "by", expression)()
   ])((ast) => {
     return ast;
   });
 }, "partitionByClause");
 var overClause = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)("over", "(", overTailExpression, ")")();
+  return (0, import_parser4.chain)("over", "(", overTailExpression, ")")();
 }, "overClause");
 var overTailExpression = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)([
+  return (0, import_parser4.chain)([
     partitionByClause,
-    (0, import_parser5.chain)(field, orderByClause)()
-  ], (0, import_parser5.many)(",", overTailExpression))();
+    (0, import_parser4.chain)(field, orderByClause)()
+  ], (0, import_parser4.many)(",", overTailExpression))();
 }, "overTailExpression");
 var limitClause = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)("limit", [
+  return (0, import_parser4.chain)("limit", [
     numberSym,
-    (0, import_parser5.chain)(numberSym, ",", numberSym)(),
-    (0, import_parser5.chain)(numberSym, "offset", numberSym)()
+    (0, import_parser4.chain)(numberSym, ",", numberSym)(),
+    (0, import_parser4.chain)(numberSym, "offset", numberSym)()
   ])();
 }, "limitClause");
 var functionChain = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)([
+  return (0, import_parser4.chain)([
     castFunction,
     normalFunction,
     ifFunction
@@ -6986,7 +6982,7 @@ var functionChain = /* @__PURE__ */ __name(() => {
   });
 }, "functionChain");
 var ifFunction = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)("if", "(", predicate, ",", field, ",", field, ")")((ast) => {
+  return (0, import_parser4.chain)("if", "(", predicate, ",", field, ",", field, ")")((ast) => {
     return {
       type: "function",
       name: "if",
@@ -6999,7 +6995,7 @@ var ifFunction = /* @__PURE__ */ __name(() => {
   });
 }, "ifFunction");
 var castFunction = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)("cast", "(", field, "as", dataType, ")")((ast) => {
+  return (0, import_parser4.chain)("cast", "(", field, "as", dataType, ")")((ast) => {
     return {
       type: "function",
       name: "cast",
@@ -7011,7 +7007,7 @@ var castFunction = /* @__PURE__ */ __name(() => {
   });
 }, "castFunction");
 var normalFunction = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)(wordSym, "(", (0, import_parser5.optional)(functionFields), ")", (0, import_parser5.optional)("filter", "(", whereStatement, ")"))((ast) => {
+  return (0, import_parser4.chain)(wordSym, "(", (0, import_parser4.optional)(functionFields), ")", (0, import_parser4.optional)("filter", "(", whereStatement, ")"))((ast) => {
     return {
       type: "function",
       name: ast[0],
@@ -7020,10 +7016,10 @@ var normalFunction = /* @__PURE__ */ __name(() => {
   });
 }, "normalFunction");
 var functionFields = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)(functionFieldItem, (0, import_parser5.many)(",", functionFieldItem))();
+  return (0, import_parser4.chain)(functionFieldItem, (0, import_parser4.many)(",", functionFieldItem))();
 }, "functionFields");
 var functionFieldItem = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)((0, import_parser5.many)(selectSpec), [
+  return (0, import_parser4.chain)((0, import_parser4.many)(selectSpec), [
     columnField,
     caseStatement
   ])((ast) => {
@@ -7031,25 +7027,25 @@ var functionFieldItem = /* @__PURE__ */ __name(() => {
   });
 }, "functionFieldItem");
 var caseStatement = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)("case", (0, import_parser5.plus)(caseAlternative), (0, import_parser5.optional)("else", [
+  return (0, import_parser4.chain)("case", (0, import_parser4.plus)(caseAlternative), (0, import_parser4.optional)("else", [
     columnField,
     "null"
   ]), [
     "end",
-    (0, import_parser5.chain)("end", "as", wordSym)()
+    (0, import_parser4.chain)("end", "as", wordSym)()
   ])();
 }, "caseStatement");
 var caseAlternative = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)("when", expression, "then", fieldItem)();
+  return (0, import_parser4.chain)("when", expression, "then", fieldItem)();
 }, "caseAlternative");
 var setStatement = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)("set", variableAssignments)();
+  return (0, import_parser4.chain)("set", variableAssignments)();
 }, "setStatement");
 var variableAssignments = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)(variableAssignment, (0, import_parser5.many)(",", variableAssignment))();
+  return (0, import_parser4.chain)(variableAssignment, (0, import_parser4.many)(",", variableAssignment))();
 }, "variableAssignments");
 var variableAssignment = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)(variableLeftValue, "=", [
+  return (0, import_parser4.chain)(variableLeftValue, "=", [
     "true",
     "false",
     stringSym,
@@ -7057,17 +7053,17 @@ var variableAssignment = /* @__PURE__ */ __name(() => {
   ])();
 }, "variableAssignment");
 var variableLeftValue = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)(wordSym, (0, import_parser5.many)(".", wordSym))();
+  return (0, import_parser4.chain)(wordSym, (0, import_parser4.many)(".", wordSym))();
 }, "variableLeftValue");
 var expression = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)(expressionHead, (0, import_parser5.many)(logicalOperator, expression))(flattenAll);
+  return (0, import_parser4.chain)(expressionHead, (0, import_parser4.many)(logicalOperator, expression))(flattenAll);
 }, "expression");
 var expressionHead = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)([
-    (0, import_parser5.chain)("(", expression, ")")(),
-    (0, import_parser5.chain)(notOperator, expression)(),
-    (0, import_parser5.chain)(booleanPrimary)
-  ], (0, import_parser5.optional)((0, import_parser5.chain)("is", (0, import_parser5.optional)("not"), [
+  return (0, import_parser4.chain)([
+    (0, import_parser4.chain)("(", expression, ")")(),
+    (0, import_parser4.chain)(notOperator, expression)(),
+    (0, import_parser4.chain)(booleanPrimary)
+  ], (0, import_parser4.optional)((0, import_parser4.chain)("is", (0, import_parser4.optional)("not"), [
     "true",
     "false",
     "unknown"
@@ -7076,10 +7072,10 @@ var expressionHead = /* @__PURE__ */ __name(() => {
   });
 }, "expressionHead");
 var booleanPrimary = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)(predicate, (0, import_parser5.many)([
+  return (0, import_parser4.chain)(predicate, (0, import_parser4.many)([
     "isnull",
-    (0, import_parser5.chain)([
-      (0, import_parser5.chain)("is", "not")(),
+    (0, import_parser4.chain)([
+      (0, import_parser4.chain)("is", "not")(),
       "is",
       "not"
     ], [
@@ -7089,23 +7085,23 @@ var booleanPrimary = /* @__PURE__ */ __name(() => {
   ]))(flattenAll);
 }, "booleanPrimary");
 var predicate = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)([
-    (0, import_parser5.chain)(columnField, predicateAddonComparison)(),
-    (0, import_parser5.chain)("(", predicate, ")", predicateAddonComparison)()
+  return (0, import_parser4.chain)([
+    (0, import_parser4.chain)(columnField, predicateAddonComparison)(),
+    (0, import_parser4.chain)("(", predicate, ")", predicateAddonComparison)()
   ])();
 }, "predicate");
 var predicateAddonComparison = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)((0, import_parser5.optional)([
-    (0, import_parser5.chain)(comparisonOperator, columnField)(),
-    (0, import_parser5.chain)("sounds", "like", columnField)(),
+  return (0, import_parser4.chain)((0, import_parser4.optional)([
+    (0, import_parser4.chain)(comparisonOperator, columnField)(),
+    (0, import_parser4.chain)("sounds", "like", columnField)(),
     isOrNotExpression
-  ]), (0, import_parser5.optional)([
+  ]), (0, import_parser4.optional)([
     "or",
     predicate
   ]))();
 }, "predicateAddonComparison");
 var columnField = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)(field)((ast) => {
+  return (0, import_parser4.chain)(field)((ast) => {
     return {
       type: "identifier",
       variant: "column",
@@ -7114,19 +7110,19 @@ var columnField = /* @__PURE__ */ __name(() => {
   });
 }, "columnField");
 var isOrNotExpression = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)((0, import_parser5.optional)("is"), (0, import_parser5.optional)("not"), [
-    (0, import_parser5.chain)("in", "(", [
+  return (0, import_parser4.chain)((0, import_parser4.optional)("is"), (0, import_parser4.optional)("not"), [
+    (0, import_parser4.chain)("in", "(", [
       selectStatement,
       fieldList
     ], ")")(),
-    (0, import_parser5.chain)("between", field, "and", predicate)(),
-    (0, import_parser5.chain)("like", field, (0, import_parser5.optional)("escape", field))(),
-    (0, import_parser5.chain)("regexp", field)(),
+    (0, import_parser4.chain)("between", field, "and", predicate)(),
+    (0, import_parser4.chain)("like", field, (0, import_parser4.optional)("escape", field))(),
+    (0, import_parser4.chain)("regexp", field)(),
     "null"
   ])();
 }, "isOrNotExpression");
 var fieldItem = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)(fieldItemDetail, (0, import_parser5.many)(normalOperator, fieldItemDetail))((ast) => {
+  return (0, import_parser4.chain)(fieldItemDetail, (0, import_parser4.many)(normalOperator, fieldItemDetail))((ast) => {
     if (!ast[1]) {
       return ast[0];
     }
@@ -7137,17 +7133,17 @@ var fieldItem = /* @__PURE__ */ __name(() => {
   });
 }, "fieldItem");
 var fieldItemDetail = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)([
+  return (0, import_parser4.chain)([
     functionChain,
     caseStatement,
-    (0, import_parser5.chain)(stringOrWordOrNumber, (0, import_parser5.optional)([
-      (0, import_parser5.chain)(".", "*")((ast) => {
+    (0, import_parser4.chain)(stringOrWordOrNumber, (0, import_parser4.optional)([
+      (0, import_parser4.chain)(".", "*")((ast) => {
         return {
           type: "identifier",
           variant: "groupAll"
         };
       }),
-      (0, import_parser5.chain)(":", normalFunction)(),
+      (0, import_parser4.chain)(":", normalFunction)(),
       dotStringOrWordOrNumber
     ]))((ast) => {
       if (!ast[1]) {
@@ -7163,10 +7159,10 @@ var fieldItemDetail = /* @__PURE__ */ __name(() => {
   });
 }, "fieldItemDetail");
 var dotStringOrWordOrNumber = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)(".", [
+  return (0, import_parser4.chain)(".", [
     stringSym,
     numberSym,
-    (0, import_parser5.chain)(wordSym)((ast) => {
+    (0, import_parser4.chain)(wordSym)((ast) => {
       return {
         type: "identifier",
         variant: "columnAfterGroup",
@@ -7181,32 +7177,32 @@ var field = /* @__PURE__ */ __name(() => {
   return createFourOperations(fieldItem)();
 }, "field");
 var createIndexStatement = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)("create", "index", indexItem, onStatement, whereStatement)();
+  return (0, import_parser4.chain)("create", "index", indexItem, onStatement, whereStatement)();
 }, "createIndexStatement");
 var indexItem = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)(stringSym, (0, import_parser5.many)(".", stringSym))();
+  return (0, import_parser4.chain)(stringSym, (0, import_parser4.many)(".", stringSym))();
 }, "indexItem");
 var onStatement = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)("ON", stringSym, "(", fieldForIndexList, ")")();
+  return (0, import_parser4.chain)("ON", stringSym, "(", fieldForIndexList, ")")();
 }, "onStatement");
 var fieldForIndex = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)(stringSym, (0, import_parser5.optional)([
+  return (0, import_parser4.chain)(stringSym, (0, import_parser4.optional)([
     "ASC",
     "DESC"
   ]))();
 }, "fieldForIndex");
 var fieldForIndexList = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)(fieldForIndex, (0, import_parser5.many)(",", fieldForIndex))();
+  return (0, import_parser4.chain)(fieldForIndex, (0, import_parser4.many)(",", fieldForIndex))();
 }, "fieldForIndexList");
 var createFunctionStatement = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)("create", "function", wordSym, "as", stringSym)();
+  return (0, import_parser4.chain)("create", "function", wordSym, "as", stringSym)();
 }, "createFunctionStatement");
 var updateStatement = /* @__PURE__ */ __name(() => {
-  return (0, import_parser5.chain)("UPDATE", tableSourceItem, "SET", setValueList, (0, import_parser5.optional)(whereStatement))();
+  return (0, import_parser4.chain)("UPDATE", tableSourceItem, "SET", setValueList, (0, import_parser4.optional)(whereStatement))();
 }, "updateStatement");
 
 // src/mysql/index.ts
-var mysqlParser = (0, import_parser7.createParser)(root, sqlTokenizer, {
+var mysqlParser = (0, import_parser6.createParser)(root, sqlTokenizer, {
   cursorTokenExcludes: (token) => {
     return token.value === "." || token.value === ":";
   }
@@ -7214,9 +7210,6 @@ var mysqlParser = (0, import_parser7.createParser)(root, sqlTokenizer, {
 module.exports = __toCommonJS(src_exports);
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  IMatching,
-  IParseResult,
-  IToken,
   mysqlParser,
   reader
 });

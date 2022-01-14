@@ -1,17 +1,10 @@
-// @ts-nocheck
-// const CustomWorkerClass = require('./parser.worker2.ts').default
-// console.log(CustomWorkerClass)
-
-// 支持wts和wjs
-// @ts-nocheck
-// import xx from 'web-worker:./parser.worker2.ts';
-import Worker from 'web-worker(./parser.worker2.ts)';
+// @ts-ignore
+import Worker from 'web-worker(./parser.worker.ts)';
 const worker = new Worker()
-console.log('worker: ', worker)
-worker.onmessage = function (event) {
-  console.log('[main]#onmessage: ' + event.data);
+worker.onmessage = function (event: any) {
+  console.log('[main]#onmessage: ', event.data);
 }
-worker.postMessage('发送Hello World');
-export const monacoSqlAutocomplete = (a, b) => {
-  // console.log('monacoSqlAutocomplete(): ', a, b)
+worker.postMessage('你好小明');
+export const monacoSqlAutocomplete = (a: any, b: any) => {
+  console.log('monacoSqlAutocomplete(): ', a, b)
 }

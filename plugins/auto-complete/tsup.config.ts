@@ -4,7 +4,7 @@ export default defineConfig((options: Options) => {
   return {
     esbuildPlugins: [WebWorkPlugin],
     entry: ['src/index.ts'],
-    splitting: false,
+    // splitting: true,
     sourcemap: true,
     bundle: true,
     clean: true,

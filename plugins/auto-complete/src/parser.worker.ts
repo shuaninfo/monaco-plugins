@@ -1,9 +1,17 @@
 import { mysqlParser } from '@shuaninfo/sql-parser';
-
+import { getVal } from './utils.js'
+// import { get, find, filter } from 'lodash-es';
 const ctx: Worker = self as any;
-ctx.onmessage = event => {
-  console.info('work 接收: ', event)
-  // ctx.postMessage(mysqlParser(event.data.text || '', event.data.index || 0));
-};
-
-export default null as any
+ctx.onmessage = (message: any) => {
+  console.log('[work]#onmessage:', message.data)
+  console.log(getVal('xx: 3333'))
+  const xx = `SELECT * FROM bananas WHERE color = 'red'`
+  const result = mysqlParser(xx)
+  postMessage({
+    text: '你好小红',
+    xx,
+    result
+    // data: get({ a: '1' }, 'a'),
+    // result: result
+  })
+}

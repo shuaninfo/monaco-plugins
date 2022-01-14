@@ -12,13 +12,13 @@
   "scripts": {
     "dev": "tsup --watch",
     "build": "tsup",
-    "prepack": "unbuild",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "@shuaninfo/sql-parser": "^2.0.0"
   },
   "devDependencies": {
+    "esbuild-plugin-d.ts": "^1.1.0",
     "unbuild": "latest"
   }
 }

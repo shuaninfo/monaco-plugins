@@ -1,6 +1,5 @@
 import * as _shuaninfo_parser from '@shuaninfo/parser';
 import { IToken } from '@shuaninfo/parser';
-export { IMatching, IParseResult, IToken } from '@shuaninfo/parser';
 
 declare type IStatements = IStatement[];
 interface IStatement {

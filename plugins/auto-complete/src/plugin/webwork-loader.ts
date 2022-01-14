@@ -6,6 +6,8 @@
  */
 import path from 'path'
 import fs from 'fs'
+// import File from 'File'
+import { Blob } from 'buffer';
 import { Plugin, PluginBuild, OnResolveArgs, OnLoadArgs, build } from 'esbuild'
 /**
  * /^web-worker\((.+)\)/
@@ -45,20 +47,18 @@ const plugin: Plugin = {
             outfile,
             minify: true, // 必填
             bundle: true,
-            sourcemap: true
+            legalComments: 'none',
+            // format: 'cjs',
           })
           const worktext = fs.readFileSync(outfile, 'utf8')
-          const miniworktext = worktext.split('\n')[0]
           return {
             contents:
               `
-                export default class {
+              export default class {
                   constructor() {
-                    return new Worker(URL.createObjectURL(
-                      new Blob([
-                        '${miniworktext}'
-                      ], {type: "text/javascript"})
-                    ));
+                    return new Worker(URL.createObjectURL(new Blob([
+                      ${JSON.stringify(worktext)}
+                    ], { type: "text/javascript" })));
                   }
                 }
               `
@@ -66,7 +66,11 @@ const plugin: Plugin = {
         } catch (error) {
           console.error('Could not build worker script:', error);
           return {
-            contents: `export default {};`
+            contents: `export default {
+              constructor() {
+                throw new Error("webwork-loader build error");
+              }
+            };`
           }
         }
       })

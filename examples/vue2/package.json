@@ -9,7 +9,6 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
-    "@shuaninfo/sql-parser": "^2.0.0",
     "@shuaninfo/auto-complete": "^2.0.0"
   },
   "devDependencies": {
