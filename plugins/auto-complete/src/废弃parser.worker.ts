@@ -1,4 +1,4 @@
-// 做测试使用
+// 废弃 做测试使用
 import { mysqlParser } from '@shuaninfo/sql-parser';
 import { getVal } from './utils.js'
 // import { get, find, filter } from 'lodash-es';

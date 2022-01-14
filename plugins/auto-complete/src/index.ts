@@ -2,8 +2,6 @@
 import Worker from 'web-worker(./web-worker/parser.ts)';
 import { DefaultOpts, IMonacoVersion, IParserType, IParseResult, ICompletionItem, reader, ICursorInfo, ITableInfo } from './default-opts';
 
-// const worker = new Worker()
-
 import { defaults, groupBy } from 'lodash-es';
 const supportedMonacoEditorVersion = ['0.19.3'];
 
@@ -17,7 +15,7 @@ export const monacoSqlAutocomplete = (monaco: any, editor: any, opts?: Partial<D
   }
   let currentParserPromise: any = null;
   let editVersion = 0;
-  console.log('editor: ', editor, currentParserPromise, editVersion)
+  // console.log('editor: ', editor, currentParserPromise, editVersion)
 
   editor.onDidChangeModelContent((_: any) => {
     editVersion++;
@@ -251,10 +249,6 @@ function returnCompletionItemsByVersion(value: ICompletionItem[], monacoVersion:
       return {
         suggestions: value,
       };
-    case '0.15.6':
-      return {
-        suggestions: value,
-      };
     default:
       throw Error('Not supported version');
   }
@@ -263,8 +257,6 @@ function returnCompletionItemsByVersion(value: ICompletionItem[], monacoVersion:
 function getSeverityByVersion(monaco: any, monacoVersion: IMonacoVersion) {
   switch (monacoVersion) {
     case '0.19.3':
-      return monaco.MarkerSeverity.Error;
-    case '0.15.6':
       return monaco.MarkerSeverity.Error;
     default:
       throw Error('Not supported version');
