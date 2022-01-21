@@ -1,7 +1,6 @@
 // @ts-ignore
 import Worker from 'web-worker(./web-worker/parser.ts)';
 import { DefaultOpts, IMonacoVersion, IParserType, IParseResult, ICompletionItem, reader, ICursorInfo, ITableInfo } from './default-opts';
-
 import { defaults, groupBy } from 'lodash-es';
 const supportedMonacoEditorVersion = ['0.19.3'];
 

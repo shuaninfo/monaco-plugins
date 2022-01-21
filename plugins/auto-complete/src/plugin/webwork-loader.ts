@@ -47,6 +47,7 @@ const plugin: Plugin = {
             outfile,
             minify: true, // 必填
             bundle: true,
+            // 清空注释
             legalComments: 'none',
             // format: 'cjs',
           })
