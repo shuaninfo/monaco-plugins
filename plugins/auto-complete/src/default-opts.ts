@@ -22,10 +22,11 @@ export class DefaultOpts {
   public onParse = (_: IParseResult) => {
     //
   };
-
+  /**
+   * 自定义提示表名
+   */
   public onSuggestTableNames?: (cursorInfo?: ICursorInfo<ITableInfo>) => Promise<ICompletionItem[]> = _ => {
     return Promise.resolve(
-      // TODO: 表名
       ['dt', 'b2b', 'tmall', 'account'].map(name => {
         return {
           label: name,
@@ -37,13 +38,15 @@ export class DefaultOpts {
     );
   };
 
+  /**
+   * 自定义提示表字段
+   */
   public onSuggestTableFields?: (
     tableInfo?: ITableInfo,
     cursorValue?: string,
     rootStatement?: IStatement,
   ) => Promise<ICompletionItem[]> = tableInfo => {
     return Promise.resolve(
-      // TODO: 表下面的字段, subnodes
       ['_aa', '_bb', '_cc']
         .map(eachName => {
           return get(tableInfo, 'namespace.value', '') + get(tableInfo, 'tableName.value', '') + eachName;
@@ -78,10 +81,12 @@ export class DefaultOpts {
         };
       });
   };
-
-  public onSuggestFunctionName?: (inputValue?: string) => Promise<ICompletionItem[]> = inputValue => {
+  /**
+   * 提示方法名称
+   */
+  // inputValue
+  public onSuggestFunctionName?: (inputValue?: string) => Promise<ICompletionItem[]> = (_inputValue) => {
     return Promise.resolve(
-      // TODO: 自定义方法
       ['sum', 'count', 'cast'].map(each => {
         return {
           label: each,
@@ -95,7 +100,7 @@ export class DefaultOpts {
 
   public onSuggestFieldGroup?: (tableNameOrAlias?: string) => ICompletionItem = tableNameOrAlias => {
     return {
-      label: tableNameOrAlias,
+      label: `11_${tableNameOrAlias}`,
       insertText: tableNameOrAlias,
       sortText: `D${tableNameOrAlias}`,
       kind: this.monaco.languages.CompletionItemKind.Folder,

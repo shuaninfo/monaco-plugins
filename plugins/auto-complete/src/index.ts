@@ -2,8 +2,10 @@
 import Worker from 'web-worker(./web-worker/parser.ts)';
 import { DefaultOpts, IMonacoVersion, IParserType, IParseResult, ICompletionItem, reader, ICursorInfo, ITableInfo } from './default-opts';
 import { defaults, groupBy } from 'lodash-es';
-const supportedMonacoEditorVersion = ['0.19.3'];
+export * from './languages/index'
 
+
+const supportedMonacoEditorVersion = ['0.19.3'];
 export const monacoSqlAutocomplete = (monaco: any, editor: any, opts?: Partial<DefaultOpts>) => {
   opts = defaults(opts || {}, new DefaultOpts(monaco));
   if (supportedMonacoEditorVersion.indexOf(opts.monacoEditorVersion) === -1) {
