@@ -4,6 +4,10 @@
 
 
 
+Github: https://github.com/shuaninfo/monaco-plugins
+
+Gitee: https://gitee.com/anshuinfo/monaco-plugins
+
 
 
 
