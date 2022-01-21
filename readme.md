@@ -1,4 +1,21 @@
 # @shuaninfo/monaco-plugins
 
-暂不可使用, fork: [ascoders/syntax-parser](https://github.com/ascoders/syntax-parser)
+> fork: [ascoders/syntax-parser](https://github.com/ascoders/syntax-parser)
+
+
+
+
+
+
+
+```shell
+git clone https://github.com/shuaninfo/monaco-plugins.git
+cd monaco-plugins
+
+yarn install
+
+yarn dev
+```
+
+
 
